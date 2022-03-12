@@ -29,14 +29,14 @@ int main(int, char **)
     SDL_SetWindowTitle(window, "Your (k) Reign");
 
     SDL_Rect src1{0, 0, 0, 0};
-    SDL_Rect dst1{900, 0, 200, 600};
+    SDL_Rect dst1{980, 0, 120, 600};
 
     SDL_Surface *imagesMenuRessource;
 
-    imagesMenuRessource = IMG_Load("../menu.png");
+    imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
 
-    SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenu);
-    SDL_FreeSurface(imagesMenu);
+    SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
+    SDL_FreeSurface(imagesMenuRessource);
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
 
