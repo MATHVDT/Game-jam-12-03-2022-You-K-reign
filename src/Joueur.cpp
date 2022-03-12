@@ -3,6 +3,12 @@
 const int Joueur::_stockRBMax = 3;
 const int Joueur::_stockRCMax = 3;
 
+static const int _coupAttaqueArmee = 2;
+static const int _coupAttaqueReligion = 2;
+static const int _coupAccordCommercial = 2;
+static const int _coupConvertir = 1;
+static const int _coupTransformer = 3;
+
 Joueur::Joueur(Pays *paysJoueur)
     : _pays(paysJoueur), _ptAction(0),
       _paysAnnexes()
@@ -95,7 +101,7 @@ string Joueur::convertir(Pays &pays)
     // Message de l'action
     if (tauxConversion > 0)
     {
-        _ptAction--; // Utilisation des points d'actions
+        _ptAction -= _coupConvertir; // Utilisation des points d'actions
 
         // Conversion du pays
         bool conversionTotal = pays.convertir(tauxConversion);
@@ -159,6 +165,7 @@ string Joueur::attaqueArmee(Pays &pays)
     }
 
     // Consomme un point d'action
+    _ptAction -= _coupAttaqueArmee;
 
     if (rand() % 100 <= probaReussite)
     {                   // Attaque reussite
@@ -173,4 +180,9 @@ string Joueur::attaqueArmee(Pays &pays)
         message += "Pas assez puissant, il faut avoir plus de ressources differentes.";
     }
     return message;
+}
+
+// Attaque religion
+string Joueur::attaqueReligion(Pays &pays)
+{
 }

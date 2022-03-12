@@ -25,6 +25,14 @@ private:
     static const int _stockRBMax;
     static const int _stockRCMax;
 
+    static const int _coupAttaqueArmee;
+    static const int _coupAttaqueReligion;
+    static const int _coupAccordCommercial;
+    static const int _coupConvertir;
+    static const int _coupTransformer;
+
+
+
 public:
     Joueur(Pays *paysJoueur);
     ~Joueur();
