@@ -27,6 +27,8 @@ private:
     static const int _coupAttaqueArmee;
     static const int _coupAttaqueReligion;
     static const int _coupAccordCommercial;
+    static const int _coupAcheterRessource;
+    static const int _coupAcheterRessourceAccord;
     static const int _coupConvertir;
     static const int _coupTransformer;
 
@@ -53,6 +55,7 @@ public:
     void donnerPointAction(int pt = 5);
     string accordCommercial(Pays &pays);
     string convertir(Pays &pays);
+    string acheter(Pays & pays);
 
     // Attaque
     string attaqueArmee(Pays &pays);
@@ -60,6 +63,8 @@ public:
 
 private:
     void annexerPays(Pays &pays);
+    string acheterRessourcePaysNeutre(Pays &pays);
+    string acheterRessourcePaysAccord(Pays &pays);
 };
 
 #endif

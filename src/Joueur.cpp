@@ -6,6 +6,8 @@ const int Joueur::_stockRCMax = 5;
 const int Joueur::_coupAttaqueArmee = 2;
 const int Joueur::_coupAttaqueReligion = 2;
 const int Joueur::_coupAccordCommercial = 2;
+const int Joueur::_coupAcheterRessource = 2;
+const int Joueur::_coupAcheterRessourceAccord = 1;
 const int Joueur::_coupConvertir = 1;
 const int Joueur::_coupTransformer = 3;
 
@@ -209,6 +211,8 @@ void Joueur::annexerPays(Pays &pays)
 }
 
 // Nouveau Tour joueur
+// Donne des points d'actions
+// Collecte les resssources des pays possedes
 void Joueur::nouveauTour()
 {
     // Reset les pt d'actions
@@ -225,4 +229,87 @@ void Joueur::nouveauTour()
             _stockRB[indiceRB] = (_stockRB[indiceRB] + 1 < _stockRBMax);
         }
     }
+}
+
+// Achete une ressource a un pays
+string Joueur::acheter(Pays &pays)
+{
+    string message;
+
+    EtatPays etatPays = pays.getEtatPays();
+
+    switch (etatPays)
+    {
+    case EtatPays::Accord:
+        message += acheterRessourcePaysAccord(pays);
+        break;
+    case EtatPays::Neutre:
+        message += acheterRessourcePaysNeutre(pays);
+        break;
+    case EtatPays::Guerre:
+        message += "Ile en guerre, vous ne pouvez pas acheter de ressource.";
+        break;
+    case EtatPays::Annexe:
+        message += "Vous possedez déjà l'ile et la ressource.";
+        break;
+    default:
+        message += "Etat du pays bizarre, surement des indépendantistes.";
+        cerr << message;
+        break;
+    }
+    return message;
+}
+
+// Achete la ressource au prix d'un pays neutre
+string Joueur::acheterRessourcePaysNeutre(Pays &pays)
+{
+    string message;
+    // Check s'il peut agir
+    if (_ptAction - _coupAcheterRessource >= 0)
+    {
+        int indiceRB = static_cast<int>(pays.getRessource());
+        if (_stockRB[indiceRB] + 1 < _stockRBMax)
+        {                                       // Check si ya de la place dans le stock
+            _ptAction -= _coupAcheterRessource; // Consomme action
+            _stockRB[indiceRB]++;               // Augmente la ressource
+            message += "Ressource achetée.";
+        }
+        else
+        {
+            message += "Plus d'espace disponible pour cette ressource.";
+        }
+    }
+    else
+    {
+        message += "Pas assez de points d'actions pour acheter.";
+    }
+
+    return message;
+}
+
+// Achete la ressource au prix d'un pays avec accord commercial
+string Joueur::acheterRessourcePaysAccord(Pays &pays)
+{
+    string message;
+    // Check s'il peut agir
+    if (_ptAction - _coupAcheterRessourceAccord >= 0)
+    {
+        int indiceRB = static_cast<int>(pays.getRessource());
+        if (_stockRB[indiceRB] + 1 < _stockRBMax)
+        {                                             // Check si ya de la place dans le stock
+            _ptAction -= _coupAcheterRessourceAccord; // Consomme action
+            _stockRB[indiceRB]++;                     // Augmente la ressource
+            message += "Ressource achetée pour 1 Action. STONKS ↗";
+        }
+        else
+        {
+            message += "Plus d'espace disponible pour cette ressource.";
+        }
+    }
+    else
+    {
+        message += "Pas assez de points d'actions pour acheter.";
+    }
+
+    return message;
 }
