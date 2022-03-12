@@ -1,8 +1,11 @@
 #include "Pays.hpp"
 
-Pays::Pays(int idPays, string nom, RessourceBase ressource,
+Pays::Pays(int idPays, string nom,
+           int religion,
+           RessourceBase ressource,
            EtatPays etat)
     : _idPays(idPays), _nomPays(nom),
+      _religion(religion),
       _ressource(ressource), _etat(etat),
       // texture
       _compteurEtat(0),

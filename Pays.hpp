@@ -14,6 +14,7 @@ class Pays
 private:
     int _idPays;
     string _nomPays;
+    int _religion;
     RessourceBase _ressource;
 
     // Texture SDL2 _texture
@@ -30,6 +31,7 @@ private:
 
 public:
     Pays(int idPays, string nom,
+         int religion,
          RessourceBase ressource,
          EtatPays etat = EtatPays::Neutre);
 
