@@ -10,24 +10,30 @@ int main(int, char **)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[debug] %s", SDL_GetError());
     }
 
+    if (TTF_Init() < 0)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
+        return EXIT_FAILURE;
+    }
+
     SDL_Window *window{nullptr};
     SDL_Renderer *renderer{nullptr};
 
-    if (SDL_CreateWindowAndRenderer(980, 600, SDL_WINDOW_SHOWN, &window, &renderer))
+    if (SDL_CreateWindowAndRenderer(1100, 600, SDL_WINDOW_SHOWN, &window, &renderer))
     {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
         SDL_Quit();
         return EXIT_FAILURE;
     }
 
-    SDL_SetWindowTitle(window, "Simulation Géopolitique");
+    SDL_SetWindowTitle(window, "Your (k) Reign");
 
     SDL_Rect src1{0, 0, 0, 0};
-    SDL_Rect dst1{600, 0, 380, 600};
+    SDL_Rect dst1{900, 0, 200, 600};
 
-    SDL_Surface *imagesMenu;
-    
-    imagesMenu = IMG_Load("../menu.png");
+    SDL_Surface *imagesMenuRessource;
+
+    imagesMenuRessource = IMG_Load("../menu.png");
 
     SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenu);
     SDL_FreeSurface(imagesMenu);
@@ -36,7 +42,15 @@ int main(int, char **)
 
     Pays::chargerTexture(renderer);
 
-    Pays paysTest(0,"Ukraine",2,RessourceBase::RB0,EtatPays::Accord);
+    Pays pays(0, "Ukraine", 10, RessourceBase::RB0, EtatPays::Neutre);
+    Pays pays1(1, "Russie", 15, RessourceBase::RB1, EtatPays::Neutre);
+    Pays pays2(2, "Serbie", 5, RessourceBase::RB2, EtatPays::Neutre);
+    Pays pays3(3, "Bosnie", 10, RessourceBase::RB3, EtatPays::Neutre);
+    Pays pays4(4, "Slovaquie", 100, RessourceBase::RB4, EtatPays::Neutre);
+    Pays pays5(5, "Pologne", 15, RessourceBase::RB5, EtatPays::Neutre);
+    Pays pays6(6, "Chypre", 20, RessourceBase::RB6, EtatPays::Neutre);
+    Pays pays7(7, "Malte", 5, RessourceBase::RB7, EtatPays::Neutre);
+    Pays pays8(8, "Corse", 0, RessourceBase::RB8, EtatPays::Neutre);
 
     SDL_Event events;
     bool isOpen{true};
@@ -60,7 +74,15 @@ int main(int, char **)
         SDL_RenderClear(renderer);
 
         dessiner(renderer, textureMenu, src1, dst1);
-        paysTest.afficherPays(renderer);
+        pays.afficherPays(renderer);
+        pays1.afficherPays(renderer);
+        pays2.afficherPays(renderer);
+        pays3.afficherPays(renderer);
+        pays4.afficherPays(renderer);
+        pays5.afficherPays(renderer);
+        pays6.afficherPays(renderer);
+        pays7.afficherPays(renderer);
+        pays8.afficherPays(renderer);
 
         SDL_RenderPresent(renderer);
     }
@@ -70,6 +92,7 @@ int main(int, char **)
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_Quit();
     SDL_Quit();
 
     return EXIT_SUCCESS;
