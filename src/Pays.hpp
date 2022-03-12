@@ -63,7 +63,7 @@ public:
     RessourceBase vendreRessource(int & ptActionJoueur);
     void convertir(int tauxConversion);
     void chargerTexture(SDL_Renderer *);
-
+    void detruireTexture();
 
 private:
     void actualiserEtat();

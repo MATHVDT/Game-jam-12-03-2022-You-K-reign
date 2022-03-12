@@ -206,6 +206,23 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
     }
 }
 
+void Pays::detruireTexture()
+{
+    SDL_DestroyTexture(_textureIle);
+
+    for (int i = 0; i < 3; i++)
+    {
+        SDL_DestroyTexture(_textureEtat[i]);
+        SDL_DestroyTexture(_textureRessourcesCraft[i]);
+    }
+
+    for (int i = 0; i < 9; i++)
+    {
+        SDL_DestroyTexture(_textureRessourcesBase[i]);
+    }
+}
+
+
 /*
 Fonction dessinerRessource pour prendre le pays en entrée /
 Fonction dessinerEtat pour prendre le pays en entrée /
