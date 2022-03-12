@@ -5,11 +5,9 @@
 
 #include <vector>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
 #include "Ressource.hpp"
 #include "EtatPays.hpp"
+#include "dessin.hpp" 
 
 using namespace std;
 

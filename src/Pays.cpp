@@ -1,5 +1,4 @@
 #include "Pays.hpp"
-#include "dessin.hpp" 
 
 int Pays::_tempsAccord = 3;
 int Pays::_tempsGuerre = 5;
