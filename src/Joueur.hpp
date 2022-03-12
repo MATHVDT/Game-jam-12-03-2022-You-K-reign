@@ -61,8 +61,8 @@ public:
     string attaqueArmee(Pays &pays);
     string attaqueReligion(Pays &pays);
 
-private:
     void annexerPays(Pays &pays);
+private:
     string acheterRessourcePaysNeutre(Pays &pays);
     string acheterRessourcePaysAccord(Pays &pays);
 };

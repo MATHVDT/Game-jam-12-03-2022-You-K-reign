@@ -240,7 +240,7 @@ void Joueur::nouveauTour()
         // Recupere toute la capacite de prod des pays
         for (int k = 0; k < p->getMaxProduction(); ++k)
         {
-            _stockRB[indiceRB] = (_stockRB[indiceRB] + 1 < _stockRBMax);
+            _stockRB[indiceRB] += (_stockRB[indiceRB] + 1 < _stockRBMax);
         }
     }
 }
@@ -283,10 +283,19 @@ string Joueur::acheterRessourcePaysNeutre(Pays &pays)
     {
         int indiceRB = static_cast<int>(pays.getRessource());
         if (_stockRB[indiceRB] + 1 < _stockRBMax)
-        {                                       // Check si ya de la place dans le stock
-            _ptAction -= _coupAcheterRessource; // Consomme action
-            _stockRB[indiceRB]++;               // Augmente la ressource
-            message += "Ressource achetée.";
+        {
+            if (pays.getRessourceDispo() > 0)
+            {                                       // Verifie s'il ya encore des truc a acheter
+                                                    // Check si ya de la place dans le stock
+                _ptAction -= _coupAcheterRessource; // Consomme action
+                _stockRB[indiceRB]++;               // Augmente la ressource
+                pays.vendreRessource();
+                message += "Ressource achetée. Victoire du capitalisme.";
+            }
+            else
+            {
+                message += "Vous avez tous acheté. C'est comme le PQ pendant le covid, rupture de stock.";
+            }
         }
         else
         {
@@ -310,10 +319,18 @@ string Joueur::acheterRessourcePaysAccord(Pays &pays)
     {
         int indiceRB = static_cast<int>(pays.getRessource());
         if (_stockRB[indiceRB] + 1 < _stockRBMax)
-        {                                             // Check si ya de la place dans le stock
-            _ptAction -= _coupAcheterRessourceAccord; // Consomme action
-            _stockRB[indiceRB]++;                     // Augmente la ressource
-            message += "Ressource achetée pour 1 Action. STONKS ↗";
+        { // Check si ya de la place dans le stock
+            if (pays.getRessourceDispo() > 0)
+            {                                             // Verifie s'il ya encore des truc a acheter
+                _ptAction -= _coupAcheterRessourceAccord; // Consomme action
+                _stockRB[indiceRB]++;                     // Augmente la ressource
+                pays.vendreRessource();
+                message += "Ressource achetée pour 1 Action. STONKS ↗";
+            }
+            else
+            {
+                message += "Vous avez tous acheté. C'est comme le PQ pendant le covid, rupture de stock.";
+            }
         }
         else
         {

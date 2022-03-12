@@ -55,7 +55,7 @@ public:
     void nouveauTour();
     void annexer();
     bool accordCommercial();
-    RessourceBase vendreRessource(int &ptActionJoueur);
+    void vendreRessource();
     bool convertir(int tauxConversion);
 
 private:
