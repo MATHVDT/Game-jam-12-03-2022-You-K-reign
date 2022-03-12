@@ -1,4 +1,5 @@
 #include "Pays.hpp"
+#include "dessin.hpp" 
 
 int Pays::_tempsAccord = 3;
 int Pays::_tempsGuerre = 5;
@@ -37,7 +38,12 @@ void Pays::afficherConsole()
 
 void Pays::afficherPays(SDL_Renderer * renderer)
 {
-    
+    dessinerIle(renderer,_textureIle,_angle,_idPays);
+    dessinerRessource(renderer,_textureRessourcesBase,static_cast<int>(_ressource),_idPays);
+    if (static_cast<int>(_etat) != 0)
+    {
+        dessinerEtat(renderer,_textureEtat,static_cast<int>(_etat),_idPays);
+    }
 }
 
 // Check l'etat du pays et remet
@@ -203,7 +209,7 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
 /*
 Fonction dessinerRessource pour prendre le pays en entrée /
 Fonction dessinerEtat pour prendre le pays en entrée /
-Faire fonction afficher dans la classe pays
+Faire fonction afficher dans la classe pays /
 Faire fonction dessinerReligion
 Faire en sorte d'avoir un numéro à coté de la ressource
 */

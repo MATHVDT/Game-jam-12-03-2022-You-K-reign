@@ -5,7 +5,7 @@ void dessiner(SDL_Renderer *renderer, SDL_Texture *texture, SDL_Rect src, SDL_Re
     SDL_RenderCopy(renderer, texture, &src, &dst);
 }
 
-void dessinerIles(SDL_Renderer *renderer, SDL_Texture *texture, double angle[9], int id_pays)
+void dessinerIle(SDL_Renderer *renderer, SDL_Texture *texture, double angle[9], int id_pays)
 {
     SDL_Rect src{0, 0, 0, 0};
     SDL_Rect dst{0, 0, 200, 200};
