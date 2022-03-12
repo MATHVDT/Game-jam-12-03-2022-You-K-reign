@@ -5,6 +5,9 @@
 
 #include <vector>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
 #include "Ressource.hpp"
 #include "EtatPays.hpp"
 
@@ -18,8 +21,6 @@ private:
     int _religion; // de 0 => 10
     RessourceBase _ressource;
 
-    // Texture SDL2 _texture
-
     EtatPays _etat;
     int _compteurEtat;
     int _maxProductionRessource;
@@ -30,6 +31,12 @@ private:
     static int _tempsAccord;
     static int _tempsGuerre;
 
+    static double _angle[9];
+    static SDL_Texture *_textureIle;
+    static SDL_Texture *_textureEtat[3];
+    static SDL_Texture *_textureRessourcesBase[9];
+    static SDL_Texture *_textureRessourcesCraft[3];
+
 public:
     Pays(int idPays, string nom,
          int religion,
@@ -39,6 +46,7 @@ public:
     ~Pays() = default;
 
     void afficherConsole();
+    void afficherPays(SDL_Renderer *);
 
     // Getter
     int getId() { return _idPays; }
@@ -54,6 +62,7 @@ public:
     bool accordCommercial();
     RessourceBase vendreRessource(int & ptActionJoueur);
     void convertir(int tauxConversion);
+    void chargerTexture(SDL_Renderer *);
 
 
 private:

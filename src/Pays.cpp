@@ -10,7 +10,6 @@ Pays::Pays(int idPays, string nom,
     : _idPays(idPays), _nomPays(nom),
       _religion(religion),
       _ressource(ressource), _etat(etat),
-      // texture
       _compteurEtat(0),
       _maxProductionRessource(3),
       _ressourceDispo(0),
@@ -34,6 +33,11 @@ void Pays::afficherConsole()
     cout << "max prod : " << _maxProductionRessource << endl;
     cout << "ressource dispo : " << _ressourceDispo << endl;
     // vector<Pays *> _alliance;
+}
+
+void Pays::afficherPays(SDL_Renderer * renderer)
+{
+    
 }
 
 // Check l'etat du pays et remet
@@ -133,3 +137,73 @@ void Pays::convertir(int tauxConversion)
     if (_religion > 10)
         _religion = 10;
 }
+
+// Charger Texture SDL2
+
+void Pays::chargerTexture(SDL_Renderer *renderer)
+{
+    int tab[4] = {90, 180, 270, 0};
+    for (int i = 0; i < 9; i++)
+    {
+        _angle[i] = tab[rand() % 4];
+    }
+    
+    //Charger Texture Ile
+
+    SDL_Surface *imagesIle;
+    
+    imagesIle = IMG_Load("../img/fond_ile.png");
+
+    _textureIle = SDL_CreateTextureFromSurface(renderer, imagesIle);
+    SDL_FreeSurface(imagesIle);
+
+    SDL_Surface *imagesEtat[3];
+
+    imagesEtat[0] = IMG_Load("../img/en_guerre.png");
+    imagesEtat[1] = IMG_Load("../img/accord_commercial.png");
+    imagesEtat[2] = IMG_Load("../img/conquis.png");
+
+    for (int i = 0; i < 3; i++)
+    {
+        _textureEtat[i] = SDL_CreateTextureFromSurface(renderer, imagesEtat[i]);
+        SDL_FreeSurface(imagesEtat[i]);
+    }
+
+    SDL_Surface *imagesRessourcesBase[9];
+    
+    imagesRessourcesBase[0] = IMG_Load("../img/ressources/ressource_1.png");
+    imagesRessourcesBase[1] = IMG_Load("../img/ressources/ressource_2.png");
+    imagesRessourcesBase[2] = IMG_Load("../img/ressources/ressource_3.png");
+    imagesRessourcesBase[3] = IMG_Load("../img/ressources/ressource_4.png");
+    imagesRessourcesBase[4] = IMG_Load("../img/ressources/ressource_5.png");
+    imagesRessourcesBase[5] = IMG_Load("../img/ressources/ressource_6.png");
+    imagesRessourcesBase[6] = IMG_Load("../img/ressources/ressource_7.png");
+    imagesRessourcesBase[7] = IMG_Load("../img/ressources/ressource_8.png");
+    imagesRessourcesBase[8] = IMG_Load("../img/ressources/ressource_9.png");
+
+    for (int i = 0; i < 9; i++)
+    {
+        _textureRessourcesBase[i] = SDL_CreateTextureFromSurface(renderer, imagesRessourcesBase[i]);
+        SDL_FreeSurface(imagesRessourcesBase[i]);
+    }
+
+    SDL_Surface *imagesRessourcesCraft[3];
+
+    imagesRessourcesCraft[0] = IMG_Load("../img/ressources_craft/ressource__craft_1.png");
+    imagesRessourcesCraft[1] = IMG_Load("../img/ressources_craft/ressource__craft_2.png");
+    imagesRessourcesCraft[2] = IMG_Load("../img/ressources_craft/ressource__craft_3.png");
+
+    for (int i = 0; i < 3; i++)
+    {
+        _textureRessourcesCraft[i] = SDL_CreateTextureFromSurface(renderer, imagesRessourcesCraft[i]);
+        SDL_FreeSurface(imagesRessourcesCraft[i]);
+    }
+}
+
+/*
+Fonction dessinerRessource pour prendre le pays en entrée /
+Fonction dessinerEtat pour prendre le pays en entrée /
+Faire fonction afficher dans la classe pays
+Faire fonction dessinerReligion
+Faire en sorte d'avoir un numéro à coté de la ressource
+*/
