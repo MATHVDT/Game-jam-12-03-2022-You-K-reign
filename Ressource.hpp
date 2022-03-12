@@ -3,17 +3,25 @@
 
 //static_cast<int>
 
-enum class Ressource
+enum class RessourceBase
 {
-    R0 = 0,
-    R1 = 1,
-    R2 = 2,
-    R3 = 3,
-    R4 = 4,
-    R5 = 5,
-    R6 = 6,
-    R7 = 7,
-    R8 = 8
+    RB0 = 0,
+    RB1 = 1,
+    RB2 = 2,
+    RB3 = 3,
+    RB4 = 4,
+    RB5 = 5,
+    RB6 = 6,
+    RB7 = 7,
+    RB8 = 8
+};
+
+enum class RessourceCraft
+{
+    RC0 = 0,
+    RC1 = 1,
+    RC2 = 2,
+    RC3 = 3,
 };
 
 #endif

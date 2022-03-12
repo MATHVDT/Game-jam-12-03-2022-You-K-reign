@@ -5,7 +5,10 @@
 
 enum class EtatPays
 {
-
-}
+    Neutre,
+    Guerre,
+    Accord,
+    Annexe
+};
 
 #endif
