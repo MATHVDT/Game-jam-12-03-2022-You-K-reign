@@ -1,3 +1,6 @@
+#ifndef __MANAGER_HPP__
+#define __MANAGER_HPP__
+
 #include "dessin.hpp"
 #include "Pays.hpp"
 //#include "Joueur.hpp"
@@ -13,3 +16,5 @@ class Manager
     
 
 };
+
+#endif

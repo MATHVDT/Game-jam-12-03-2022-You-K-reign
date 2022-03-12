@@ -1,3 +1,6 @@
+#ifndef __BOUTON_HPP__
+#define __BOUTON_HPP__
+
 #include "dessin.hpp"
 #include <iostream>
 
@@ -26,3 +29,5 @@ class Bouton
         void detruireTextureBouton();
         void static detruireTexture();
 };
+
+#endif
