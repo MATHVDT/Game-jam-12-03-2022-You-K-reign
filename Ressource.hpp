@@ -13,7 +13,8 @@ enum class RessourceBase
     RB5 = 5,
     RB6 = 6,
     RB7 = 7,
-    RB8 = 8
+    RB8 = 8,
+    RIEN = -1,
 };
 
 enum class RessourceCraft
@@ -22,6 +23,7 @@ enum class RessourceCraft
     RC1 = 1,
     RC2 = 2,
     RC3 = 3,
+    RIEN = -1,
 };
 
 #endif

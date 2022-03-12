@@ -14,7 +14,7 @@ class Pays
 private:
     int _idPays;
     string _nomPays;
-    int _religion;
+    int _religion; // de 0 => 10
     RessourceBase _ressource;
 
     // Texture SDL2 _texture
@@ -49,6 +49,7 @@ public:
     void nouveauTour();
     void annexer();
     bool accordCommercial();
+    RessourceBase vendreRessource(int & ptActionJoueur);
 
 private:
     void actualiserEtat();

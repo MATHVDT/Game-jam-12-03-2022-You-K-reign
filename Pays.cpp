@@ -73,3 +73,27 @@ bool Pays::accordCommercial()
     _etat = EtatPays::Accord;
     _compteurEtat += _tempsAccord;
 }
+
+// Vendre une ressource au joueur
+RessourceBase Pays::vendreRessource(int &ptActionJoueur)
+{
+    RessourceBase r = _ressource;
+
+    switch (_etat)
+    {
+    case EtatPays::Accord:
+        ptActionJoueur -= 1;
+        break;
+    case EtatPays::Neutre:
+        ptActionJoueur -= 2;
+        break;
+    case EtatPays::Guerre:
+    case EtatPays::Annexe:
+        r = RessourceBase::RIEN;
+        break;
+    default:
+        cerr << "Vendre ressource mais l'etat du pays est bizarre";
+        break;
+    }
+    return r;
+}
