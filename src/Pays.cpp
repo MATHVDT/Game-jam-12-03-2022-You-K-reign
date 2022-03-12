@@ -89,6 +89,7 @@ void Pays::guerreDeclaree(Pays &pays)
 }
 
 // Tente de mettre un accord commercial
+// Retourne false si pas d'accord car guerre
 bool Pays::accordCommercial()
 {
     if (_etat == EtatPays::Guerre)
@@ -127,9 +128,18 @@ RessourceBase Pays::vendreRessource(int &ptActionJoueur)
 
 // Convertir un pays
 // Prend un taux de conversion definit
-void Pays::convertir(int tauxConversion)
+// Renvoie true si le pays est totalement converti
+bool Pays::convertir(int tauxConversion)
 {
+    bool conversionTotale = false;
+
     _religion += tauxConversion;
+
     if (_religion > 10)
+    {
+        conversionTotale = true;
         _religion = 10;
+    }
+
+    return conversionTotale;
 }

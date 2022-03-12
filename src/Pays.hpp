@@ -43,6 +43,7 @@ public:
     // Getter
     int getId() { return _idPays; }
     string getNom() { return _nomPays; }
+    int getCompteur() {return _compteurEtat;}
     RessourceBase getRessource() { return _ressource; }
     int getMaxProduction() { return _maxProductionRessource; }
     int getRessourceDispo() { return _ressourceDispo; }
@@ -53,7 +54,7 @@ public:
     void annexer();
     bool accordCommercial();
     RessourceBase vendreRessource(int & ptActionJoueur);
-    void convertir(int tauxConversion);
+    bool convertir(int tauxConversion);
 
 
 private:
