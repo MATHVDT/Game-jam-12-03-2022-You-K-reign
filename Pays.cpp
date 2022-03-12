@@ -1,5 +1,8 @@
 #include "Pays.hpp"
 
+int Pays::_tempsAccord = 3;
+int Pays::_tempsGuerre = 5;
+
 Pays::Pays(int idPays, string nom,
            int religion,
            RessourceBase ressource,
@@ -16,6 +19,25 @@ Pays::Pays(int idPays, string nom,
 {
 }
 
+void Pays::afficherConsole()
+{
+    cout << endl;
+    cout << "id pays : " << _idPays << endl;
+    cout << "nom pays : " << _nomPays << endl;
+    cout << "religion : " << _religion << endl;
+    cout << "ressource : " << static_cast<int>(_ressource) << endl;
+
+    // Texture SDL2 _texture
+
+    cout << "etat : " << static_cast<int>(_etat) << endl;
+    cout << "compteur etat : " << _compteurEtat << endl;
+    cout << "max prod : " << _maxProductionRessource << endl;
+    cout << "ressource dispo : " << _ressourceDispo << endl;
+    // vector<Pays *> _alliance;
+}
+
+// Check l'etat du pays et remet
+// les stocks a 0 en debut de tour
 void Pays::nouveauTour()
 {
     actualiserEtat();
@@ -43,6 +65,9 @@ void Pays::annexer()
 {
     // Passe le pays en annexe
     _etat = EtatPays::Annexe;
+
+    // Reduit la production
+    _maxProductionRessource = 2;
 
     // Tous les pays de alliance => guerre
     for (auto pays : _alliance)
@@ -72,6 +97,8 @@ bool Pays::accordCommercial()
     // Passe le pays en accord commercial
     _etat = EtatPays::Accord;
     _compteurEtat += _tempsAccord;
+
+    return true;
 }
 
 // Vendre une ressource au joueur

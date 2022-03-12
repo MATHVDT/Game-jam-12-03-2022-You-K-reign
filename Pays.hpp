@@ -2,6 +2,7 @@
 #define __PAYS_HPP__
 
 #include <iostream>
+
 #include <vector>
 
 #include "Ressource.hpp"
@@ -36,6 +37,8 @@ public:
          EtatPays etat = EtatPays::Neutre);
 
     ~Pays() = default;
+
+    void afficherConsole();
 
     // Getter
     int getId() { return _idPays; }
