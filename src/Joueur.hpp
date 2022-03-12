@@ -37,7 +37,7 @@ public:
     ~Joueur();
 
     // Getter
-    Pays *getPays() { return _pays; }
+    Pays *getPaysOrigin() ;
     int getPtAction() { return _ptAction; }
 
     int *getStockRB() { return _stockRB; }

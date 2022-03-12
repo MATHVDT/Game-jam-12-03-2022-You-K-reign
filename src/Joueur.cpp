@@ -26,6 +26,20 @@ Joueur::~Joueur()
 {
 }
 
+// Retourne le pays d'origine
+Pays *Joueur::getPaysOrigin()
+{
+    int k = 0;
+    bool origin = false;
+    while (!origin && k < (int)_paysPossedes.size())
+    {
+        origin = _paysPossedes.at(k)->getEtatPays() == EtatPays::Neutre;
+        ++k;
+    }
+
+    return _paysPossedes.at(k - 1);
+}
+
 // Retourne le stock de la i eme RB
 // Retourne -1 si en dehors des la tableau
 int Joueur::getStockRBi(int i)
