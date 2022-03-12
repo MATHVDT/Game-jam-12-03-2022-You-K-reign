@@ -2,6 +2,13 @@
 
 SDL_Texture *Bouton::_textureBoutons[12];
 
+Bouton::Bouton(int idBouton, bool etatBouton)
+{
+    _idBouton = idBouton;
+    _etatBouton = etatBouton;
+}
+
+
 void Bouton::chargerTexture(SDL_Renderer * renderer)
 {
     SDL_Surface *imagesBouton[12];
@@ -26,18 +33,15 @@ void Bouton::chargerTexture(SDL_Renderer * renderer)
     }
 } 
 
-void Bouton::chargerTextureBouton(SDL_Texture * texturesBouton[],int idBouton)
+void Bouton::chargerBouton(SDL_Texture * texturesBouton[])
 {
     for (int i = 0; i < 2; i++)
     {
-        _textureBoutonId[i] = texturesBouton[2*i+i];
+        _textureBoutonId[i] = texturesBouton[2*_idBouton+i];
     }
-} 
 
-void Bouton::chargerPosition(int idBouton, int x, int y, int w, int h)
-{
     _position.x = 630;
-    _position.y = 5 + idBouton * 100;;
+    _position.y = 5 + _idBouton * 100;;
     _position.w = 320;
     _position.h = 90;
 }
@@ -58,4 +62,20 @@ bool Bouton::detectionClique(int xSouris, int ySouris)
 void Bouton::afficherBouton(SDL_Renderer * renderer)
 {
     dessinerBouton(renderer,_textureBoutonId,_etatBouton,_idBouton);
+}
+
+void Bouton::detruireTextureBouton()
+{
+    for (int i = 0; i < 2; i++)
+    {
+        SDL_DestroyTexture(_textureBoutonId[i]);
+    }
+}
+
+void Bouton::detruireTexture()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        SDL_DestroyTexture(_textureBoutons[i]);
+    }
 }

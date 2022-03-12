@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include "dessin.hpp"
 #include "Pays.hpp"
+#include "Bouton.hpp"
 
 int main(int, char **)
 {
@@ -29,12 +30,16 @@ int main(int, char **)
     
     imagesMenu = IMG_Load("../menu.png");
 
-    SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenu);
+    //SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenu);
     SDL_FreeSurface(imagesMenu);
 
-    SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
+    //SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
 
     Pays::chargerTexture(renderer);
+    Bouton::chargerTexture(renderer);
+
+    Bouton boutonTest(0,false);
+    boutonTest.chargerBouton(Bouton::_textureBoutons);
 
     Pays paysTest(0,"Ukraine",2,RessourceBase::RB0,EtatPays::Accord);
 
@@ -59,13 +64,15 @@ int main(int, char **)
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        dessiner(renderer, textureMenu, src1, dst1);
+        //dessiner(renderer, textureMenu, src1, dst1);
         paysTest.afficherPays(renderer);
+        boutonTest.afficherBouton(renderer);
 
         SDL_RenderPresent(renderer);
     }
-
-    SDL_DestroyTexture(textureMenu);
+    boutonTest.detruireTextureBouton();
+    //SDL_DestroyTexture(textureMenu);
+    Bouton::detruireTexture();
     Pays::detruireTexture();
 
     SDL_DestroyRenderer(renderer);

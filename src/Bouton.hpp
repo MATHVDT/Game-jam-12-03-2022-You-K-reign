@@ -1,4 +1,5 @@
 #include "dessin.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -14,9 +15,14 @@ class Bouton
         static SDL_Texture *_textureBoutons[12];
 
     public:
+        Bouton(int idBouton, bool etatBouton);
+        ~Bouton() = default;
         void static chargerTexture(SDL_Renderer *);
-        void chargerTextureBouton(SDL_Texture *[], int);
-        void chargerPosition(int idBouton, int x, int y, int w, int h);
+        void chargerBouton(SDL_Texture *[]);
+
         bool detectionClique(int xSouris, int ySouris);
         void afficherBouton(SDL_Renderer *);
+
+        void detruireTextureBouton();
+        void static detruireTexture();
 };
