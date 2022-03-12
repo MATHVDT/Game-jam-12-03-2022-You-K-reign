@@ -97,3 +97,12 @@ RessourceBase Pays::vendreRessource(int &ptActionJoueur)
     }
     return r;
 }
+
+// Convertir un pays
+// Prend un taux de conversion definit
+void Pays::convertir(int tauxConversion)
+{
+    _religion += tauxConversion;
+    if (_religion > 10)
+        _religion = 10;
+}

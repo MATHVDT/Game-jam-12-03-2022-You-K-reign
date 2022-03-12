@@ -50,6 +50,8 @@ public:
     void annexer();
     bool accordCommercial();
     RessourceBase vendreRessource(int & ptActionJoueur);
+    void convertir(int tauxConversion);
+
 
 private:
     void actualiserEtat();
