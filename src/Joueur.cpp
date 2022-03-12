@@ -1,7 +1,7 @@
 #include "Joueur.hpp"
 
-const int Joueur::_stockRBMax = 3;
-const int Joueur::_stockRCMax = 3;
+const int Joueur::_stockRBMax = 5;
+const int Joueur::_stockRCMax = 5;
 
 const int Joueur::_coupAttaqueArmee = 2;
 const int Joueur::_coupAttaqueReligion = 2;
@@ -10,8 +10,8 @@ const int Joueur::_coupConvertir = 1;
 const int Joueur::_coupTransformer = 3;
 
 Joueur::Joueur(Pays *paysJoueur)
-    : _pays(paysJoueur), _ptAction(0),
-      _paysAnnexes()
+    : _ptAction(0),
+      _paysPossedes{paysJoueur}
 {
     // Mise a 0 des ressources
     for (int i = 0; i < 9; i++)
@@ -168,10 +168,9 @@ string Joueur::attaqueArmee(Pays &pays)
     _ptAction -= _coupAttaqueArmee;
 
     if (rand() % 100 <= probaReussite)
-    {                   // Attaque reussite
-        pays.annexer(); // Annexe le pays
+    { // Attaque reussite
 
-        _paysAnnexes.push_back(&pays); // Ajout a la liste des pays annexes
+        annexerPays(pays);
 
         message += "Pays capturé !";
     }
@@ -190,9 +189,7 @@ string Joueur::attaqueReligion(Pays &pays)
 
     if (rand() % 100 < populationFidele)
     { // Conversion réussite
-        pays.annexer();
-
-        _paysAnnexes.push_back(&pays);
+        annexerPays(pays);
 
         message += "OPC (Offre Publique de Conversion) réussite.";
     }
@@ -202,4 +199,30 @@ string Joueur::attaqueReligion(Pays &pays)
     }
 
     return message;
+}
+
+// Annexe un pays et ajout dans la liste
+void Joueur::annexerPays(Pays &pays)
+{
+    pays.annexer();                 // Annexe le pays
+    _paysPossedes.push_back(&pays); // Ajout a la liste des pays annexes
+}
+
+// Nouveau Tour joueur
+void Joueur::nouveauTour()
+{
+    // Reset les pt d'actions
+    donnerPointAction();
+
+    // Récupère les ressources
+    int indiceRB;
+    for (auto p : _paysPossedes)
+    {
+        indiceRB = static_cast<int>(p->getRessource());
+        // Recupere toute la capacite de prod des pays
+        for (int k = 0; k < p->getMaxProduction(); ++k)
+        {
+            _stockRB[indiceRB] = (_stockRB[indiceRB] + 1 < _stockRBMax);
+        }
+    }
 }

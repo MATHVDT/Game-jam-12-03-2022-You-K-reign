@@ -13,10 +13,9 @@ using namespace std;
 class Joueur
 {
 private:
-    Pays *_pays;
     int _ptAction;
 
-    vector<Pays *> _paysAnnexes;
+    vector<Pays *> _paysPossedes;
 
     int _stockRB[9];
     int _stockRC[3];
@@ -30,8 +29,6 @@ private:
     static const int _coupAccordCommercial;
     static const int _coupConvertir;
     static const int _coupTransformer;
-
-
 
 public:
     Joueur(Pays *paysJoueur);
@@ -52,6 +49,7 @@ public:
     int getStockRCMax() { return _stockRCMax; }
 
     // Action
+    void nouveauTour();
     void donnerPointAction(int pt = 5);
     string accordCommercial(Pays &pays);
     string convertir(Pays &pays);
@@ -59,6 +57,9 @@ public:
     // Attaque
     string attaqueArmee(Pays &pays);
     string attaqueReligion(Pays &pays);
+
+private:
+    void annexerPays(Pays &pays);
 };
 
 #endif
