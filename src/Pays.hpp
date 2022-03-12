@@ -15,7 +15,7 @@ class Pays
 private:
     int _idPays;
     string _nomPays;
-    int _religion; // de 0 => 10
+    int _religion; // de 0 => 100
     RessourceBase _ressource;
 
     // Texture SDL2 _texture
@@ -43,7 +43,8 @@ public:
     // Getter
     int getId() { return _idPays; }
     string getNom() { return _nomPays; }
-    int getCompteur() {return _compteurEtat;}
+    int getCompteur() { return _compteurEtat; }
+    int getPopFidele() { return _religion; }
     RessourceBase getRessource() { return _ressource; }
     int getMaxProduction() { return _maxProductionRessource; }
     int getRessourceDispo() { return _ressourceDispo; }
@@ -53,9 +54,8 @@ public:
     void nouveauTour();
     void annexer();
     bool accordCommercial();
-    RessourceBase vendreRessource(int & ptActionJoueur);
+    RessourceBase vendreRessource(int &ptActionJoueur);
     bool convertir(int tauxConversion);
-
 
 private:
     void actualiserEtat();

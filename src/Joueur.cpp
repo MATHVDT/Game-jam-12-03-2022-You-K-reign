@@ -3,11 +3,11 @@
 const int Joueur::_stockRBMax = 3;
 const int Joueur::_stockRCMax = 3;
 
-static const int _coupAttaqueArmee = 2;
-static const int _coupAttaqueReligion = 2;
-static const int _coupAccordCommercial = 2;
-static const int _coupConvertir = 1;
-static const int _coupTransformer = 3;
+const int Joueur::_coupAttaqueArmee = 2;
+const int Joueur::_coupAttaqueReligion = 2;
+const int Joueur::_coupAccordCommercial = 2;
+const int Joueur::_coupConvertir = 1;
+const int Joueur::_coupTransformer = 3;
 
 Joueur::Joueur(Pays *paysJoueur)
     : _pays(paysJoueur), _ptAction(0),
@@ -75,27 +75,27 @@ string Joueur::accordCommercial(Pays &pays)
 // Convertir la population du pays
 // Renvoie un message d'info
 // Utilise ressource : RB2 => 10%
-// Utilise ressource : RC2 => 20%
+// Utilise ressource : RC2 => 25%
 string Joueur::convertir(Pays &pays)
 {
     int indiceRB = static_cast<int>(RessourceBase::RB2);
     int indiceRC = static_cast<int>(RessourceCraft::RC2);
 
     string message;
-    int tauxConversion = 0; // +1 => 10%
+    int tauxConversion = 0;
 
     // Stock Ressource Base > 0
     if (_stockRB[indiceRB])
     {
         _stockRB[indiceRB]--; // Reduit le stock
-        tauxConversion += 1;  // Augmente le taux
+        tauxConversion += 10; // Augmente le taux
     }
 
     // Stock Ressource Craft > 0
     if (_stockRC[indiceRC])
     {
         _stockRC[indiceRC]--; // Reduit le stock
-        tauxConversion += 2;  // Augmente le taux
+        tauxConversion += 25; // Augmente le taux
     }
 
     // Message de l'action
@@ -113,7 +113,7 @@ string Joueur::convertir(Pays &pays)
         else
         {
             message += to_string(tauxConversion * 10);
-            message += "% de personne converti";
+            message += "%% de personne converti";
         }
     }
     else
@@ -185,4 +185,21 @@ string Joueur::attaqueArmee(Pays &pays)
 // Attaque religion
 string Joueur::attaqueReligion(Pays &pays)
 {
+    string message;
+    int populationFidele = pays.getPopFidele();
+
+    if (rand() % 100 < populationFidele)
+    { // Conversion réussite
+        pays.annexer();
+
+        _paysAnnexes.push_back(&pays);
+
+        message += "OPC (Offre Publique de Conversion) réussite.";
+    }
+    else
+    { // Echec de la conversion
+        message += "La religion n'a pas assez de charisme.";
+    }
+
+    return message;
 }

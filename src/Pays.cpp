@@ -110,10 +110,10 @@ RessourceBase Pays::vendreRessource(int &ptActionJoueur)
     switch (_etat)
     {
     case EtatPays::Accord:
-        ptActionJoueur -= 1;
+        ptActionJoueur -= 1; // ...
         break;
     case EtatPays::Neutre:
-        ptActionJoueur -= 2;
+        ptActionJoueur -= 2; // ...
         break;
     case EtatPays::Guerre:
     case EtatPays::Annexe:
@@ -135,10 +135,10 @@ bool Pays::convertir(int tauxConversion)
 
     _religion += tauxConversion;
 
-    if (_religion > 10)
+    if (_religion > 100)
     {
         conversionTotale = true;
-        _religion = 10;
+        _religion = 100;
     }
 
     return conversionTotale;
