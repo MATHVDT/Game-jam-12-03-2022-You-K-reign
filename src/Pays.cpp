@@ -4,6 +4,12 @@
 int Pays::_tempsAccord = 3;
 int Pays::_tempsGuerre = 5;
 
+double Pays::_angle[9];
+SDL_Texture *Pays::_textureIle;
+SDL_Texture *Pays::_textureEtat[3];
+SDL_Texture *Pays::_textureRessourcesCraft[3];
+SDL_Texture *Pays::_textureRessourcesBase[9];
+
 Pays::Pays(int idPays, string nom,
            int religion,
            RessourceBase ressource,
@@ -151,7 +157,7 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
     int tab[4] = {90, 180, 270, 0};
     for (int i = 0; i < 9; i++)
     {
-        _angle[i] = tab[rand() % 4];
+        Pays::_angle[i] = tab[rand() % 4];
     }
     
     //Charger Texture Ile
@@ -222,11 +228,7 @@ void Pays::detruireTexture()
     }
 }
 
-
 /*
-Fonction dessinerRessource pour prendre le pays en entrée /
-Fonction dessinerEtat pour prendre le pays en entrée /
-Faire fonction afficher dans la classe pays /
 Faire fonction dessinerReligion
 Faire en sorte d'avoir un numéro à coté de la ressource
 */

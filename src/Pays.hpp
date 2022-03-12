@@ -30,7 +30,7 @@ private:
 private:
     static int _tempsAccord;
     static int _tempsGuerre;
-
+public:
     static double _angle[9];
     static SDL_Texture *_textureIle;
     static SDL_Texture *_textureEtat[3];
@@ -62,8 +62,8 @@ public:
     bool accordCommercial();
     RessourceBase vendreRessource(int & ptActionJoueur);
     void convertir(int tauxConversion);
-    void chargerTexture(SDL_Renderer *);
-    void detruireTexture();
+    void static chargerTexture(SDL_Renderer *);
+    void static detruireTexture();
 
 private:
     void actualiserEtat();

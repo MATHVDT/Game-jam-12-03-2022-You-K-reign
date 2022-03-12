@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "dessin.hpp"
+#include "Pays.hpp"
 
 int main(int, char **)
 {
@@ -33,6 +34,10 @@ int main(int, char **)
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
 
+    Pays::chargerTexture(renderer);
+
+    Pays paysTest(0,"Ukraine",2,RessourceBase::RB0,EtatPays::Accord);
+
     SDL_Event events;
     bool isOpen{true};
     while (isOpen)
@@ -55,11 +60,13 @@ int main(int, char **)
         SDL_RenderClear(renderer);
 
         dessiner(renderer, textureMenu, src1, dst1);
+        paysTest.afficherPays(renderer);
 
         SDL_RenderPresent(renderer);
     }
 
     SDL_DestroyTexture(textureMenu);
+    Pays::detruireTexture();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
