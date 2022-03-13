@@ -41,7 +41,7 @@ public:
 
     void initJoueur(Pays *paysJoueur);
 
-    void afficherJoueur(SDL_Renderer *renderer);
+    void afficherJoueur(SDL_Renderer *renderer, int nbTourRestant);
 
     // Getter
     Pays *getPaysOrigin();

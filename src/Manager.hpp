@@ -35,6 +35,7 @@ private:
     SDL_Texture *_textureFondInterface;
     SDL_Texture *_textureRessourcesInterface;
     SDL_Texture *_textureNouveauTour;
+    int _nbTourRestant;
 
 private:
     void chargerTexture(SDL_Renderer *);

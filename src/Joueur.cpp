@@ -455,7 +455,7 @@ void Joueur::chargerTexture(SDL_Renderer *renderer)
     imagesRessources[4] = TTF_RenderText_Blended(font, "4", SDL_Color{0, 0, 0, 250});
     imagesRessources[5] = TTF_RenderText_Blended(font, "5", SDL_Color{0, 0, 0, 250});
     imagesRessources[6] = TTF_RenderText_Blended(font, "/", SDL_Color{0, 0, 0, 250});
-    imagesRessources[7] = TTF_RenderText_Blended(font, "PA :", SDL_Color{0, 0, 0, 250});
+    imagesRessources[7] = TTF_RenderText_Blended(font, "30", SDL_Color{0, 0, 0, 250});
 
     for (int i = 0; i < 8; i++)
     {
@@ -474,7 +474,7 @@ void Joueur::detruireTexture()
     }
 }
 
-void Joueur::afficherJoueur(SDL_Renderer *renderer)
+void Joueur::afficherJoueur(SDL_Renderer *renderer, int nbTourRestant)
 {
     for (int i = 0; i < 9; i++)
     {
@@ -486,4 +486,5 @@ void Joueur::afficherJoueur(SDL_Renderer *renderer)
     }
 
     dessinerPARestant(renderer, _textureRessources, getPtAction());
+    dessinerToursRestants(renderer, _textureRessources, nbTourRestant);
 }

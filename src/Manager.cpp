@@ -6,6 +6,7 @@ Manager::Manager()
     _textureFondInterface = nullptr;
     _textureRessourcesInterface = nullptr;
     _textureNouveauTour = nullptr;
+    _nbTourRestant = 0;
 
     for (int i = 0; i < 9; i++)
     {
@@ -41,11 +42,12 @@ void Manager::initJeu(SDL_Renderer *renderer)
     _joueur = Joueur();
     initJoueur(_tabPays[4]);
     creerAlliance();
+    _nbTourRestant = 0;
 }
 
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
-    TTF_Font *font = TTF_OpenFont("arial.ttf", 20);
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 50);
 
     if (font == nullptr)
     {
@@ -97,7 +99,7 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     // Charger Texture Nouveau Tour
     SDL_Surface *imageNouveauTour;
 
-    imageNouveauTour = TTF_RenderText_Blended(font, "Nouveau tour !", SDL_Color{141,88,36,250});
+    imageNouveauTour = TTF_RenderText_Blended(font, "Nouveau tour !", SDL_Color{141, 88, 36, 250});
 
     _textureNouveauTour = SDL_CreateTextureFromSurface(renderer, imageNouveauTour);
     SDL_FreeSurface(imageNouveauTour);
@@ -176,7 +178,7 @@ void Manager::afficher(SDL_Renderer *renderer)
     }
 
     // Affichage valeurs des ressources
-    _joueur.afficherJoueur(renderer);
+    _joueur.afficherJoueur(renderer, _nbTourRestant);
 
     SDL_RenderPresent(renderer);
 }
@@ -260,7 +262,6 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
     initJeu(renderer);
 
     int idIleChoisie = -1;
-    int nbTourEcoule = 0;
 
     SDL_Event events;
     bool isOpen{true};
@@ -290,9 +291,9 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
                 }
             }
 
-            tour(idIleChoisie, nbTourEcoule, renderer);
+            tour(idIleChoisie, _nbTourRestant, renderer);
 
-            if (checkVictoire() || nbTourEcoule >= nbTour)
+            if (checkVictoire() || _nbTourRestant >= nbTour)
             {
                 partieEnCours = false;
             }
@@ -314,7 +315,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
     return isOpen;
 }
 
-void Manager::tour(int idIleChoisie, int & nbTourEcoule, SDL_Renderer *renderer)
+void Manager::tour(int idIleChoisie, int &nbTourEcoule, SDL_Renderer *renderer)
 {
     if (_joueur.getPtAction() > 0)
     { // Action joueur
@@ -368,13 +369,15 @@ void Manager::tour(int idIleChoisie, int & nbTourEcoule, SDL_Renderer *renderer)
 
         _joueur.nouveauTour();
 
-        dessinerNouveauTour(renderer, _textureNouveauTour, _textureMenuFond);
+        if (nbTourEcoule != 1)
+        {
+            dessinerNouveauTour(renderer, _textureNouveauTour, _textureMenuFond);
 
-        SDL_RenderPresent(renderer);
-        SDL_Delay(2000);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(2000);
+        }
         cout << "Nouveau tour, point d'action : " << _joueur.getPtAction() << endl;
     }
-
 }
 
 // Fonction qui contient le menu pour lancer partie
@@ -446,6 +449,7 @@ void Manager::jeu(SDL_Renderer *renderer)
             }
             else
             {
+                initJeu(renderer);
                 isOpen = Partie(30, renderer);
                 isPlay = false;
             }
