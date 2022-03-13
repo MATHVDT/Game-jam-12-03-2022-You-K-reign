@@ -16,10 +16,14 @@ int main(int, char **)
     Joueur j{p};
     p2->nouveauTour();
     j.nouveauTour();
-    j.setStockRBi(0, 5);
-    j.setStockRBi(2, 2);
-    j.setStockRCi(2, 5);
-    j.setStockRCi(1, 8);
+    j.setStockRBi(3, 4);
+    j.setStockRBi(4, 4);
+    j.setStockRBi(5, 3);
+    j.setStockRBi(6, 2);
+    j.setStockRBi(1, 4);
+    j.setStockRBi(8, 0);
+    j.setStockRCi(0,3);
+ 
 
     for (int i = 0; i < 9; i++)
         cout << j.getStockRBi(i) << " ";
@@ -35,10 +39,7 @@ int main(int, char **)
     /**************** DEBUT ACTION ******************/
     // cout << j.acheter(*p2);
 
-    cout << j.convertir(*p2) << endl;
-    cout << j.convertir(*p2) << endl;
-    cout << j.convertir(*p2) << endl;
-    cout << j.attaqueReligion(*p2) << endl;
+    cout << j.transformerRessource();
 
     /***************** FIN ACTION ******************/
 
@@ -54,7 +55,6 @@ int main(int, char **)
         cout << j.getStockRCi(i) << " ";
     cout << endl;
 
-    cout << j.getPaysOrigin()->getId();
 
     delete p;
 

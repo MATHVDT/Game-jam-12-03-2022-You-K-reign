@@ -381,3 +381,50 @@ bool Joueur::checkAssezRessource(int pourcentage, string &message)
     }
     return assezRessource;
 }
+
+// Transforme toutes les RB possible en RC
+// RB3 + R4 => RC0
+// RB5 + R6 => RC1
+// RB7 + R8 => RC3
+string Joueur::transformerRessource()
+{
+    string message;
+
+    if (checkAssezPtAction(_coupTransformer, message))
+    { // Assez de PA
+        int nbRessourceCraft = 0;
+        // RB3 + R4 => RC0
+        while ((_stockRC[0] + 1 <= _stockRBMax) &&
+               _stockRB[3] && _stockRB[4])
+        {
+            _stockRC[0]++;
+            _stockRB[3]--;
+            _stockRB[4]--;
+            nbRessourceCraft++;
+        }
+
+        // RB5 + R6 => RC1
+        while ((_stockRC[1] + 1 <= _stockRBMax) &&
+               _stockRB[5] && _stockRB[6])
+        {
+            _stockRC[1]++;
+            _stockRB[5]--;
+            _stockRB[6]--;
+            nbRessourceCraft++;
+        }
+
+        // RB7 + R8 => RC2
+        while ((_stockRC[2] + 1 <= _stockRBMax) &&
+               _stockRB[7] && _stockRB[8])
+        {
+            _stockRC[2]++;
+            _stockRB[7]--;
+            _stockRB[8]--;
+            nbRessourceCraft++;
+        }
+
+        message = to_string(nbRessourceCraft) + " resssources transformées.";
+    }
+
+    return message;
+}
