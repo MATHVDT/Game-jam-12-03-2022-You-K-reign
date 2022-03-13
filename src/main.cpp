@@ -33,24 +33,34 @@ int main(int, char **)
 
     SDL_SetWindowTitle(window, "Your (k) Reign");
 
+    SDL_Rect src{0, 0, 0, 0};
+    SDL_Rect dst{0, 0, 1100, 600};
     SDL_Rect src1{0, 0, 0, 0};
-    SDL_Rect dst1{980, 0, 120, 600};
+    SDL_Rect dst1{965, 0, 120, 600};
     SDL_Rect src2{0, 0, 0, 0};
-    SDL_Rect dst2{600, 0, 380, 600};
+    SDL_Rect dst2{600, 0, 365, 600};
+    SDL_Rect src3{0, 0, 0, 0};
+    SDL_Rect dst3{1085, 0, 15, 600};
 
+    SDL_Surface *imageMenu;
     SDL_Surface *imagesMenuRessource;
     SDL_Surface *imagesMenuRessource2;
 
+    imageMenu = IMG_Load("../img/menu.png");
     imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
     imagesMenuRessource2 = IMG_Load("../img/fond_menu.png");
 
+    SDL_Texture *textureMen = SDL_CreateTextureFromSurface(renderer, imageMenu);
+    SDL_FreeSurface(imageMenu);
     SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
     SDL_FreeSurface(imagesMenuRessource);
     SDL_Texture *textureMenu2 = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource2);
     SDL_FreeSurface(imagesMenuRessource2);
 
+    SDL_QueryTexture(textureMen, nullptr, nullptr, &src.w, &src.h);
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
     SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src2.w, &src2.h);
+    SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src3.w, &src3.h);
 
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
@@ -63,10 +73,10 @@ int main(int, char **)
     Bouton boutonGuerreReligieuse(4, false);
     Bouton boutonTransformer(5, false);
 
-    menu.setPosition(450, 140);
+    menu.setPosition(450, 240);
 
-    SDL_Color hoverColor = {140, 137, 137, 250};
-    SDL_Color normalColor = {250, 250, 250, 250};
+    SDL_Color hoverColor = {141, 88, 36, 250};
+    SDL_Color normalColor = {250, 197, 129, 250};
     menu.setColor(normalColor, hoverColor);
 
     menu.chargerTexture(renderer, "Jouer");
@@ -130,6 +140,7 @@ int main(int, char **)
                 SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
                 SDL_RenderClear(renderer);
 
+                dessiner(renderer, textureMen, src, dst);
                 menu.dessinerMenu(renderer);
 
                 SDL_RenderPresent(renderer);
@@ -159,6 +170,7 @@ int main(int, char **)
 
                 dessiner(renderer, textureMenu, src1, dst1);
                 dessiner(renderer, textureMenu2, src2, dst2);
+                dessiner(renderer, textureMenu2, src3, dst3);
                 boutonAccord.afficherBouton(renderer);
                 boutonAcheter.afficherBouton(renderer);
                 boutonConvertir.afficherBouton(renderer);
