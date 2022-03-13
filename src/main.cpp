@@ -134,6 +134,8 @@ int main(int, char **)
                 SDL_RenderClear(renderer);
 
                 dessiner(renderer, textureMenu, src1, dst1);
+                boutonTest.afficherBouton(renderer);
+                
                 pays.afficherPays(renderer);
                 pays1.afficherPays(renderer);
                 pays2.afficherPays(renderer);
@@ -148,7 +150,7 @@ int main(int, char **)
             }
         }
     }
-    
+
     SDL_DestroyTexture(textureMenu);
     Bouton::detruireTexture();
     Pays::detruireTexture();
