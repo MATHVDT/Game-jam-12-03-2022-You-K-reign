@@ -83,7 +83,7 @@ string Joueur::accordCommercial(Pays &pays)
         if (pays.accordCommercial())
         {
             message += "Accord commercial établi. ";
-            message += "(" + to_string(pays.getCompteur()) + ") ";
+            message +=  to_string(pays.getCompteur());
             message += " ressources disponible à l'achat pour 1 point d'action.";
         }
         else

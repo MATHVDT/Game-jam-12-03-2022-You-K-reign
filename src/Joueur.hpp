@@ -44,6 +44,7 @@ public:
 
     // Getter
     Pays *getPaysOrigin();
+    int getNbPaysPossedes() { return _paysPossedes.size(); }
     int getPtAction() { return _ptAction; }
 
     int *getStockRB() { return _stockRB; }
