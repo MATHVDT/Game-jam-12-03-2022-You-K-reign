@@ -144,6 +144,9 @@ void Manager::initBouton()
 
 void Manager::afficher(SDL_Renderer *renderer)
 {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
     SDL_Rect srcFondInterface{0, 0, 0, 0};
     SDL_Rect srcRessourcesInterface{0, 0, 0, 0};
     SDL_Rect srcFondInterface2{0, 0, 0, 0};
@@ -287,24 +290,35 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
                 }
             }
 
-            nbTourEcoule += tour(idIleChoisie, renderer);
+            tour(idIleChoisie, nbTourEcoule, renderer);
 
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            SDL_RenderClear(renderer);
+            if (checkVictoire() || nbTourEcoule >= nbTour)
+            {
+                partieEnCours = false;
+            }
 
             afficher(renderer);
         }
     }
 
+    // Appeler fct pour afficher ecran de fin
+    if (checkVictoire())
+    {
+        //ecran victoire
+    }
+    else
+    {
+        //ecran defaire
+    }
+
     return isOpen;
 }
 
-bool Manager::tour(int idIleChoisie, SDL_Renderer *renderer)
+void Manager::tour(int idIleChoisie, int & nbTourEcoule, SDL_Renderer *renderer)
 {
-    bool nouveauTour = false;
     if (_joueur.getPtAction() > 0)
     { // Action joueur
-        cout << "point action : " << _joueur.getPtAction() << endl;
+        // cout << "point action : " << _joueur.getPtAction() << endl;
         if (_tabBouton[btnTransformer]->getEtatBouton())
         { // Bouton active => transfo ressource
             cout << _joueur.transformerRessource() << endl;
@@ -348,7 +362,7 @@ bool Manager::tour(int idIleChoisie, SDL_Renderer *renderer)
     }
     else
     { // Nouveau tour
-        nouveauTour = true;
+        nbTourEcoule++;
         for (auto p : _tabPays)
             p->nouveauTour();
 
@@ -358,9 +372,9 @@ bool Manager::tour(int idIleChoisie, SDL_Renderer *renderer)
 
         SDL_RenderPresent(renderer);
         SDL_Delay(2000);
+        cout << "Nouveau tour, point d'action : " << _joueur.getPtAction() << endl;
     }
 
-    return nouveauTour;
 }
 
 // Fonction qui contient le menu pour lancer partie
@@ -382,6 +396,7 @@ void Manager::jeu(SDL_Renderer *renderer)
             switch (events.type)
             {
             case SDL_QUIT:
+            case SDLK_ESCAPE:
                 isOpen = false;
                 break;
             case SDL_KEYDOWN:
@@ -436,4 +451,11 @@ void Manager::jeu(SDL_Renderer *renderer)
             }
         }
     }
+}
+
+// Regarde si toutes les toutes iles
+// sont possedees par le joueur
+bool Manager::checkVictoire()
+{
+    return (_joueur.getNbPaysPossedes() == 9);
 }

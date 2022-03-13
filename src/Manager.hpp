@@ -47,7 +47,8 @@ private:
     void creerAlliance();
 
     int ileChoisie(int xMouse, int yMouse);
-    bool tour(int idIleChoisie, SDL_Renderer *renderer);
+    void tour(int idIleChoisie, int &nbTourEcoule, SDL_Renderer *renderer);
+    bool checkVictoire();
 
 public:
     Manager();
