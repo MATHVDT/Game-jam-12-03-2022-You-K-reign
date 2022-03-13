@@ -28,7 +28,7 @@ Pays::Pays(int idPays, string nom,
 Pays::~Pays()
 {
     cout << "Destructeur Pays" << endl;
-} 
+}
 
 void Pays::afficherConsole()
 {
@@ -47,13 +47,13 @@ void Pays::afficherConsole()
     // vector<Pays *> _alliance;
 }
 
-void Pays::afficherPays(SDL_Renderer * renderer)
+void Pays::afficherPays(SDL_Renderer *renderer)
 {
-    dessinerIle(renderer,_textureIle,_angle,_idPays);
-    dessinerRessource(renderer,_textureRessourcesBase,static_cast<int>(_ressource),_idPays, _ressourceDispo);
+    dessinerIle(renderer, _textureIle, _angle, _idPays);
+    dessinerRessource(renderer, _textureRessourcesBase, static_cast<int>(_ressource), _idPays, _ressourceDispo);
     if (static_cast<int>(_etat) != 0)
     {
-        dessinerEtat(renderer,_textureEtat,static_cast<int>(_etat),_idPays);
+        dessinerEtat(renderer, _textureEtat, static_cast<int>(_etat), _idPays);
     }
     dessinerReligion(renderer, _textureText, static_cast<int>(_religion), _idPays);
 }
@@ -85,8 +85,6 @@ void Pays::actualiserEtat()
 // pas encore annexe passe en guerre
 void Pays::annexer()
 {
-    // Passe le pays en annexe
-    _etat = EtatPays::Annexe;
 
     // Reduit la production
     _maxProductionRessource = 2;
@@ -96,6 +94,8 @@ void Pays::annexer()
     {
         guerreDeclaree(*pays);
     }
+    // Passe le pays en annexe
+    _etat = EtatPays::Annexe;
 }
 
 // Pays passe en guerre
@@ -163,11 +163,11 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
     {
         Pays::_angle[i] = tab[rand() % 4];
     }
-    
+
     //Charger Texture Ile
 
     SDL_Surface *imagesIle;
-    
+
     imagesIle = IMG_Load("../img/fond_ile.png");
 
     _textureIle = SDL_CreateTextureFromSurface(renderer, imagesIle);
@@ -186,7 +186,7 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
     }
 
     SDL_Surface *imagesRessourcesBase[15];
-    
+
     imagesRessourcesBase[0] = IMG_Load("../img/ressources/ressource_1.png");
     imagesRessourcesBase[1] = IMG_Load("../img/ressources/ressource_2.png");
     imagesRessourcesBase[2] = IMG_Load("../img/ressources/ressource_3.png");
@@ -196,12 +196,12 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
     imagesRessourcesBase[6] = IMG_Load("../img/ressources/ressource_7.png");
     imagesRessourcesBase[7] = IMG_Load("../img/ressources/ressource_8.png");
     imagesRessourcesBase[8] = IMG_Load("../img/ressources/ressource_9.png");
-    imagesRessourcesBase[9] = TTF_RenderText_Blended(font, "0 x ", SDL_Color{0,0,0,250});
-    imagesRessourcesBase[10] = TTF_RenderText_Blended(font, "1 x ", SDL_Color{0,0,0,250});
-    imagesRessourcesBase[11] = TTF_RenderText_Blended(font, "2 x ", SDL_Color{0,0,0,250});
-    imagesRessourcesBase[12] = TTF_RenderText_Blended(font, "3 x ", SDL_Color{0,0,0,250});
-    imagesRessourcesBase[13] = TTF_RenderText_Blended(font, "4 x ", SDL_Color{0,0,0,250});
-    imagesRessourcesBase[14] = TTF_RenderText_Blended(font, "5 x ", SDL_Color{0,0,0,250});
+    imagesRessourcesBase[9] = TTF_RenderText_Blended(font, "0 x ", SDL_Color{0, 0, 0, 250});
+    imagesRessourcesBase[10] = TTF_RenderText_Blended(font, "1 x ", SDL_Color{0, 0, 0, 250});
+    imagesRessourcesBase[11] = TTF_RenderText_Blended(font, "2 x ", SDL_Color{0, 0, 0, 250});
+    imagesRessourcesBase[12] = TTF_RenderText_Blended(font, "3 x ", SDL_Color{0, 0, 0, 250});
+    imagesRessourcesBase[13] = TTF_RenderText_Blended(font, "4 x ", SDL_Color{0, 0, 0, 250});
+    imagesRessourcesBase[14] = TTF_RenderText_Blended(font, "5 x ", SDL_Color{0, 0, 0, 250});
 
     for (int i = 0; i < 15; i++)
     {
@@ -221,29 +221,29 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
         SDL_FreeSurface(imagesRessourcesCraft[i]);
     }
 
-    SDL_Surface * textes[21];
+    SDL_Surface *textes[21];
 
-    textes[0] = TTF_RenderText_Blended(font, "0%", SDL_Color{0,0,0,250});
-    textes[1] = TTF_RenderText_Blended(font, "5%", SDL_Color{0,0,0,250});
-    textes[2] = TTF_RenderText_Blended(font, "10%", SDL_Color{0,0,0,250});
-    textes[3] = TTF_RenderText_Blended(font, "15%", SDL_Color{0,0,0,250});
-    textes[4] = TTF_RenderText_Blended(font, "20%", SDL_Color{0,0,0,250});
-    textes[5] = TTF_RenderText_Blended(font, "25%", SDL_Color{0,0,0,250});
-    textes[6] = TTF_RenderText_Blended(font, "30%", SDL_Color{0,0,0,250});
-    textes[7] = TTF_RenderText_Blended(font, "35%", SDL_Color{0,0,0,250});
-    textes[8] = TTF_RenderText_Blended(font, "40%", SDL_Color{0,0,0,250});
-    textes[9] = TTF_RenderText_Blended(font, "45%", SDL_Color{0,0,0,250});
-    textes[10] = TTF_RenderText_Blended(font, "50%", SDL_Color{0,0,0,250});
-    textes[11] = TTF_RenderText_Blended(font, "55%", SDL_Color{0,0,0,250});
-    textes[12] = TTF_RenderText_Blended(font, "60%", SDL_Color{0,0,0,250});
-    textes[13] = TTF_RenderText_Blended(font, "65%", SDL_Color{0,0,0,250});
-    textes[14] = TTF_RenderText_Blended(font, "70%", SDL_Color{0,0,0,250});
-    textes[15] = TTF_RenderText_Blended(font, "75%", SDL_Color{0,0,0,250});
-    textes[16] = TTF_RenderText_Blended(font, "80%", SDL_Color{0,0,0,250});
-    textes[17] = TTF_RenderText_Blended(font, "85%", SDL_Color{0,0,0,250});
-    textes[18] = TTF_RenderText_Blended(font, "90%", SDL_Color{0,0,0,250});
-    textes[19] = TTF_RenderText_Blended(font, "95%", SDL_Color{0,0,0,250});
-    textes[20] = TTF_RenderText_Blended(font, "100%", SDL_Color{0,0,0,250});
+    textes[0] = TTF_RenderText_Blended(font, "0%", SDL_Color{0, 0, 0, 250});
+    textes[1] = TTF_RenderText_Blended(font, "5%", SDL_Color{0, 0, 0, 250});
+    textes[2] = TTF_RenderText_Blended(font, "10%", SDL_Color{0, 0, 0, 250});
+    textes[3] = TTF_RenderText_Blended(font, "15%", SDL_Color{0, 0, 0, 250});
+    textes[4] = TTF_RenderText_Blended(font, "20%", SDL_Color{0, 0, 0, 250});
+    textes[5] = TTF_RenderText_Blended(font, "25%", SDL_Color{0, 0, 0, 250});
+    textes[6] = TTF_RenderText_Blended(font, "30%", SDL_Color{0, 0, 0, 250});
+    textes[7] = TTF_RenderText_Blended(font, "35%", SDL_Color{0, 0, 0, 250});
+    textes[8] = TTF_RenderText_Blended(font, "40%", SDL_Color{0, 0, 0, 250});
+    textes[9] = TTF_RenderText_Blended(font, "45%", SDL_Color{0, 0, 0, 250});
+    textes[10] = TTF_RenderText_Blended(font, "50%", SDL_Color{0, 0, 0, 250});
+    textes[11] = TTF_RenderText_Blended(font, "55%", SDL_Color{0, 0, 0, 250});
+    textes[12] = TTF_RenderText_Blended(font, "60%", SDL_Color{0, 0, 0, 250});
+    textes[13] = TTF_RenderText_Blended(font, "65%", SDL_Color{0, 0, 0, 250});
+    textes[14] = TTF_RenderText_Blended(font, "70%", SDL_Color{0, 0, 0, 250});
+    textes[15] = TTF_RenderText_Blended(font, "75%", SDL_Color{0, 0, 0, 250});
+    textes[16] = TTF_RenderText_Blended(font, "80%", SDL_Color{0, 0, 0, 250});
+    textes[17] = TTF_RenderText_Blended(font, "85%", SDL_Color{0, 0, 0, 250});
+    textes[18] = TTF_RenderText_Blended(font, "90%", SDL_Color{0, 0, 0, 250});
+    textes[19] = TTF_RenderText_Blended(font, "95%", SDL_Color{0, 0, 0, 250});
+    textes[20] = TTF_RenderText_Blended(font, "100%", SDL_Color{0, 0, 0, 250});
 
     for (int i = 0; i < 21; i++)
     {

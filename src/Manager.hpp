@@ -1,6 +1,7 @@
 #ifndef __MANAGER_HPP__
 #define __MANAGER_HPP__
 
+#include <iostream>
 #include <list>
 
 #include "dessin.hpp"
@@ -8,6 +9,19 @@
 #include "Joueur.hpp"
 #include "Menu.hpp"
 #include "Bouton.hpp"
+
+#include "EnumBouton.hpp"
+
+enum BOUTON
+{
+    btnAccord = 0,
+    btnAcheter = 1,
+    btnConvertir = 2,
+    btnGuerreMilitaire = 3,
+    btnGuerreReligueuse = 4,
+    btnTransformer = 5
+};
+
 
 using namespace std;
 
@@ -28,6 +42,12 @@ private:
     void initJoueur(Pays *paysJoueur);
     void initBouton();
 
+    void checkBouton(int xMouse, int yMouse);
+    void creerAlliance();
+
+    int ileChoisie(int xMouse, int yMouse);
+    void tour(int idIleChoisie);
+
 public:
     Manager();
     ~Manager();
@@ -35,11 +55,8 @@ public:
     void afficher(SDL_Renderer *);
     void initJeu(SDL_Renderer *);
     void Partie(int, SDL_Renderer *);
-
-    void creerAlliance();
-
-    int ileChoisie(int xMouse, int yMouse);
-
 };
+
+
 
 #endif

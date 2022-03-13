@@ -13,7 +13,6 @@ const int Joueur::_coupTransformer = 3;
 
 SDL_Texture *Joueur::_textureRessources[7];
 
-
 Joueur::Joueur()
     : _ptAction(0)
 {
@@ -28,7 +27,7 @@ Joueur::~Joueur()
 {
 }
 
-void Joueur::initJoueur(Pays * paysJoueur)
+void Joueur::initJoueur(Pays *paysJoueur)
 {
     _paysPossedes.push_back(paysJoueur);
 }
@@ -79,17 +78,19 @@ void Joueur::donnerPointAction(int pt)
 string Joueur::accordCommercial(Pays &pays)
 {
     string message;
-
-    if (pays.accordCommercial())
+    if (checkAssezPtAction(_coupAccordCommercial, message))
     {
-        message += "Accord commercial établi. ";
-        message += "(" + to_string(pays.getCompteur()) + ") ";
-        message += "Vous ressource disponible pour 1 point d'action.";
-    }
-    else
-    {
-        message += "Acccord commercial échec. ";
-        message += "Pays en guerre contre vous. ";
+        if (pays.accordCommercial())
+        {
+            message += "Accord commercial établi. ";
+            message += "(" + to_string(pays.getCompteur()) + ") ";
+            message += " ressources disponible à l'achat pour 1 point d'action.";
+        }
+        else
+        {
+            message += "Acccord commercial échec. ";
+            message += "Pays en guerre contre vous. ";
+        }
     }
 
     return message;

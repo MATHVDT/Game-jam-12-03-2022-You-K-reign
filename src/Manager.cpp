@@ -38,13 +38,14 @@ void Manager::initJeu(SDL_Renderer *renderer)
     initBouton();
     _joueur = Joueur();
     initJoueur(_tabPays[4]);
+    creerAlliance();
 }
 
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
-    //Joueur::chargerTexture(renderer);
+    Joueur::chargerTexture(renderer);
 
     //Charger Texture Menu Ressource
     SDL_Surface *imageRessourceInterface;
@@ -69,7 +70,7 @@ void Manager::detruireTexture()
     SDL_DestroyTexture(_textureRessourcesInterface);
     Bouton::detruireTexture();
     Pays::detruireTexture();
-    //Joueur::detruireTexture();
+    Joueur::detruireTexture();
 }
 
 void Manager::initPays()
@@ -123,8 +124,20 @@ void Manager::afficher(SDL_Renderer *renderer)
 
     for (int i = 0; i < 6; i++)
     {
-        _tabBouton[i]->afficherBouton(renderer);  
-    } 
+        _tabBouton[i]->afficherBouton(renderer);
+    }
+
+    // Affichage des ressources
+    SDL_Rect src1{0, 0, 0, 0};
+    SDL_Rect dst1{980, 0, 120, 600};
+    SDL_Rect src2{0, 0, 0, 0};
+    SDL_Rect dst2{600, 0, 380, 600};
+
+    dessiner(renderer, _textureRessourcesInterface, src1, dst1);
+    dessiner(renderer, _textureFondInterface, src2, dst2);
+
+    // Affichage valeurs des ressources
+    _joueur.afficherJoueur(renderer);
 
     SDL_RenderPresent(renderer);
 }
@@ -145,11 +158,6 @@ int Manager::ileChoisie(int xMouse, int yMouse)
         id += xMouse / tailleCaseIle;
     }
     return id;
-}
-
-void Manager::Partie(int tour,SDL_Renderer *renderer)
-{
-    initJeu(renderer);
 }
 
 // Crée les alliances entre les pays
@@ -196,5 +204,115 @@ void Manager::creerAlliance()
         {
             p->setAlliance(allianceCour);
         }
+    }
+}
+
+void Manager::checkBouton(int xMouse, int yMouse)
+{
+    for (int k = 0; k < 6; k++)
+        _tabBouton[k]->setEtatBouton(_tabBouton[k]->detectionClique(xMouse, yMouse));
+}
+
+void Manager::Partie(int nbTour, SDL_Renderer *renderer)
+{
+    // Init la partie avec le joueur et les alliances
+    // Et les textures
+    initJeu(renderer);
+
+    int idIleChoisie = -1;
+
+    SDL_Event events;
+    bool isOpen{true};
+    bool isPlay{false};
+    bool partieEnCours = true;
+
+    while (isOpen && partieEnCours)
+    {
+        while (SDL_PollEvent(&events))
+        {
+            switch (events.type)
+            {
+            case SDL_QUIT:
+                isOpen = false;
+                break;
+
+            case SDL_MOUSEBUTTONDOWN:
+                if (events.button.button == SDL_BUTTON_LEFT)
+                {
+                    // Selectionne ile
+                    idIleChoisie = ileChoisie(events.button.x, events.button.y);
+                    if (idIleChoisie == -1)
+                    {
+                        // Selection les btn
+                        checkBouton(events.button.x, events.button.y);
+                    }
+                }
+            }
+
+            tour(idIleChoisie);
+
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderClear(renderer);
+
+            afficher(renderer);
+
+            // SDL_RenderPresent(renderer);
+        }
+    }
+}
+
+void Manager::tour(int idIleChoisie)
+{
+
+    if (_joueur.getPtAction() > 0)
+    { // Action joueur
+        cout << "point action : " << _joueur.getPtAction() << endl;
+        if (_tabBouton[btnTransformer]->getEtatBouton())
+        { // Bouton active => transfo ressource
+            cout << _joueur.transformerRessource() << endl;
+            _tabBouton[btnTransformer]->setEtatBouton(false);
+        }
+        else
+        {
+            // cout << "pays select :  " << idIleChoisie << endl;
+            if (idIleChoisie != -1)
+            { // Une ile selectionne
+                // Recupere le pays select
+                Pays *paysSelect = _tabPays[idIleChoisie];
+
+                if (_tabBouton[btnAccord]->getEtatBouton())
+                {
+                    cout << _joueur.accordCommercial(*paysSelect) << endl;
+                    _tabBouton[btnAccord]->setEtatBouton(false);
+                }
+                else if (_tabBouton[btnAcheter]->getEtatBouton())
+                {
+                    cout << _joueur.acheter(*paysSelect) << endl;
+                    _tabBouton[btnAcheter]->setEtatBouton(false);
+                }
+                else if (_tabBouton[btnConvertir]->getEtatBouton())
+                {
+                    cout << _joueur.convertir(*paysSelect) << endl;
+                    _tabBouton[btnConvertir]->setEtatBouton(false);
+                }
+                else if (_tabBouton[btnGuerreMilitaire]->getEtatBouton())
+                {
+                    cout << _joueur.attaqueArmee(*paysSelect) << endl;
+                    _tabBouton[btnGuerreMilitaire]->setEtatBouton(false);
+                }
+                else if (_tabBouton[btnGuerreReligueuse]->getEtatBouton())
+                {
+                    cout << _joueur.attaqueReligion(*paysSelect) << endl;
+                    _tabBouton[btnGuerreReligueuse]->setEtatBouton(false);
+                }
+            }
+        }
+    }
+    else
+    { // Nouveau tour
+        for (auto p : _tabPays)
+            p->nouveauTour();
+
+        _joueur.nouveauTour();
     }
 }

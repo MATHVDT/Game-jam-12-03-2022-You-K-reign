@@ -9,7 +9,6 @@
 #include "Bouton.hpp"
 #include "Manager.hpp"
 
-
 int main(int, char **)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -39,15 +38,8 @@ int main(int, char **)
 
     Manager manager;
     manager.initJeu(renderer);
-    
-    SDL_bool play = SDL_TRUE;
 
-    while(play)
-    {
-        manager.afficher(renderer);
-        SDL_Delay(3000);
-        play = SDL_FALSE;
-    }
+    manager.Partie(10, renderer);
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -85,16 +77,7 @@ int main(int, char **)
     SDL_Rect src2{0, 0, 0, 0};
     SDL_Rect dst2{600, 0, 380, 600};
 
-    SDL_Surface *imagesMenuRessource;
-    SDL_Surface *imagesMenuRessource2;
 
-    imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
-    imagesMenuRessource2 = IMG_Load("../img/fond_menu.png");
-
-    SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
-    SDL_FreeSurface(imagesMenuRessource);
-    SDL_Texture *textureMenu2 = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource2);
-    SDL_FreeSurface(imagesMenuRessource2);
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
     SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src2.w, &src2.h);
@@ -206,22 +189,8 @@ int main(int, char **)
 
                 dessiner(renderer, textureMenu, src1, dst1);
                 dessiner(renderer, textureMenu2, src2, dst2);
-                boutonAccord.afficherBouton(renderer);
-                boutonAcheter.afficherBouton(renderer);
-                boutonConvertir.afficherBouton(renderer);
-                boutonGuerreMilitaire.afficherBouton(renderer);
-                boutonGuerreReligieuse.afficherBouton(renderer);
-                boutonTransformer.afficherBouton(renderer);
 
-                pays.afficherPays(renderer);
-                pays1.afficherPays(renderer);
-                pays2.afficherPays(renderer);
-                pays3.afficherPays(renderer);
-                pays4.afficherPays(renderer);
-                pays5.afficherPays(renderer);
-                pays6.afficherPays(renderer);
-                pays7.afficherPays(renderer);
-                pays8.afficherPays(renderer);
+
                 joueur.afficherJoueur(renderer);
 
                 SDL_RenderPresent(renderer);
