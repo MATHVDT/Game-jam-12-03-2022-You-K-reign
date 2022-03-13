@@ -32,10 +32,10 @@ void dessinerEtat(SDL_Renderer *renderer, SDL_Texture *texturesEtat[], int etat,
 void dessinerBouton(SDL_Renderer *renderer, SDL_Texture *texturesBouton[], bool etatBouton, int idBouton)
 {
     SDL_Rect src{0,0,0,0};
-    SDL_Rect dst{0,0,320,90};
+    SDL_Rect dst{0,0,320,72};
 
     dst.x = 630;
-    dst.y = 5 + idBouton * 100;
+    dst.y = 5 + idBouton * 77;
     SDL_QueryTexture(texturesBouton[2 * idBouton + etatBouton], nullptr, nullptr, &src.w, &src.h);
     SDL_RenderCopy(renderer, texturesBouton[2 * idBouton + etatBouton], &src, &dst);
 }
