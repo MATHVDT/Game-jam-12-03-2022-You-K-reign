@@ -39,7 +39,6 @@ int main(int, char **)
 
     imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
 
-
     SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
     SDL_FreeSurface(imagesMenuRessource);
 
@@ -48,12 +47,17 @@ int main(int, char **)
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
 
-    Bouton boutonTest(0,false);
+    Bouton boutonAccord(0, false);
+    Bouton boutonAcheter(1, false);
+    Bouton boutonConvertir(2, false);
+    Bouton boutonGuerreMilitaire(3, false);
+    Bouton boutonGuerreReligieuse(4, false);
+    Bouton boutonTransformer(5, false);
 
-    menu.setPosition(250, 140);
+    menu.setPosition(450, 140);
 
-    SDL_Color hoverColor = {26, 62, 137, 250};
-    SDL_Color normalColor = {150, 150, 150, 250};
+    SDL_Color hoverColor = {140, 137, 137, 250};
+    SDL_Color normalColor = {250, 250, 250, 250};
     menu.setColor(normalColor, hoverColor);
 
     menu.chargerTexture(renderer, "Jouer");
@@ -94,11 +98,21 @@ int main(int, char **)
                 {
                     menu.moveDown();
                 }
-                else if (events.key.keysym.sym == SDLK_SPACE)
+                else if (events.key.keysym.sym == SDLK_RETURN)
                 {
                     menu.select();
                 }
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                if (events.button.button == SDL_BUTTON_LEFT)
+                {
+                    boutonAccord.setEtatBouton(boutonAccord.detectionClique(events.button.x, events.button.y));
+                    boutonAcheter.setEtatBouton(boutonAcheter.detectionClique(events.button.x, events.button.y));
+                    boutonConvertir.setEtatBouton(boutonConvertir.detectionClique(events.button.x, events.button.y));
+                    boutonGuerreMilitaire.setEtatBouton(boutonGuerreMilitaire.detectionClique(events.button.x, events.button.y));
+                    boutonGuerreReligieuse.setEtatBouton(boutonGuerreReligieuse.detectionClique(events.button.x, events.button.y));
+                    boutonTransformer.setEtatBouton(boutonTransformer.detectionClique(events.button.x, events.button.y));
+                }
             }
 
             if (!isPlay)
@@ -134,8 +148,13 @@ int main(int, char **)
                 SDL_RenderClear(renderer);
 
                 dessiner(renderer, textureMenu, src1, dst1);
-                boutonTest.afficherBouton(renderer);
-                
+                boutonAccord.afficherBouton(renderer);
+                boutonAcheter.afficherBouton(renderer);
+                boutonConvertir.afficherBouton(renderer);
+                boutonGuerreMilitaire.afficherBouton(renderer);
+                boutonGuerreReligieuse.afficherBouton(renderer);
+                boutonTransformer.afficherBouton(renderer);
+
                 pays.afficherPays(renderer);
                 pays1.afficherPays(renderer);
                 pays2.afficherPays(renderer);

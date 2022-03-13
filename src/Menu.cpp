@@ -6,7 +6,7 @@ Menu::Menu()
 
 void Menu::chargerTexture(SDL_Renderer *renderer, const char * text)
 {
-    TTF_Font *font = TTF_OpenFont("arial.ttf", 20);
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 50);
 
     if (font == nullptr)
     {
@@ -40,13 +40,14 @@ void Menu::dessinerMenu(SDL_Renderer *renderer)
         dst.y = this->m_posY + i * 100 + 10;
         if (this->m_currentIndex == i)
         {
+
             SDL_QueryTexture(this->m_menuElementList.at(i).textureHover, nullptr, nullptr, &src.w, &src.h);
             SDL_RenderCopy(renderer, this->m_menuElementList.at(i).textureHover, &src, &dst);
         }
         else
         {
-            SDL_QueryTexture(this->m_menuElementList.at(i).textureHover, nullptr, nullptr, &src.w, &src.h);
-            SDL_RenderCopy(renderer, this->m_menuElementList.at(i).textureHover, &src, &dst);
+            SDL_QueryTexture(this->m_menuElementList.at(i).textureNormal, nullptr, nullptr, &src.w, &src.h);
+            SDL_RenderCopy(renderer, this->m_menuElementList.at(i).textureNormal, &src, &dst);
         }
     }
 }
