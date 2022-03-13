@@ -40,7 +40,6 @@ int main(int, char **)
     Manager manager;
     manager.initJeu(renderer);
     manager.afficher(renderer);
-    manager.~Manager();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
