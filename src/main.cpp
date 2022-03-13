@@ -4,6 +4,7 @@
 #include "Pays.hpp"
 #include "Menu.hpp"
 #include "Bouton.hpp"
+#include "Joueur.hpp"
 
 int main(int, char **)
 {
@@ -46,6 +47,7 @@ int main(int, char **)
 
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
+    Joueur::chargerTexture(renderer);
 
     Bouton boutonAccord(0, false);
     Bouton boutonAcheter(1, false);
@@ -74,6 +76,7 @@ int main(int, char **)
     Pays pays6(6, "Chypre", 20, RessourceBase::RB6, EtatPays::Neutre);
     Pays pays7(7, "Malte", 5, RessourceBase::RB7, EtatPays::Neutre);
     Pays pays8(8, "Corse", 0, RessourceBase::RB8, EtatPays::Neutre);
+    Joueur joueur(&pays4);
 
     SDL_Event events;
     bool isOpen{true};
@@ -164,6 +167,7 @@ int main(int, char **)
                 pays6.afficherPays(renderer);
                 pays7.afficherPays(renderer);
                 pays8.afficherPays(renderer);
+                joueur.afficherJoueur(renderer);
 
                 SDL_RenderPresent(renderer);
             }

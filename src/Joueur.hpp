@@ -31,11 +31,14 @@ private:
     static const int _coupConvertir;
     static const int _coupTransformer;
 
-
+public:
+    static SDL_Texture *_textureRessources[7];
 
 public:
     Joueur(Pays *paysJoueur);
     ~Joueur();
+
+    void afficherJoueur(SDL_Renderer *renderer);
 
     // Getter
     Pays *getPays() { return _pays; }
@@ -59,6 +62,10 @@ public:
     // Attaque
     string attaqueArmee(Pays &pays);
     string attaqueReligion(Pays &pays);
+
+    // Ressources
+    void static chargerTexture(SDL_Renderer *renderer);
+    void static detruireTexture();
 };
 
 #endif

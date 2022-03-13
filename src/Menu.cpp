@@ -107,4 +107,9 @@ void Menu::select()
 
 Menu::~Menu()
 {
+    /*for (int i = 0; i < getMenuSize(); i++)
+    {
+        SDL_DestroyTexture(this->m_menuElementList.at(i).textureHover);
+        SDL_DestroyTexture(this->m_menuElementList.at(i).textureNormal);
+    }*/
 }

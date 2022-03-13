@@ -66,3 +66,39 @@ void dessinerReligion(SDL_Renderer *renderer, SDL_Texture *textureTexte[], int r
     SDL_QueryTexture(textureTexte[religion/5], nullptr, nullptr, &src.w, &src.h);
     SDL_RenderCopy(renderer, textureTexte[religion/5], &src, &dst);
 }
+
+void dessinerRessourcePrimaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,10,20};
+    dst.x = 1035;
+    dst.y = 55 + ressource * 42;
+    SDL_QueryTexture(texturesRessources[ressourceDispo], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceDispo], &src, &dst);
+
+    dst.x = 1055;
+    SDL_QueryTexture(texturesRessources[6], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[6], &src, &dst);
+
+    dst.x = 1075;
+    SDL_QueryTexture(texturesRessources[ressourceMax], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceMax], &src, &dst);
+}
+
+void dessinerRessourceSecondaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,10,20};
+    dst.x = 1035;
+    dst.y = 480 + ressource * 42;
+    SDL_QueryTexture(texturesRessources[ressourceDispo], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceDispo], &src, &dst);
+
+    dst.x = 1055;
+    SDL_QueryTexture(texturesRessources[6], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[6], &src, &dst);
+
+    dst.x = 1075;
+    SDL_QueryTexture(texturesRessources[ressourceMax], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceMax], &src, &dst);
+}
