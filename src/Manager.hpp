@@ -22,7 +22,6 @@ enum BOUTON
     btnTransformer = 5
 };
 
-
 using namespace std;
 
 class Manager
@@ -54,9 +53,8 @@ public:
 
     void afficher(SDL_Renderer *);
     void initJeu(SDL_Renderer *);
-    void Partie(int, SDL_Renderer *);
+    void jeu(SDL_Renderer *renderer);
+    bool Partie(int, SDL_Renderer *);
 };
-
-
 
 #endif
