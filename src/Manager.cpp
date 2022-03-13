@@ -255,7 +255,8 @@ void Manager::checkBouton(int xMouse, int yMouse)
 }
 
 // Retourne l'etat de isOpen
-bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
+bool Manager::Partie(int nbTour,
+                     SDL_Renderer *renderer)
 {
     // Init la partie avec le joueur et les alliances
     // Et les textures

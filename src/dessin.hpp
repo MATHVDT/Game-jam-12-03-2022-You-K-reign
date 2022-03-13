@@ -18,4 +18,7 @@ void dessinerPARestant(SDL_Renderer *renderer, SDL_Texture *texturesRessources[]
 void dessinerToursRestants(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int nbTourEcoule);
 void dessinerNouveauTour(SDL_Renderer *renderer, SDL_Texture *texturesRessources, SDL_Texture *textureMenu);
 
+
+void dessinerVille(SDL_Renderer *renderer, SDL_Texture *texturesVille[], int idPays);
+
 #endif
