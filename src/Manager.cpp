@@ -43,6 +43,19 @@ void Manager::initJeu(SDL_Renderer *renderer)
 
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
+    // Menu de jeu
+    _menu.setPosition(450, 140);
+
+    SDL_Color hoverColor = {140, 137, 137, 250};
+    SDL_Color normalColor = {250, 250, 250, 250};
+    _menu.setColor(normalColor, hoverColor);
+
+    _menu.chargerTexture(renderer, "Jouer");
+    _menu.chargerTexture(renderer, "Instructions");
+    _menu.chargerTexture(renderer, "Credits");
+    _menu.chargerTexture(renderer, "Quitter");
+
+    // Charger texture jeu
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
     Joueur::chargerTexture(renderer);
@@ -213,17 +226,18 @@ void Manager::checkBouton(int xMouse, int yMouse)
         _tabBouton[k]->setEtatBouton(_tabBouton[k]->detectionClique(xMouse, yMouse));
 }
 
-void Manager::Partie(int nbTour, SDL_Renderer *renderer)
+// Retourne l'etat de isOpen
+bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
 {
     // Init la partie avec le joueur et les alliances
     // Et les textures
     initJeu(renderer);
 
     int idIleChoisie = -1;
+    int nbTourEcoule = 0;
 
     SDL_Event events;
     bool isOpen{true};
-    bool isPlay{false};
     bool partieEnCours = true;
 
     while (isOpen && partieEnCours)
@@ -249,22 +263,22 @@ void Manager::Partie(int nbTour, SDL_Renderer *renderer)
                 }
             }
 
-            tour(idIleChoisie);
+            nbTourEcoule += tour(idIleChoisie);
 
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             SDL_RenderClear(renderer);
 
             afficher(renderer);
-
-            // SDL_RenderPresent(renderer);
         }
     }
+
+    return isOpen;
 }
 
-void Manager::tour(int idIleChoisie)
+bool Manager::tour(int idIleChoisie)
 {
-
-    if (_joueur.getPtAction() > 0)
+    bool nouveauTour = false;
+     if (_joueur.getPtAction() > 0)
     { // Action joueur
         cout << "point action : " << _joueur.getPtAction() << endl;
         if (_tabBouton[btnTransformer]->getEtatBouton())
@@ -314,5 +328,74 @@ void Manager::tour(int idIleChoisie)
             p->nouveauTour();
 
         _joueur.nouveauTour();
+    }
+}
+
+// Fonction qui contient le menu pour lancer partie
+void Manager::jeu(SDL_Renderer *renderer)
+{
+    SDL_Event events;
+    bool isOpen{true};
+    bool isPlay{false};
+
+    while (isOpen)
+    {
+        while (SDL_PollEvent(&events))
+        {
+            switch (events.type)
+            {
+            case SDL_QUIT:
+                isOpen = false;
+                break;
+            case SDL_KEYDOWN:
+                if (events.key.keysym.sym == SDLK_ESCAPE)
+                    isOpen = false;
+                else if (events.key.keysym.sym == SDLK_UP)
+                {
+                    _menu.moveUp();
+                }
+                else if (events.key.keysym.sym == SDLK_DOWN)
+                {
+                    _menu.moveDown();
+                }
+                else if (events.key.keysym.sym == SDLK_RETURN)
+                {
+                    _menu.select();
+                }
+                break;
+            }
+            if (!isPlay)
+            {
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                SDL_RenderClear(renderer);
+
+                _menu.dessinerMenu(renderer);
+
+                SDL_RenderPresent(renderer);
+
+                if (_menu.getIsSelect())
+                {
+                    _menu.setIsSelectFalse();
+                    switch (_menu.getCurrentIndex())
+                    {
+                    case MENU_JEU:
+                        isPlay = true;
+                        break;
+                    case MENU_CREDIT:
+                        break;
+                    case MENU_INSTRUCTION:
+                        break;
+                    case MENU_QUIT:
+                        isOpen = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                isOpen = Partie(30, renderer);
+                isPlay = false;
+            }
+        }
     }
 }

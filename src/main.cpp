@@ -39,7 +39,8 @@ int main(int, char **)
     Manager manager;
     manager.initJeu(renderer);
 
-    manager.Partie(10, renderer);
+    // manager.Partie(10, renderer);
+    manager.jeu(renderer);
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
