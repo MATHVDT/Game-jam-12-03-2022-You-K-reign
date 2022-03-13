@@ -3,6 +3,7 @@
 #include "dessin.hpp"
 #include "Pays.hpp"
 #include "Menu.hpp"
+#include "Bouton.hpp"
 
 int main(int, char **)
 {
@@ -38,12 +39,16 @@ int main(int, char **)
 
     imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
 
+
     SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
     SDL_FreeSurface(imagesMenuRessource);
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
 
     Pays::chargerTexture(renderer);
+    Bouton::chargerTexture(renderer);
+
+    Bouton boutonTest(0,false);
 
     menu.setPosition(250, 140);
 
@@ -143,8 +148,9 @@ int main(int, char **)
             }
         }
     }
-
+    
     SDL_DestroyTexture(textureMenu);
+    Bouton::detruireTexture();
     Pays::detruireTexture();
 
     SDL_DestroyRenderer(renderer);
