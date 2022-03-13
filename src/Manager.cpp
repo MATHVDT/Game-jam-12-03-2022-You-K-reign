@@ -275,7 +275,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
 
             tour(idIleChoisie, nbTourEcoule);
 
-            if (checkVictoire() || nbTourEcoule >= 30)
+            if (checkVictoire() || nbTourEcoule >= nbTour)
             {
                 partieEnCours = false;
             }
