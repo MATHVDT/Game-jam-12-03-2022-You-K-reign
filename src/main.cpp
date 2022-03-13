@@ -37,9 +37,11 @@ int main(int, char **)
     SDL_SetWindowTitle(window, "Your (k) Reign");
 
     SDL_Rect src1{0, 0, 0, 0};
-    SDL_Rect dst1{980, 0, 120, 600};
+    SDL_Rect dst1{965, 0, 120, 600};
     SDL_Rect src2{0, 0, 0, 0};
-    SDL_Rect dst2{600, 0, 380, 600};
+    SDL_Rect dst2{600, 0, 365, 600};
+    SDL_Rect src3{0,0,0,0};
+    SDL_Rect dst3{1085, 0, 15, 600};
 
     SDL_Surface *imagesMenuRessource;
     SDL_Surface *imagesMenuRessource2;
@@ -54,6 +56,7 @@ int main(int, char **)
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
     SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src2.w, &src2.h);
+    SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src3.w, &src3.h);
 
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
@@ -162,6 +165,7 @@ int main(int, char **)
 
                 dessiner(renderer, textureMenu, src1, dst1);
                 dessiner(renderer, textureMenu2, src2, dst2);
+                dessiner(renderer, textureMenu2, src3, dst3);
                 boutonAccord.afficherBouton(renderer);
                 boutonAcheter.afficherBouton(renderer);
                 boutonConvertir.afficherBouton(renderer);
