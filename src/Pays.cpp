@@ -62,7 +62,8 @@ void Pays::afficherPays(SDL_Renderer *renderer)
 // les stocks a 0 en debut de tour
 void Pays::nouveauTour()
 {
-    actualiserEtat();
+    if (_etat != EtatPays::Annexe)
+        actualiserEtat();
 
     // Produit ses ressources
     _ressourceDispo = _maxProductionRessource;
@@ -92,7 +93,8 @@ void Pays::annexer()
     // Tous les pays de alliance => guerre
     for (auto pays : _alliance)
     {
-        guerreDeclaree(*pays);
+        if (pays->getEtatPays() != EtatPays::Guerre)
+            guerreDeclaree(*pays);
     }
     // Passe le pays en annexe
     _etat = EtatPays::Annexe;
@@ -102,12 +104,12 @@ void Pays::annexer()
 void Pays::guerreDeclaree(Pays &pays)
 {
     // S'il est deja annexe alors rien
-    if (pays._etat == EtatPays::Annexe)
-        return;
-
-    // Passe le pays en guerre
-    pays._etat = EtatPays::Guerre;
-    pays._compteurEtat = _tempsGuerre;
+    if (pays._etat != EtatPays::Annexe)
+    {
+        // Passe le pays en guerre
+        pays._etat = EtatPays::Guerre;
+        pays._compteurEtat = _tempsGuerre;
+    }
 }
 
 // Tente de mettre un accord commercial

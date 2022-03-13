@@ -106,7 +106,7 @@ string Joueur::convertir(Pays &pays)
     int indiceRC = static_cast<int>(RessourceCraft::RC2);
 
     string message;
-    int tauxConversion = 0;
+    int tauxConversion = 5;
 
     if (pays.getPopFidele() == 100)
     {
