@@ -16,4 +16,7 @@ void dessinerRessourcePrimaire(SDL_Renderer *renderer, SDL_Texture *texturesRess
 void dessinerRessourceSecondaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax);
 void dessinerPARestant(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ptAction);
 
+
+void dessinerVille(SDL_Renderer *renderer, SDL_Texture *texturesVille[], int idPays);
+
 #endif

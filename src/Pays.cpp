@@ -10,6 +10,8 @@ SDL_Texture *Pays::_textureRessourcesCraft[3];
 SDL_Texture *Pays::_textureRessourcesBase[15];
 SDL_Texture *Pays::_textureText[21];
 
+SDL_Texture *Pays::_texturVille[9];
+
 Pays::Pays(int idPays, string nom,
            int religion,
            RessourceBase ressource,
@@ -50,7 +52,11 @@ void Pays::afficherConsole()
 void Pays::afficherPays(SDL_Renderer *renderer)
 {
     dessinerIle(renderer, _textureIle, _angle, _idPays);
+
+    // dessinerVille(renderer, _texturVille,_idPays);
+
     dessinerRessource(renderer, _textureRessourcesBase, static_cast<int>(_ressource), _idPays, _ressourceDispo);
+
     if (static_cast<int>(_etat) != 0)
     {
         dessinerEtat(renderer, _textureEtat, static_cast<int>(_etat), _idPays);
@@ -254,6 +260,25 @@ void Pays::chargerTexture(SDL_Renderer *renderer)
     }
 
     TTF_CloseFont(font);
+
+    // Image ville
+    //    SDL_Surface *imagesVile[9];
+
+    // imagesVile[0] = IMG_Load("../img/ville1.png");
+    // imagesVile[1] = IMG_Load("../img/ville1.png");
+    // imagesVile[2] = IMG_Load("../img/ville1.png");
+    // imagesVile[3] = IMG_Load("../img/ville1.png");
+    // imagesVile[4] = IMG_Load("../img/ville1.png");
+    // imagesVile[5] = IMG_Load("../img/ville1.png");
+    // imagesVile[6] = IMG_Load("../img/ville1.png");
+    // imagesVile[7] = IMG_Load("../img/ville1.png");
+    // imagesVile[8] = IMG_Load("../img/ville1.png");
+
+    // for (int i = 0; i <9 ; i++)
+    // {
+    //     _textureVille[i] = SDL_CreateTextureFromSurface(renderer, imagesVile[i]);
+    //     SDL_FreeSurface(imagesVile[i]);
+    // }
 }
 
 void Pays::detruireTexture()

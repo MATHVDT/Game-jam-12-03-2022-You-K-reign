@@ -132,7 +132,7 @@ void Manager::afficher(SDL_Renderer *renderer)
 
     SDL_Rect srcFondInterface{0, 0, 0, 0};
     SDL_Rect srcRessourcesInterface{0, 0, 0, 0};
-    SDL_Rect srcFondInterface2{0,0,0,0};
+    SDL_Rect srcFondInterface2{0, 0, 0, 0};
     SDL_Rect dstFondInterface{600, 0, 365, 600};
     SDL_Rect dstRessourcesInterface{965, 0, 120, 600};
     SDL_Rect dstFondInterface2{1085, 0, 15, 600};
@@ -236,7 +236,8 @@ void Manager::checkBouton(int xMouse, int yMouse)
 }
 
 // Retourne l'etat de isOpen
-bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
+bool Manager::Partie(int nbTour,
+                     SDL_Renderer *renderer)
 {
     // Init la partie avec le joueur et les alliances
     // Et les textures
@@ -297,7 +298,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
     return isOpen;
 }
 
-void Manager::tour(int idIleChoisie, int & nbTourEcoule)
+void Manager::tour(int idIleChoisie, int &nbTourEcoule)
 {
     if (_joueur.getPtAction() > 0)
     { // Action joueur
@@ -353,7 +354,6 @@ void Manager::tour(int idIleChoisie, int & nbTourEcoule)
 
         cout << "Nouveau tour, point d'action : " << _joueur.getPtAction() << endl;
     }
-
 }
 
 // Fonction qui contient le menu pour lancer partie

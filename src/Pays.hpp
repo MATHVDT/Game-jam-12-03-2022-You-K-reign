@@ -37,6 +37,8 @@ public:
     static SDL_Texture *_textureRessourcesCraft[3];
     static SDL_Texture *_textureText[21];
 
+    static SDL_Texture *_texturVille[9];
+
 public:
     Pays(int idPays, string nom,
          int religion,
