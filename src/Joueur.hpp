@@ -32,7 +32,8 @@ private:
     static const int _coupConvertir;
     static const int _coupTransformer;
 
-    static SDL_Texture *_textureRessources[7];
+public:
+    static SDL_Texture *_textureRessources[8];
 
 public:
     Joueur();

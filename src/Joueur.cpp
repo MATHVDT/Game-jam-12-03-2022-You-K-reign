@@ -11,7 +11,7 @@ const int Joueur::_coupAcheterRessourceAccord = 1;
 const int Joueur::_coupConvertir = 1;
 const int Joueur::_coupTransformer = 3;
 
-SDL_Texture *Joueur::_textureRessources[7];
+SDL_Texture *Joueur::_textureRessources[8];
 
 Joueur::Joueur()
     : _ptAction(0)
@@ -446,7 +446,7 @@ void Joueur::chargerTexture(SDL_Renderer *renderer)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
     }
 
-    SDL_Surface *imagesRessources[7];
+    SDL_Surface *imagesRessources[8];
 
     imagesRessources[0] = TTF_RenderText_Blended(font, "0", SDL_Color{0, 0, 0, 250});
     imagesRessources[1] = TTF_RenderText_Blended(font, "1", SDL_Color{0, 0, 0, 250});
@@ -455,8 +455,9 @@ void Joueur::chargerTexture(SDL_Renderer *renderer)
     imagesRessources[4] = TTF_RenderText_Blended(font, "4", SDL_Color{0, 0, 0, 250});
     imagesRessources[5] = TTF_RenderText_Blended(font, "5", SDL_Color{0, 0, 0, 250});
     imagesRessources[6] = TTF_RenderText_Blended(font, "/", SDL_Color{0, 0, 0, 250});
+    imagesRessources[7] = TTF_RenderText_Blended(font, "PA :", SDL_Color{0, 0, 0, 250});
 
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 8; i++)
     {
         _textureRessources[i] = SDL_CreateTextureFromSurface(renderer, imagesRessources[i]);
         SDL_FreeSurface(imagesRessources[i]);
@@ -467,7 +468,7 @@ void Joueur::chargerTexture(SDL_Renderer *renderer)
 
 void Joueur::detruireTexture()
 {
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 8; i++)
     {
         SDL_DestroyTexture(_textureRessources[i]);
     }
@@ -483,4 +484,6 @@ void Joueur::afficherJoueur(SDL_Renderer *renderer)
     {
         dessinerRessourceSecondaire(renderer, _textureRessources, i, _stockRC[i], _stockRCMax);
     }
+
+    dessinerPARestant(renderer, _textureRessources, getPtAction());
 }

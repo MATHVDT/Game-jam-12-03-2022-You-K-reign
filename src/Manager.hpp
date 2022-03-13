@@ -31,6 +31,7 @@ private:
     Joueur _joueur;
     Bouton *_tabBouton[6];
     Menu _menu;
+    SDL_Texture *_textureMenuFond;
     SDL_Texture *_textureFondInterface;
     SDL_Texture *_textureRessourcesInterface;
 
