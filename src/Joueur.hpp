@@ -57,6 +57,7 @@ public:
     // Action
     void nouveauTour();
     void donnerPointAction(int pt = 5);
+    string transformerRessource(); // test ok
     string accordCommercial(Pays &pays);
     string convertir(Pays &pays); // test ok
     string acheter(Pays &pays); // test ok2
