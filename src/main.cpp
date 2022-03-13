@@ -35,15 +35,22 @@ int main(int, char **)
 
     SDL_Rect src1{0, 0, 0, 0};
     SDL_Rect dst1{980, 0, 120, 600};
+    SDL_Rect src2{0, 0, 0, 0};
+    SDL_Rect dst2{600, 0, 380, 600};
 
     SDL_Surface *imagesMenuRessource;
+    SDL_Surface *imagesMenuRessource2;
 
     imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
+    imagesMenuRessource2 = IMG_Load("../img/fond_menu.png");
 
     SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
     SDL_FreeSurface(imagesMenuRessource);
+    SDL_Texture *textureMenu2 = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource2);
+    SDL_FreeSurface(imagesMenuRessource2);
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
+    SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src2.w, &src2.h);
 
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
@@ -67,7 +74,7 @@ int main(int, char **)
     menu.chargerTexture(renderer, "Credits");
     menu.chargerTexture(renderer, "Quitter");
 
-    Pays pays(0, "Ukraine", 10, RessourceBase::RB0, EtatPays::Neutre);
+    Pays pays(0, "Ukraine", 10, RessourceBase::RB0, EtatPays::Guerre);
     Pays pays1(1, "Russie", 15, RessourceBase::RB1, EtatPays::Neutre);
     Pays pays2(2, "Serbie", 5, RessourceBase::RB2, EtatPays::Neutre);
     Pays pays3(3, "Bosnie", 10, RessourceBase::RB3, EtatPays::Neutre);
@@ -151,6 +158,7 @@ int main(int, char **)
                 SDL_RenderClear(renderer);
 
                 dessiner(renderer, textureMenu, src1, dst1);
+                dessiner(renderer, textureMenu2, src2, dst2);
                 boutonAccord.afficherBouton(renderer);
                 boutonAcheter.afficherBouton(renderer);
                 boutonConvertir.afficherBouton(renderer);
@@ -177,6 +185,7 @@ int main(int, char **)
     SDL_DestroyTexture(textureMenu);
     Bouton::detruireTexture();
     Pays::detruireTexture();
+    Joueur::detruireTexture();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
