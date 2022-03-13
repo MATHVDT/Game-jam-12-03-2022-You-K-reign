@@ -55,6 +55,7 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     _menu.chargerTexture(renderer, "Credits");
     _menu.chargerTexture(renderer, "Quitter");
 
+    // Charger texture jeu
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
     Joueur::chargerTexture(renderer);
@@ -233,6 +234,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
     initJeu(renderer);
 
     int idIleChoisie = -1;
+    int nbTourEcoule = 0;
 
     SDL_Event events;
     bool isOpen{true};
@@ -261,7 +263,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
                 }
             }
 
-            tour(idIleChoisie);
+            nbTourEcoule += tour(idIleChoisie);
 
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             SDL_RenderClear(renderer);
@@ -273,10 +275,10 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
     return isOpen;
 }
 
-void Manager::tour(int idIleChoisie)
+bool Manager::tour(int idIleChoisie)
 {
-
-    if (_joueur.getPtAction() > 0)
+    bool nouveauTour = false;
+     if (_joueur.getPtAction() > 0)
     { // Action joueur
         cout << "point action : " << _joueur.getPtAction() << endl;
         if (_tabBouton[btnTransformer]->getEtatBouton())

@@ -45,7 +45,7 @@ private:
     void creerAlliance();
 
     int ileChoisie(int xMouse, int yMouse);
-    void tour(int idIleChoisie);
+    bool tour(int idIleChoisie);
 
 public:
     Manager();
