@@ -278,7 +278,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
 bool Manager::tour(int idIleChoisie)
 {
     bool nouveauTour = false;
-     if (_joueur.getPtAction() > 0)
+    if (_joueur.getPtAction() > 0)
     { // Action joueur
         cout << "point action : " << _joueur.getPtAction() << endl;
         if (_tabBouton[btnTransformer]->getEtatBouton())
@@ -324,11 +324,14 @@ bool Manager::tour(int idIleChoisie)
     }
     else
     { // Nouveau tour
+        nouveauTour = true;
         for (auto p : _tabPays)
             p->nouveauTour();
 
         _joueur.nouveauTour();
     }
+
+    return nouveauTour;
 }
 
 // Fonction qui contient le menu pour lancer partie
