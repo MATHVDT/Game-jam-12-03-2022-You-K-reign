@@ -71,15 +71,16 @@ public:
     string attaqueArmee(Pays &pays);
     string attaqueReligion(Pays &pays);
 
+    //Ressources
+    void static chargerTexture(SDL_Renderer *renderer);
+    void static detruireTexture();
+
 private:
     void annexerPays(Pays &pays); // test ok
     string acheterRessourcePaysNeutre(Pays &pays);
     string acheterRessourcePaysAccord(Pays &pays);
     bool checkAssezPtAction(int coup, string &message);
     bool checkAssezRessource(int pourcentage, string &message);
-    // Ressources
-    void static chargerTexture(SDL_Renderer *renderer);
-    void static detruireTexture();
 };
 
 #endif
