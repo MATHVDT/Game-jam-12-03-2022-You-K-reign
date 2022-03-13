@@ -32,7 +32,7 @@ void dessinerEtat(SDL_Renderer *renderer, SDL_Texture *texturesEtat[], int etat,
 void dessinerVille(SDL_Renderer *renderer, SDL_Texture *texturesVille[], int idPays)
 {
     SDL_Rect src{0,0,0,0};
-    SDL_Rect dst{0,0,50,50};
+    SDL_Rect dst{0,0,80,80};
 
     dst.x = 50 + idPays%3 * 200;
     dst.y = 50 + idPays/3 * 200;
