@@ -102,3 +102,26 @@ void dessinerRessourceSecondaire(SDL_Renderer *renderer, SDL_Texture *texturesRe
     SDL_QueryTexture(texturesRessources[ressourceMax], nullptr, nullptr, &src.w, &src.h);
     SDL_RenderCopy(renderer, texturesRessources[ressourceMax], &src, &dst);
 }
+
+void dessinerPARestant(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ptAction)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,50,20};
+    dst.x = 635;
+    dst.y = 60;
+    SDL_QueryTexture(texturesRessources[7], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[7], &src, &dst);
+
+    dst.w = 20;
+    dst.x = 685;
+    SDL_QueryTexture(texturesRessources[ptAction], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ptAction], &src, &dst);
+
+    dst.x = 705;
+    SDL_QueryTexture(texturesRessources[6], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[6], &src, &dst);
+
+    dst.x = 725;
+    SDL_QueryTexture(texturesRessources[5], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[5], &src, &dst);
+}

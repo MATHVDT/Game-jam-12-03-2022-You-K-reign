@@ -32,7 +32,7 @@ private:
     static const int _coupTransformer;
 
 public:
-    static SDL_Texture *_textureRessources[7];
+    static SDL_Texture *_textureRessources[8];
 
 public:
     Joueur(Pays *paysJoueur);
