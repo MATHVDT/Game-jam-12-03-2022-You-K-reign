@@ -1,6 +1,8 @@
 #ifndef __MANAGER_HPP__
 #define __MANAGER_HPP__
 
+#include <list>
+
 #include "dessin.hpp"
 #include "Pays.hpp"
 #include "Joueur.hpp"
@@ -25,10 +27,12 @@ private:
     void initBouton();
 
     int ileChoisie(int xMouse, int yMouse);
-
+    
 public:
     void afficher();
     void initJeu();
+
+    void creerAlliance();
 };
 
 #endif

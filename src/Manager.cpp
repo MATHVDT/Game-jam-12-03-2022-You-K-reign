@@ -38,9 +38,6 @@ void Manager::afficher()
     Pays::detruireTexture();
 }
 
-void Manager::afficher()
-{
-}
 
 void Manager::initPays()
 {
@@ -85,4 +82,51 @@ int Manager::ileChoisie(int xMouse, int yMouse)
         id += xMouse / tailleCaseIle;
     }
     return id;
+}
+
+// Crée les alliances entre les pays
+// 4 alliances
+// Entre 1 et 3 pays par alliance
+void Manager::creerAlliance()
+{
+    int nbPays = 9;
+    int nbPaysHorsAlliance = nbPays;
+    int nbPaysAlliance;
+    vector<Pays *> allianceCour;
+
+    // Dire que tous les pays ne sont pas encore dans une alliance
+    bool estAllie[9];
+    int indice;
+    for (int k = 0; k < nbPays; ++k)
+    {
+        estAllie[k] = false;
+    }
+
+    // Sortir le pays du joueur (par defaut 4)
+    estAllie[4] = true; // Pour ne pas etre pris en compte
+    nbPaysHorsAlliance--;
+
+    while (nbPaysHorsAlliance > 0)
+    {
+        allianceCour.clear();              // Reset membre alliance
+        nbPaysAlliance = 1 + (rand() % 3); // [|1,3|]
+        do                                 // Recuperation des pays d'une alliance
+        {
+            // Choisir un pays
+            indice = rand() % 9;
+            if (!estAllie[indice])
+            { // Pays aucune alliance => ajoute
+                allianceCour.push_back(_tabPays[indice]);
+                estAllie[indice] = true;
+                nbPaysHorsAlliance--;
+            }
+        } while (nbPaysHorsAlliance > 0 &&
+                 (int)allianceCour.size() <= nbPaysAlliance);
+
+        // Ajout de l'alliance au pays membre
+        for (auto p : allianceCour)
+        {
+            p->setAlliance(allianceCour);
+        }
+    }
 }

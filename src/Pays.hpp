@@ -7,7 +7,7 @@
 
 #include "Ressource.hpp"
 #include "EtatPays.hpp"
-#include "dessin.hpp" 
+#include "dessin.hpp"
 
 using namespace std;
 
@@ -57,6 +57,9 @@ public:
     int getMaxProduction() { return _maxProductionRessource; }
     int getRessourceDispo() { return _ressourceDispo; }
     vector<Pays *> getAlliance() { return _alliance; }
+
+    // Setter
+    void setAlliance(const vector<Pays *> alliance) { _alliance = alliance; };
 
     // Action
     void nouveauTour();
