@@ -39,7 +39,6 @@ int main(int, char **)
     Bouton::chargerTexture(renderer);
 
     Bouton boutonTest(0,false);
-    boutonTest.chargerBouton(Bouton::_textureBoutons);
 
     Pays paysTest(0,"Ukraine",2,RessourceBase::RB0,EtatPays::Accord);
 
@@ -70,7 +69,6 @@ int main(int, char **)
 
         SDL_RenderPresent(renderer);
     }
-    boutonTest.detruireTextureBouton();
     //SDL_DestroyTexture(textureMenu);
     Bouton::detruireTexture();
     Pays::detruireTexture();

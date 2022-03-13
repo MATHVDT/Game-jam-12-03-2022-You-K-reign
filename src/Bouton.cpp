@@ -13,38 +13,25 @@ void Bouton::chargerTexture(SDL_Renderer * renderer)
 {
     SDL_Surface *imagesBouton[12];
 
-    imagesBouton[0] = IMG_Load("../img/bouton_accord_commercial_unselec.png");
-    imagesBouton[1] = IMG_Load("../img/bouton_accord_commercial_selec.png");
-    imagesBouton[2] = IMG_Load("../img/bouton_acheter_unselec.png");
-    imagesBouton[3] = IMG_Load("../img/bouton_acheter_selec.png");
-    imagesBouton[4] = IMG_Load("../img/bouton_convertir_unselec.png");
-    imagesBouton[5] = IMG_Load("../img/bouton_convertir_selec.png");
-    imagesBouton[6] = IMG_Load("../img/bouton_guerre_militaire_unselec.png");
-    imagesBouton[7] = IMG_Load("../img/bouton_guerre_militaire_selec.png");
-    imagesBouton[8] = IMG_Load("../img/bouton_guerre_religieuse_unselec.png");
-    imagesBouton[9] = IMG_Load("../img/bouton_guerre_religieuse_selec.png");
-    imagesBouton[10] = IMG_Load("../img/bouton_transformer_unselec.png");
-    imagesBouton[11] = IMG_Load("../img/bouton_transformer_selec.png");
+    imagesBouton[0] = IMG_Load("../img/menu/bouton_accord_commercial_unselec.png");
+    imagesBouton[1] = IMG_Load("../img/menu/bouton_accord_commercial_selec.png");
+    imagesBouton[2] = IMG_Load("../img/menu/bouton_acheter_unselec.png");
+    imagesBouton[3] = IMG_Load("../img/menu/bouton_acheter_selec.png");
+    imagesBouton[4] = IMG_Load("../img/menu/bouton_convertir_unselec.png");
+    imagesBouton[5] = IMG_Load("../img/menu/bouton_convertir_selec.png");
+    imagesBouton[6] = IMG_Load("../img/menu/bouton_guerre_militaire_unselec.png");
+    imagesBouton[7] = IMG_Load("../img/menu/bouton_guerre_militaire_selec.png");
+    imagesBouton[8] = IMG_Load("../img/menu/bouton_guerre_religieuse_unselec.png");
+    imagesBouton[9] = IMG_Load("../img/menu/bouton_guerre_religieuse_selec.png");
+    imagesBouton[10] = IMG_Load("../img/menu/bouton_transformer_unselec.png");
+    imagesBouton[11] = IMG_Load("../img/menu/bouton_transformer_selec.png");
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 12; i++)
     {
         _textureBoutons[i] = SDL_CreateTextureFromSurface(renderer, imagesBouton[i]);
         SDL_FreeSurface(imagesBouton[i]);
     }
 } 
-
-void Bouton::chargerBouton(SDL_Texture * texturesBouton[])
-{
-    for (int i = 0; i < 2; i++)
-    {
-        _textureBoutonId[i] = texturesBouton[2*_idBouton+i];
-    }
-
-    _position.x = 630;
-    _position.y = 5 + _idBouton * 100;;
-    _position.w = 320;
-    _position.h = 90;
-}
 
 bool Bouton::detectionClique(int xSouris, int ySouris)
 {
@@ -61,15 +48,7 @@ bool Bouton::detectionClique(int xSouris, int ySouris)
 
 void Bouton::afficherBouton(SDL_Renderer * renderer)
 {
-    dessinerBouton(renderer,_textureBoutonId,_etatBouton,_idBouton);
-}
-
-void Bouton::detruireTextureBouton()
-{
-    for (int i = 0; i < 2; i++)
-    {
-        SDL_DestroyTexture(_textureBoutonId[i]);
-    }
+    dessinerBouton(renderer,_textureBoutons,_etatBouton,_idBouton);
 }
 
 void Bouton::detruireTexture()

@@ -42,10 +42,10 @@ void dessinerRessource(SDL_Renderer *renderer, SDL_Texture *texturesRessourcesBa
 void dessinerBouton(SDL_Renderer *renderer, SDL_Texture *texturesBouton[], bool etatBouton, int idBouton)
 {
     SDL_Rect src{0,0,0,0};
-    SDL_Rect dst{0,0,90,320};
+    SDL_Rect dst{0,0,320,90};
 
     dst.x = 630;
     dst.y = 5 + idBouton * 100;
-    SDL_QueryTexture(texturesBouton[etatBouton], nullptr, nullptr, &src.w, &src.h);
-    SDL_RenderCopy(renderer, texturesBouton[etatBouton], &src, &dst);
+    SDL_QueryTexture(texturesBouton[idBouton + etatBouton], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesBouton[idBouton + etatBouton], &src, &dst);
 }
