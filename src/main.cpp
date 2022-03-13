@@ -1,7 +1,11 @@
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+
 #include "dessin.hpp"
 #include "Pays.hpp"
+#include "Joueur.hpp"
+#include "Menu.hpp"
 #include "Bouton.hpp"
 
 int main(int, char **)
@@ -16,6 +20,8 @@ int main(int, char **)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
         return EXIT_FAILURE;
     }
+
+    Menu menu;
 
     SDL_Window *window{nullptr};
     SDL_Renderer *renderer{nullptr};
@@ -47,6 +53,17 @@ int main(int, char **)
 
     Bouton boutonTest(0,false);
 
+    menu.setPosition(250, 140);
+
+    SDL_Color hoverColor = {26, 62, 137, 250};
+    SDL_Color normalColor = {150, 150, 150, 250};
+    menu.setColor(normalColor, hoverColor);
+
+    menu.chargerTexture(renderer, "Jouer");
+    menu.chargerTexture(renderer, "Instructions");
+    menu.chargerTexture(renderer, "Credits");
+    menu.chargerTexture(renderer, "Quitter");
+
     Pays pays(0, "Ukraine", 10, RessourceBase::RB0, EtatPays::Neutre);
     Pays pays1(1, "Russie", 15, RessourceBase::RB1, EtatPays::Neutre);
     Pays pays2(2, "Serbie", 5, RessourceBase::RB2, EtatPays::Neutre);
@@ -59,6 +76,7 @@ int main(int, char **)
 
     SDL_Event events;
     bool isOpen{true};
+    bool isPlay{false};
     while (isOpen)
     {
         while (SDL_PollEvent(&events))
@@ -71,29 +89,71 @@ int main(int, char **)
             case SDL_KEYDOWN:
                 if (events.key.keysym.sym == SDLK_ESCAPE)
                     isOpen = false;
+                else if (events.key.keysym.sym == SDLK_UP)
+                {
+                    menu.moveUp();
+                }
+                else if (events.key.keysym.sym == SDLK_DOWN)
+                {
+                    menu.moveDown();
+                }
+                else if (events.key.keysym.sym == SDLK_SPACE)
+                {
+                    menu.select();
+                }
                 break;
             }
+
+            if (!isPlay)
+            {
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                SDL_RenderClear(renderer);
+
+                menu.dessinerMenu(renderer);
+
+                SDL_RenderPresent(renderer);
+
+                if (menu.getIsSelect())
+                {
+                    menu.setIsSelectFalse();
+                    switch (menu.getCurrentIndex())
+                    {
+                    case MENU_JEU:
+                        isPlay = true;
+                        break;
+                    case MENU_CREDIT:
+                        break;
+                    case MENU_INSTRUCTION:
+                        break;
+                    case MENU_QUIT:
+                        isOpen = false;
+                        break;
+                    }
+                }
+            }
+            if (isPlay)
+            {
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                SDL_RenderClear(renderer);
+
+                dessiner(renderer, textureMenu, src1, dst1);
+                boutonTest.afficherBouton(renderer);
+                
+                pays.afficherPays(renderer);
+                pays1.afficherPays(renderer);
+                pays2.afficherPays(renderer);
+                pays3.afficherPays(renderer);
+                pays4.afficherPays(renderer);
+                pays5.afficherPays(renderer);
+                pays6.afficherPays(renderer);
+                pays7.afficherPays(renderer);
+                pays8.afficherPays(renderer);
+
+                SDL_RenderPresent(renderer);
+            }
         }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-
-        dessiner(renderer, textureMenu, src1, dst1);
-        boutonTest.afficherBouton(renderer);
-
-        
-        pays.afficherPays(renderer);
-        pays1.afficherPays(renderer);
-        pays2.afficherPays(renderer);
-        pays3.afficherPays(renderer);
-        pays4.afficherPays(renderer);
-        pays5.afficherPays(renderer);
-        pays6.afficherPays(renderer);
-        pays7.afficherPays(renderer);
-        pays8.afficherPays(renderer);
-
-        SDL_RenderPresent(renderer);
     }
+
     SDL_DestroyTexture(textureMenu);
     Bouton::detruireTexture();
     Pays::detruireTexture();
