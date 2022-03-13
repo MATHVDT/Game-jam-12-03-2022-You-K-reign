@@ -15,5 +15,6 @@ void dessinerReligion(SDL_Renderer *renderer, SDL_Texture *textureTexte[], int r
 void dessinerRessourcePrimaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax);
 void dessinerRessourceSecondaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax);
 void dessinerPARestant(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ptAction);
+void dessinerNouveauTour(SDL_Renderer *renderer, SDL_Texture *texturesRessources, SDL_Texture *textureMenu);
 
 #endif

@@ -34,6 +34,7 @@ private:
     SDL_Texture *_textureMenuFond;
     SDL_Texture *_textureFondInterface;
     SDL_Texture *_textureRessourcesInterface;
+    SDL_Texture *_textureNouveauTour;
 
 private:
     void chargerTexture(SDL_Renderer *);
@@ -46,7 +47,7 @@ private:
     void creerAlliance();
 
     int ileChoisie(int xMouse, int yMouse);
-    bool tour(int idIleChoisie);
+    bool tour(int idIleChoisie, SDL_Renderer *renderer);
 
 public:
     Manager();

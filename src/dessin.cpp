@@ -125,3 +125,21 @@ void dessinerPARestant(SDL_Renderer *renderer, SDL_Texture *texturesRessources[]
     SDL_QueryTexture(texturesRessources[5], nullptr, nullptr, &src.w, &src.h);
     SDL_RenderCopy(renderer, texturesRessources[5], &src, &dst);
 }
+
+void dessinerNouveauTour(SDL_Renderer *renderer, SDL_Texture *texturesRessources, SDL_Texture *textureMenu)
+{
+    SDL_RenderClear(renderer);
+    SDL_Rect srcFondMenu{0, 0, 0, 0};
+    SDL_Rect dstFondMenu{0, 0, 1100, 600};
+
+    SDL_QueryTexture(textureMenu, nullptr, nullptr, &srcFondMenu.w, &srcFondMenu.h);
+
+    dessiner(renderer, textureMenu, srcFondMenu, dstFondMenu);
+
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,250,50};
+    dst.x = 425;
+    dst.y = 275;
+    SDL_QueryTexture(texturesRessources, nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources, &src, &dst);
+}

@@ -5,6 +5,7 @@ Manager::Manager()
     _textureMenuFond = nullptr;
     _textureFondInterface = nullptr;
     _textureRessourcesInterface = nullptr;
+    _textureNouveauTour = nullptr;
 
     for (int i = 0; i < 9; i++)
     {
@@ -44,6 +45,13 @@ void Manager::initJeu(SDL_Renderer *renderer)
 
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 20);
+
+    if (font == nullptr)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
+    }
+
     // Menu de jeu
     _menu.setPosition(450, 240);
 
@@ -78,13 +86,21 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     _textureRessourcesInterface = SDL_CreateTextureFromSurface(renderer, imageRessourceInterface);
     SDL_FreeSurface(imageRessourceInterface);
 
-    //Charger Texture Fond Interface
+    // Charger Texture Fond Interface
     SDL_Surface *imageFondInterface;
 
     imageFondInterface = IMG_Load("../img/fond_menu.png");
 
     _textureFondInterface = SDL_CreateTextureFromSurface(renderer, imageFondInterface);
     SDL_FreeSurface(imageFondInterface);
+
+    // Charger Texture Nouveau Tour
+    SDL_Surface *imageNouveauTour;
+
+    imageNouveauTour = TTF_RenderText_Blended(font, "Nouveau tour !", SDL_Color{141,88,36,250});
+
+    _textureNouveauTour = SDL_CreateTextureFromSurface(renderer, imageNouveauTour);
+    SDL_FreeSurface(imageNouveauTour);
 }
 
 void Manager::detruireTexture()
@@ -92,6 +108,7 @@ void Manager::detruireTexture()
     SDL_DestroyTexture(_textureMenuFond);
     SDL_DestroyTexture(_textureFondInterface);
     SDL_DestroyTexture(_textureRessourcesInterface);
+    SDL_DestroyTexture(_textureNouveauTour);
     Bouton::detruireTexture();
     Pays::detruireTexture();
     Joueur::detruireTexture();
@@ -129,7 +146,7 @@ void Manager::afficher(SDL_Renderer *renderer)
 {
     SDL_Rect srcFondInterface{0, 0, 0, 0};
     SDL_Rect srcRessourcesInterface{0, 0, 0, 0};
-    SDL_Rect srcFondInterface2{0,0,0,0};
+    SDL_Rect srcFondInterface2{0, 0, 0, 0};
     SDL_Rect dstFondInterface{600, 0, 365, 600};
     SDL_Rect dstRessourcesInterface{965, 0, 120, 600};
     SDL_Rect dstFondInterface2{1085, 0, 15, 600};
@@ -270,7 +287,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
                 }
             }
 
-            nbTourEcoule += tour(idIleChoisie);
+            nbTourEcoule += tour(idIleChoisie, renderer);
 
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             SDL_RenderClear(renderer);
@@ -282,7 +299,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
     return isOpen;
 }
 
-bool Manager::tour(int idIleChoisie)
+bool Manager::tour(int idIleChoisie, SDL_Renderer *renderer)
 {
     bool nouveauTour = false;
     if (_joueur.getPtAction() > 0)
@@ -336,6 +353,11 @@ bool Manager::tour(int idIleChoisie)
             p->nouveauTour();
 
         _joueur.nouveauTour();
+
+        dessinerNouveauTour(renderer, _textureNouveauTour, _textureMenuFond);
+
+        SDL_RenderPresent(renderer);
+        SDL_Delay(2000);
     }
 
     return nouveauTour;
