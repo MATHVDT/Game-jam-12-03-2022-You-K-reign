@@ -425,7 +425,7 @@ void Manager::jeu(SDL_Renderer *renderer)
             }
             else
             {
-                isOpen = Partie(2, renderer);
+                isOpen = Partie(30, renderer);
                 isPlay = false;
             }
         }
