@@ -10,13 +10,16 @@ int main(int, char **)
 
     cout << "Hello world !" << endl;
 
-    Pays *p = new Pays{0, "France", 100, RessourceBase::RB0};
+    Pays *p = new Pays{5, "France", 100, RessourceBase::RB0};
     Pays *p2 = new Pays{1, "Pologne", 5, RessourceBase::RB2};
 
     Joueur j{p};
     p2->nouveauTour();
-    j.annexerPays(*p2);
     j.nouveauTour();
+    j.setStockRBi(0, 5);
+    j.setStockRBi(2, 2);
+    j.setStockRCi(2, 5);
+    j.setStockRCi(1, 8);
 
     for (int i = 0; i < 9; i++)
         cout << j.getStockRBi(i) << " ";
@@ -28,7 +31,17 @@ int main(int, char **)
 
     cout << endl
          << "pt : " << j.getPtAction() << "  RB dispo : " << p2->getRessourceDispo() << endl;
+
+    /**************** DEBUT ACTION ******************/
     // cout << j.acheter(*p2);
+
+    cout << j.convertir(*p2) << endl;
+    cout << j.convertir(*p2) << endl;
+    cout << j.convertir(*p2) << endl;
+    cout << j.attaqueReligion(*p2) << endl;
+
+    /***************** FIN ACTION ******************/
+
     cout << endl
          << "pt : " << j.getPtAction() << "  RB dispo : " << p2->getRessourceDispo() << endl;
 
@@ -40,6 +53,8 @@ int main(int, char **)
     for (int i = 0; i < 3; i++)
         cout << j.getStockRCi(i) << " ";
     cout << endl;
+
+    cout << j.getPaysOrigin()->getId();
 
     delete p;
 

@@ -114,7 +114,6 @@ void Pays::vendreRessource()
 bool Pays::convertir(int tauxConversion)
 {
     bool conversionTotale = false;
-
     _religion += tauxConversion;
 
     if (_religion > 100)
