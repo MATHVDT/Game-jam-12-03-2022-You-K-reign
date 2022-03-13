@@ -4,16 +4,16 @@ Manager::Manager()
 {
     _textureFondInterface = nullptr;
     _textureRessourcesInterface = nullptr;
-    
+
     for (int i = 0; i < 9; i++)
     {
-        _tabPays[i] = nullptr;  
+        _tabPays[i] = nullptr;
     }
 
     for (int i = 0; i < 6; i++)
     {
-        _tabBouton[i] = nullptr;  
-    } 
+        _tabBouton[i] = nullptr;
+    }
 }
 
 Manager::~Manager()
@@ -22,13 +22,13 @@ Manager::~Manager()
 
     for (int i = 0; i < 9; i++)
     {
-        delete _tabPays[i];  
+        delete _tabPays[i];
     }
 
     for (int i = 0; i < 6; i++)
     {
-        delete _tabBouton[i];  
-    } 
+        delete _tabBouton[i];
+    }
 }
 
 void Manager::initJeu(SDL_Renderer *renderer)
@@ -39,7 +39,6 @@ void Manager::initJeu(SDL_Renderer *renderer)
     _joueur = Joueur();
     initJoueur(_tabPays[4]);
 }
-
 
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
@@ -63,8 +62,6 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     SDL_FreeSurface(imageFondInterface);
 }
 
-
-
 void Manager::detruireTexture()
 {
     SDL_DestroyTexture(_textureFondInterface);
@@ -72,7 +69,6 @@ void Manager::detruireTexture()
     Bouton::detruireTexture();
     Pays::detruireTexture();
 }
-
 
 void Manager::initPays()
 {
@@ -94,12 +90,12 @@ void Manager::initJoueur(Pays *paysJoueur)
 
 void Manager::initBouton()
 {
-    _tabBouton[0] = new Bouton(0,false);
-    _tabBouton[1] = new Bouton(1,false);
-    _tabBouton[2] = new Bouton(2,false);
-    _tabBouton[3] = new Bouton(3,false);
-    _tabBouton[4] = new Bouton(4,false);
-    _tabBouton[5] = new Bouton(5,false);
+    _tabBouton[0] = new Bouton(0, false);
+    _tabBouton[1] = new Bouton(1, false);
+    _tabBouton[2] = new Bouton(2, false);
+    _tabBouton[3] = new Bouton(3, false);
+    _tabBouton[4] = new Bouton(4, false);
+    _tabBouton[5] = new Bouton(5, false);
 }
 
 void Manager::afficher(SDL_Renderer *renderer)
@@ -120,13 +116,13 @@ void Manager::afficher(SDL_Renderer *renderer)
 
     for (int i = 0; i < 9; i++)
     {
-        _tabPays[i]->afficherPays(renderer);  
+        _tabPays[i]->afficherPays(renderer);
     }
 
     for (int i = 0; i < 6; i++)
     {
-        _tabBouton[i]->afficherBouton(renderer);  
-    } 
+        _tabBouton[i]->afficherBouton(renderer);
+    }
 }
 
 // Recupere la position de la souris
