@@ -18,7 +18,7 @@ class Bouton
 
     public:
         Bouton(int idBouton, bool etatBouton);
-        ~Bouton() = default;
+        ~Bouton();
         void static chargerTexture(SDL_Renderer *);
 
         bool detectionClique(int xSouris, int ySouris);

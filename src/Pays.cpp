@@ -25,6 +25,11 @@ Pays::Pays(int idPays, string nom,
 {
 }
 
+Pays::~Pays()
+{
+    cout << "Destructeur Pays" << endl;
+} 
+
 void Pays::afficherConsole()
 {
     cout << endl;

@@ -1,47 +1,77 @@
 #include "Manager.hpp"
 
-void Manager::chargerTexture(SDL_Renderer * renderer)
+Manager::Manager()
+{
+    _textureFondInterface = nullptr;
+    _textureRessourcesInterface = nullptr;
+    
+    for (int i = 0; i < 9; i++)
+    {
+        _tabPays[i] = nullptr;  
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        _tabBouton[i] = nullptr;  
+    } 
+}
+
+Manager::~Manager()
+{
+    detruireTexture();
+
+    for (int i = 0; i < 9; i++)
+    {
+        delete _tabPays[i];  
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        delete _tabBouton[i];  
+    } 
+}
+
+void Manager::initJeu(SDL_Renderer *renderer)
+{
+    chargerTexture(renderer);
+    initPays();
+    initBouton();
+    _joueur = Joueur();
+    initJoueur(_tabPays[4]);
+}
+
+void Manager::chargerTexture(SDL_Renderer *renderer)
 {
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
 
     //Charger Texture Menu Ressource
-    SDL_Surface *imageRessourceMenu;
+    SDL_Surface *imageRessourceInterface;
 
-    imageRessourceMenu = IMG_Load("../img/menu/interface_ressource_verticale.png");
+    imageRessourceInterface = IMG_Load("../img/menu/interface_ressource_verticale.png");
 
-    _textureRessourcesMenu = SDL_CreateTextureFromSurface(renderer, imageRessourceMenu);
-    SDL_FreeSurface(imageRessourceMenu);
+    _textureRessourcesInterface = SDL_CreateTextureFromSurface(renderer, imageRessourceInterface);
+    SDL_FreeSurface(imageRessourceInterface);
 
-    //Charger Texture Fond Menu
-    SDL_Surface *imageFondMenu;
+    //Charger Texture Fond Interface
+    SDL_Surface *imageFondInterface;
 
-    imageFondMenu = IMG_Load("../img/menu/fond_menu.png");
+    imageFondInterface = IMG_Load("../img/menu/fond_menu.png");
 
-    _textureFondMenu = SDL_CreateTextureFromSurface(renderer, imageFondMenu);
-    SDL_FreeSurface(imageFondMenu);
+    _textureFondInterface = SDL_CreateTextureFromSurface(renderer, imageFondInterface);
+    SDL_FreeSurface(imageFondInterface);
 }
+
+
 
 void Manager::detruireTexture()
 {
-    SDL_DestroyTexture(_textureFondMenu);
-    SDL_DestroyTexture(_textureRessourcesMenu);
+    SDL_DestroyTexture(_textureFondInterface);
+    SDL_DestroyTexture(_textureRessourcesInterface);
     Bouton::detruireTexture();
     Pays::detruireTexture();
 }
 
-void Manager::afficher()
-{
-    SDL_DestroyTexture(_textureFondMenu);
-    SDL_DestroyTexture(_textureRessourcesMenu);
-    Bouton::detruireTexture();
-    Pays::detruireTexture();
-}
-
-void Manager::afficher()
-{
-    
-} 
 
 void Manager::initPays()
 {
@@ -56,9 +86,9 @@ void Manager::initPays()
     _tabPays[8] = new Pays(8, "Corse", 0, RessourceBase::RB8, EtatPays::Neutre);
 }
 
-void Manager::initJoueur()
+void Manager::initJoueur(Pays *paysJoueur)
 {
-    _joueur = Joueur(_tabPays[4]);
+    _joueur.initJoueur(paysJoueur);
 }
 
 void Manager::initBouton()
@@ -69,4 +99,31 @@ void Manager::initBouton()
     _tabBouton[3] = new Bouton(3,false);
     _tabBouton[4] = new Bouton(4,false);
     _tabBouton[5] = new Bouton(5,false);
+}
+
+void Manager::afficher(SDL_Renderer *renderer)
+{
+    SDL_Rect srcFondInterface{0, 0, 0, 0};
+    SDL_Rect srcRessourcesInterface{0, 0, 0, 0};
+    SDL_Rect dstFondInterface{600, 0, 380, 600};
+    SDL_Rect dstRessourcesInterface{980, 0, 120, 600};
+
+    SDL_QueryTexture(_textureFondInterface, nullptr, nullptr, &srcFondInterface.w, &srcFondInterface.h);
+    SDL_QueryTexture(_textureRessourcesInterface, nullptr, nullptr, &srcRessourcesInterface.w, &srcRessourcesInterface.h);
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    dessiner(renderer, _textureFondInterface, srcFondInterface, dstFondInterface);
+    dessiner(renderer, _textureRessourcesInterface, srcRessourcesInterface, dstRessourcesInterface);
+
+    for (int i = 0; i < 9; i++)
+    {
+        _tabPays[i]->afficherPays(renderer);  
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        _tabBouton[i]->afficherBouton(renderer);  
+    } 
 }

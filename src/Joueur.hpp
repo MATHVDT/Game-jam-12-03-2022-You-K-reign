@@ -33,8 +33,10 @@ private:
     static const int _coupTransformer;
 
 public:
-    Joueur(Pays *paysJoueur);
+    Joueur();
     ~Joueur();
+
+    void initJoueur(Pays * paysJoueur);
 
     // Getter
     Pays *getPaysOrigin();

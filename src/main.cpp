@@ -7,9 +7,47 @@
 #include "Joueur.hpp"
 #include "Menu.hpp"
 #include "Bouton.hpp"
+#include "Manager.hpp"
+
 
 int main(int, char **)
 {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[debug] %s", SDL_GetError());
+    }
+
+    if (TTF_Init() < 0)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
+        return EXIT_FAILURE;
+    }
+
+    Menu menu;
+
+    SDL_Window *window{nullptr};
+    SDL_Renderer *renderer{nullptr};
+
+    if (SDL_CreateWindowAndRenderer(1100, 600, SDL_WINDOW_SHOWN, &window, &renderer))
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
+        SDL_Quit();
+        return EXIT_FAILURE;
+    }
+
+    SDL_SetWindowTitle(window, "Your (k) Reign");
+
+    Manager manager;
+    manager.initJeu(renderer);
+    manager.afficher(renderer);
+    manager.~Manager();
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    TTF_Quit();
+    SDL_Quit();
+
+    /*
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[debug] %s", SDL_GetError());
@@ -162,6 +200,6 @@ int main(int, char **)
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
-
+    */
     return EXIT_SUCCESS;
 }

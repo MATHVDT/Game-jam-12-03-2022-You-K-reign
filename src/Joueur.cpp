@@ -11,9 +11,8 @@ const int Joueur::_coupAcheterRessourceAccord = 1;
 const int Joueur::_coupConvertir = 1;
 const int Joueur::_coupTransformer = 3;
 
-Joueur::Joueur(Pays *paysJoueur)
-    : _ptAction(0),
-      _paysPossedes{paysJoueur}
+Joueur::Joueur()
+    : _ptAction(0)
 {
     // Mise a 0 des ressources
     for (int i = 0; i < 9; i++)
@@ -24,6 +23,11 @@ Joueur::Joueur(Pays *paysJoueur)
 
 Joueur::~Joueur()
 {
+}
+
+void Joueur::initJoueur(Pays * paysJoueur)
+{
+    _paysPossedes.push_back(paysJoueur);
 }
 
 // Retourne le pays d'origine

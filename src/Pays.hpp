@@ -43,7 +43,7 @@ public:
          RessourceBase ressource,
          EtatPays etat = EtatPays::Neutre);
 
-    ~Pays() = default;
+    ~Pays();
 
     void afficherConsole();
     void afficherPays(SDL_Renderer *);
