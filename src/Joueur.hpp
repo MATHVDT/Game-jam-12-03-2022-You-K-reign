@@ -32,11 +32,19 @@ private:
     static const int _coupConvertir;
     static const int _coupTransformer;
 
+    static SDL_Texture *_textureRessources[7];
+
 public:
     Joueur();
     ~Joueur();
 
-    void initJoueur(Pays * paysJoueur);
+    void initJoueur(Pays *paysJoueur);
+
+public:
+    Joueur(Pays *paysJoueur);
+    ~Joueur();
+
+    void afficherJoueur(SDL_Renderer *renderer);
 
     // Getter
     Pays *getPaysOrigin();
@@ -59,13 +67,18 @@ public:
     // Action
     void nouveauTour();
     void donnerPointAction(int pt = 5);
+    string transformerRessource(); // test ok
     string accordCommercial(Pays &pays);
     string convertir(Pays &pays); // test ok
-    string acheter(Pays &pays); // test ok2
+    string acheter(Pays &pays);   // test ok2
 
     // Attaque
     string attaqueArmee(Pays &pays);
     string attaqueReligion(Pays &pays);
+
+    //Ressources
+    void static chargerTexture(SDL_Renderer *renderer);
+    void static detruireTexture();
 
 private:
     void annexerPays(Pays &pays); // test ok

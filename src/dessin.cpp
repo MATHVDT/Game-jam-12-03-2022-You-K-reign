@@ -36,8 +36,8 @@ void dessinerBouton(SDL_Renderer *renderer, SDL_Texture *texturesBouton[], bool 
 
     dst.x = 630;
     dst.y = 5 + idBouton * 100;
-    SDL_QueryTexture(texturesBouton[idBouton + etatBouton], nullptr, nullptr, &src.w, &src.h);
-    SDL_RenderCopy(renderer, texturesBouton[idBouton + etatBouton], &src, &dst);
+    SDL_QueryTexture(texturesBouton[2 * idBouton + etatBouton], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesBouton[2 * idBouton + etatBouton], &src, &dst);
 }
 
 void dessinerRessource(SDL_Renderer *renderer, SDL_Texture *texturesRessourcesBases[], int ressource, int id_pays, int ressourcedispo)
@@ -65,4 +65,40 @@ void dessinerReligion(SDL_Renderer *renderer, SDL_Texture *textureTexte[], int r
     dst.y = 150 + id_pays/3 * 200;
     SDL_QueryTexture(textureTexte[religion/5], nullptr, nullptr, &src.w, &src.h);
     SDL_RenderCopy(renderer, textureTexte[religion/5], &src, &dst);
+}
+
+void dessinerRessourcePrimaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,10,20};
+    dst.x = 1035;
+    dst.y = 55 + ressource * 42;
+    SDL_QueryTexture(texturesRessources[ressourceDispo], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceDispo], &src, &dst);
+
+    dst.x = 1055;
+    SDL_QueryTexture(texturesRessources[6], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[6], &src, &dst);
+
+    dst.x = 1075;
+    SDL_QueryTexture(texturesRessources[ressourceMax], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceMax], &src, &dst);
+}
+
+void dessinerRessourceSecondaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,10,20};
+    dst.x = 1035;
+    dst.y = 480 + ressource * 42;
+    SDL_QueryTexture(texturesRessources[ressourceDispo], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceDispo], &src, &dst);
+
+    dst.x = 1055;
+    SDL_QueryTexture(texturesRessources[6], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[6], &src, &dst);
+
+    dst.x = 1075;
+    SDL_QueryTexture(texturesRessources[ressourceMax], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessources[ressourceMax], &src, &dst);
 }

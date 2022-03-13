@@ -82,26 +82,38 @@ int main(int, char **)
 
     SDL_Rect src1{0, 0, 0, 0};
     SDL_Rect dst1{980, 0, 120, 600};
+    SDL_Rect src2{0, 0, 0, 0};
+    SDL_Rect dst2{600, 0, 380, 600};
 
     SDL_Surface *imagesMenuRessource;
+    SDL_Surface *imagesMenuRessource2;
 
     imagesMenuRessource = IMG_Load("../img/menu/interface_ressource_verticale.png");
-
+    imagesMenuRessource2 = IMG_Load("../img/fond_menu.png");
 
     SDL_Texture *textureMenu = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource);
     SDL_FreeSurface(imagesMenuRessource);
+    SDL_Texture *textureMenu2 = SDL_CreateTextureFromSurface(renderer, imagesMenuRessource2);
+    SDL_FreeSurface(imagesMenuRessource2);
 
     SDL_QueryTexture(textureMenu, nullptr, nullptr, &src1.w, &src1.h);
+    SDL_QueryTexture(textureMenu2, nullptr, nullptr, &src2.w, &src2.h);
 
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
+    Joueur::chargerTexture(renderer);
 
-    Bouton boutonTest(0,false);
+    Bouton boutonAccord(0, false);
+    Bouton boutonAcheter(1, false);
+    Bouton boutonConvertir(2, false);
+    Bouton boutonGuerreMilitaire(3, false);
+    Bouton boutonGuerreReligieuse(4, false);
+    Bouton boutonTransformer(5, false);
 
-    menu.setPosition(250, 140);
+    menu.setPosition(450, 140);
 
-    SDL_Color hoverColor = {26, 62, 137, 250};
-    SDL_Color normalColor = {150, 150, 150, 250};
+    SDL_Color hoverColor = {140, 137, 137, 250};
+    SDL_Color normalColor = {250, 250, 250, 250};
     menu.setColor(normalColor, hoverColor);
 
     menu.chargerTexture(renderer, "Jouer");
@@ -109,7 +121,7 @@ int main(int, char **)
     menu.chargerTexture(renderer, "Credits");
     menu.chargerTexture(renderer, "Quitter");
 
-    Pays pays(0, "Ukraine", 10, RessourceBase::RB0, EtatPays::Neutre);
+    Pays pays(0, "Ukraine", 10, RessourceBase::RB0, EtatPays::Guerre);
     Pays pays1(1, "Russie", 15, RessourceBase::RB1, EtatPays::Neutre);
     Pays pays2(2, "Serbie", 5, RessourceBase::RB2, EtatPays::Neutre);
     Pays pays3(3, "Bosnie", 10, RessourceBase::RB3, EtatPays::Neutre);
@@ -118,6 +130,7 @@ int main(int, char **)
     Pays pays6(6, "Chypre", 20, RessourceBase::RB6, EtatPays::Neutre);
     Pays pays7(7, "Malte", 5, RessourceBase::RB7, EtatPays::Neutre);
     Pays pays8(8, "Corse", 0, RessourceBase::RB8, EtatPays::Neutre);
+    Joueur joueur(&pays4);
 
     SDL_Event events;
     bool isOpen{true};
@@ -142,11 +155,21 @@ int main(int, char **)
                 {
                     menu.moveDown();
                 }
-                else if (events.key.keysym.sym == SDLK_SPACE)
+                else if (events.key.keysym.sym == SDLK_RETURN)
                 {
                     menu.select();
                 }
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                if (events.button.button == SDL_BUTTON_LEFT)
+                {
+                    boutonAccord.setEtatBouton(boutonAccord.detectionClique(events.button.x, events.button.y));
+                    boutonAcheter.setEtatBouton(boutonAcheter.detectionClique(events.button.x, events.button.y));
+                    boutonConvertir.setEtatBouton(boutonConvertir.detectionClique(events.button.x, events.button.y));
+                    boutonGuerreMilitaire.setEtatBouton(boutonGuerreMilitaire.detectionClique(events.button.x, events.button.y));
+                    boutonGuerreReligieuse.setEtatBouton(boutonGuerreReligieuse.detectionClique(events.button.x, events.button.y));
+                    boutonTransformer.setEtatBouton(boutonTransformer.detectionClique(events.button.x, events.button.y));
+                }
             }
 
             if (!isPlay)
@@ -182,8 +205,14 @@ int main(int, char **)
                 SDL_RenderClear(renderer);
 
                 dessiner(renderer, textureMenu, src1, dst1);
-                boutonTest.afficherBouton(renderer);
-                
+                dessiner(renderer, textureMenu2, src2, dst2);
+                boutonAccord.afficherBouton(renderer);
+                boutonAcheter.afficherBouton(renderer);
+                boutonConvertir.afficherBouton(renderer);
+                boutonGuerreMilitaire.afficherBouton(renderer);
+                boutonGuerreReligieuse.afficherBouton(renderer);
+                boutonTransformer.afficherBouton(renderer);
+
                 pays.afficherPays(renderer);
                 pays1.afficherPays(renderer);
                 pays2.afficherPays(renderer);
@@ -193,6 +222,7 @@ int main(int, char **)
                 pays6.afficherPays(renderer);
                 pays7.afficherPays(renderer);
                 pays8.afficherPays(renderer);
+                joueur.afficherJoueur(renderer);
 
                 SDL_RenderPresent(renderer);
             }
@@ -202,6 +232,7 @@ int main(int, char **)
     SDL_DestroyTexture(textureMenu);
     Bouton::detruireTexture();
     Pays::detruireTexture();
+    Joueur::detruireTexture();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

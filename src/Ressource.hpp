@@ -22,7 +22,6 @@ enum class RessourceCraft
     RC0 = 0,
     RC1 = 1,
     RC2 = 2,
-    RC3 = 3,
     RIEN = -1,
 };
 

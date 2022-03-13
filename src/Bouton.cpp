@@ -14,11 +14,11 @@ Bouton::Bouton(int idBouton, bool etatBouton)
 
 Bouton::~Bouton()
 {
-    cout << "Destructeur Bouton" << endl;
+    // cout << "Destructeur Bouton" << endl;
 }
 
 
-void Bouton::chargerTexture(SDL_Renderer * renderer)
+void Bouton::chargerTexture(SDL_Renderer *renderer)
 {
     SDL_Surface *imagesBouton[12];
 
@@ -40,13 +40,13 @@ void Bouton::chargerTexture(SDL_Renderer * renderer)
         _textureBoutons[i] = SDL_CreateTextureFromSurface(renderer, imagesBouton[i]);
         SDL_FreeSurface(imagesBouton[i]);
     }
-} 
+}
 
 bool Bouton::detectionClique(int xSouris, int ySouris)
 {
     bool clique = false;
 
-    if ((xSouris>_position.x) && (xSouris<_position.x+_position.w) && (ySouris>_position.y) && (ySouris<_position.y+_position.h))
+    if ((xSouris > _position.x) && (xSouris < _position.x + _position.w) && (ySouris > _position.y) && (ySouris < _position.y + _position.h))
     {
         clique = true;
     }
@@ -54,10 +54,19 @@ bool Bouton::detectionClique(int xSouris, int ySouris)
     return clique;
 }
 
-
-void Bouton::afficherBouton(SDL_Renderer * renderer)
+void Bouton::afficherBouton(SDL_Renderer *renderer)
 {
-    dessinerBouton(renderer,_textureBoutons,_etatBouton,_idBouton);
+    dessinerBouton(renderer, _textureBoutons, _etatBouton, _idBouton);
+}
+
+bool Bouton::getEtatBouton()
+{
+    return _etatBouton;
+}
+
+void Bouton::setEtatBouton(bool a)
+{
+    _etatBouton = a;
 }
 
 void Bouton::detruireTexture()

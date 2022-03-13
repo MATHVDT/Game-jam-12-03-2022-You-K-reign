@@ -11,6 +11,9 @@ const int Joueur::_coupAcheterRessourceAccord = 1;
 const int Joueur::_coupConvertir = 1;
 const int Joueur::_coupTransformer = 3;
 
+SDL_Texture *Joueur::_textureRessources[7];
+
+
 Joueur::Joueur()
     : _ptAction(0)
 {
@@ -384,4 +387,99 @@ bool Joueur::checkAssezRessource(int pourcentage, string &message)
         message += "Pas assez de points d'action.";
     }
     return assezRessource;
+}
+
+// Transforme toutes les RB possible en RC
+// RB3 + R4 => RC0
+// RB5 + R6 => RC1
+// RB7 + R8 => RC3
+string Joueur::transformerRessource()
+{
+    string message;
+
+    if (checkAssezPtAction(_coupTransformer, message))
+    { // Assez de PA
+        int nbRessourceCraft = 0;
+        // RB3 + R4 => RC0
+        while ((_stockRC[0] + 1 <= _stockRBMax) &&
+               _stockRB[3] && _stockRB[4])
+        {
+            _stockRC[0]++;
+            _stockRB[3]--;
+            _stockRB[4]--;
+            nbRessourceCraft++;
+        }
+
+        // RB5 + R6 => RC1
+        while ((_stockRC[1] + 1 <= _stockRBMax) &&
+               _stockRB[5] && _stockRB[6])
+        {
+            _stockRC[1]++;
+            _stockRB[5]--;
+            _stockRB[6]--;
+            nbRessourceCraft++;
+        }
+
+        // RB7 + R8 => RC2
+        while ((_stockRC[2] + 1 <= _stockRBMax) &&
+               _stockRB[7] && _stockRB[8])
+        {
+            _stockRC[2]++;
+            _stockRB[7]--;
+            _stockRB[8]--;
+            nbRessourceCraft++;
+        }
+
+        message = to_string(nbRessourceCraft) + " resssources transformées.";
+    }
+
+    return message;
+}
+
+void Joueur::chargerTexture(SDL_Renderer *renderer)
+{
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 20);
+
+    if (font == nullptr)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
+    }
+
+    SDL_Surface *imagesRessources[7];
+
+    imagesRessources[0] = TTF_RenderText_Blended(font, "0", SDL_Color{0, 0, 0, 250});
+    imagesRessources[1] = TTF_RenderText_Blended(font, "1", SDL_Color{0, 0, 0, 250});
+    imagesRessources[2] = TTF_RenderText_Blended(font, "2", SDL_Color{0, 0, 0, 250});
+    imagesRessources[3] = TTF_RenderText_Blended(font, "3", SDL_Color{0, 0, 0, 250});
+    imagesRessources[4] = TTF_RenderText_Blended(font, "4", SDL_Color{0, 0, 0, 250});
+    imagesRessources[5] = TTF_RenderText_Blended(font, "5", SDL_Color{0, 0, 0, 250});
+    imagesRessources[6] = TTF_RenderText_Blended(font, "/", SDL_Color{0, 0, 0, 250});
+
+    for (int i = 0; i < 7; i++)
+    {
+        _textureRessources[i] = SDL_CreateTextureFromSurface(renderer, imagesRessources[i]);
+        SDL_FreeSurface(imagesRessources[i]);
+    }
+
+    TTF_CloseFont(font);
+}
+
+void Joueur::detruireTexture()
+{
+    for (int i = 0; i < 7; i++)
+    {
+        SDL_DestroyTexture(_textureRessources[i]);
+    }
+}
+
+void Joueur::afficherJoueur(SDL_Renderer *renderer)
+{
+    for (int i = 0; i < 9; i++)
+    {
+        dessinerRessourcePrimaire(renderer, _textureRessources, i, _stockRB[i], _stockRBMax);
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        dessinerRessourceSecondaire(renderer, _textureRessources, i, _stockRC[i], _stockRCMax);
+    }
 }

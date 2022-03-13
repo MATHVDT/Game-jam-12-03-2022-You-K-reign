@@ -24,6 +24,9 @@ class Bouton
         bool detectionClique(int xSouris, int ySouris);
         void afficherBouton(SDL_Renderer *);
 
+        bool getEtatBouton();
+        void setEtatBouton(bool a);
+
         void static detruireTexture();
 };
 

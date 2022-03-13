@@ -3,6 +3,9 @@
         "memory": "cpp",
         "istream": "cpp",
         "functional": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "compare": "cpp",
+        "type_traits": "cpp"
     }
 }
