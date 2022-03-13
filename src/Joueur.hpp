@@ -40,10 +40,6 @@ public:
 
     void initJoueur(Pays *paysJoueur);
 
-public:
-    Joueur(Pays *paysJoueur);
-    ~Joueur();
-
     void afficherJoueur(SDL_Renderer *renderer);
 
     // Getter
