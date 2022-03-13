@@ -33,6 +33,7 @@ class Manager
 
         void afficher(SDL_Renderer *);
         void initJeu(SDL_Renderer *);
+        void Partie(int, SDL_Renderer *);
 
 };
 

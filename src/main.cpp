@@ -39,7 +39,15 @@ int main(int, char **)
 
     Manager manager;
     manager.initJeu(renderer);
-    manager.afficher(renderer);
+    
+    SDL_bool play = SDL_TRUE;
+
+    while(play)
+    {
+        manager.afficher(renderer);
+        SDL_Delay(3000);
+        play = SDL_FALSE;
+    }
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

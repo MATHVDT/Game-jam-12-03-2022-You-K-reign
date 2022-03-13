@@ -45,6 +45,7 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
 {
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
+    //Joueur::chargerTexture(renderer);
 
     //Charger Texture Menu Ressource
     SDL_Surface *imageRessourceInterface;
@@ -71,6 +72,7 @@ void Manager::detruireTexture()
     SDL_DestroyTexture(_textureRessourcesInterface);
     Bouton::detruireTexture();
     Pays::detruireTexture();
+    //Joueur::detruireTexture();
 }
 
 void Manager::initPays()
@@ -126,6 +128,8 @@ void Manager::afficher(SDL_Renderer *renderer)
     {
         _tabBouton[i]->afficherBouton(renderer);  
     } 
+
+    SDL_RenderPresent(renderer);
 }
 
 // Recupere la position de la souris
@@ -144,4 +148,9 @@ int Manager::ileChoisie(int xMouse, int yMouse)
         id += xMouse / tailleCaseIle;
     }
     return id;
+}
+
+void Manager::Partie(int tour,SDL_Renderer *renderer)
+{
+    initJeu(renderer);
 }
