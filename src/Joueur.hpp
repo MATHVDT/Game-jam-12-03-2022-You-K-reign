@@ -13,10 +13,9 @@ using namespace std;
 class Joueur
 {
 private:
-    Pays *_pays;
     int _ptAction;
 
-    vector<Pays *> _paysAnnexes;
+    vector<Pays *> _paysPossedes;
 
     int _stockRB[9];
     int _stockRC[3];
@@ -28,17 +27,19 @@ private:
     static const int _coupAttaqueArmee;
     static const int _coupAttaqueReligion;
     static const int _coupAccordCommercial;
+    static const int _coupAcheterRessource;
+    static const int _coupAcheterRessourceAccord;
     static const int _coupConvertir;
     static const int _coupTransformer;
 
-
-
 public:
-    Joueur(Pays *paysJoueur);
+    Joueur();
     ~Joueur();
 
+    void initJoueur(Pays * paysJoueur);
+
     // Getter
-    Pays *getPays() { return _pays; }
+    Pays *getPaysOrigin();
     int getPtAction() { return _ptAction; }
 
     int *getStockRB() { return _stockRB; }
@@ -47,18 +48,31 @@ public:
     int getStockRBi(int i);
     int getStockRCi(int i);
 
+    // Setter tmp un peu bizzare parce que c'est des +
+    void setStockRBi(int i, int qte) { _stockRB[i] = (_stockRB[i] + qte <= _stockRBMax ? qte : _stockRBMax); }
+    void setStockRCi(int i, int qte) { _stockRC[i] = (_stockRC[i] + qte <= _stockRCMax ? qte : _stockRCMax); }
+
     // Getter static
-    int getStockRBMax() { return _stockRBMax; }
-    int getStockRCMax() { return _stockRCMax; }
+    static int getStockRBMax() { return _stockRBMax; }
+    static int getStockRCMax() { return _stockRCMax; }
 
     // Action
+    void nouveauTour();
     void donnerPointAction(int pt = 5);
     string accordCommercial(Pays &pays);
-    string convertir(Pays &pays);
+    string convertir(Pays &pays); // test ok
+    string acheter(Pays &pays); // test ok2
 
     // Attaque
     string attaqueArmee(Pays &pays);
     string attaqueReligion(Pays &pays);
+
+private:
+    void annexerPays(Pays &pays); // test ok
+    string acheterRessourcePaysNeutre(Pays &pays);
+    string acheterRessourcePaysAccord(Pays &pays);
+    bool checkAssezPtAction(int coup, string &message);
+    bool checkAssezRessource(int pourcentage, string &message);
 };
 
 #endif

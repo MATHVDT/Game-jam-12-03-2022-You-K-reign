@@ -43,7 +43,7 @@ public:
          RessourceBase ressource,
          EtatPays etat = EtatPays::Neutre);
 
-    ~Pays() = default;
+    ~Pays();
 
     void afficherConsole();
     void afficherPays(SDL_Renderer *);
@@ -53,6 +53,7 @@ public:
     string getNom() { return _nomPays; }
     int getCompteur() { return _compteurEtat; }
     int getPopFidele() { return _religion; }
+    EtatPays getEtatPays() { return _etat; }
     RessourceBase getRessource() { return _ressource; }
     int getMaxProduction() { return _maxProductionRessource; }
     int getRessourceDispo() { return _ressourceDispo; }
@@ -65,7 +66,7 @@ public:
     void nouveauTour();
     void annexer();
     bool accordCommercial();
-    RessourceBase vendreRessource(int &ptActionJoueur);
+    void vendreRessource();
     bool convertir(int tauxConversion);
 
 public:

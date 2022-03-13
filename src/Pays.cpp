@@ -25,6 +25,11 @@ Pays::Pays(int idPays, string nom,
 {
 }
 
+Pays::~Pays()
+{
+    cout << "Destructeur Pays" << endl;
+} 
+
 void Pays::afficherConsole()
 {
     cout << endl;
@@ -120,27 +125,9 @@ bool Pays::accordCommercial()
 }
 
 // Vendre une ressource au joueur
-RessourceBase Pays::vendreRessource(int &ptActionJoueur)
+void Pays::vendreRessource()
 {
-    RessourceBase r = _ressource;
-
-    switch (_etat)
-    {
-    case EtatPays::Accord:
-        ptActionJoueur -= 1; // ...
-        break;
-    case EtatPays::Neutre:
-        ptActionJoueur -= 2; // ...
-        break;
-    case EtatPays::Guerre:
-    case EtatPays::Annexe:
-        r = RessourceBase::RIEN;
-        break;
-    default:
-        cerr << "Vendre ressource mais l'etat du pays est bizarre";
-        break;
-    }
-    return r;
+    _ressourceDispo--;
 }
 
 // Convertir un pays
@@ -149,7 +136,6 @@ RessourceBase Pays::vendreRessource(int &ptActionJoueur)
 bool Pays::convertir(int tauxConversion)
 {
     bool conversionTotale = false;
-
     _religion += tauxConversion;
 
     if (_religion > 100)

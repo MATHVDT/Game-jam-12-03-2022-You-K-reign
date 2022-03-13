@@ -12,6 +12,11 @@ Bouton::Bouton(int idBouton, bool etatBouton)
     _position.h = 90;
 }
 
+Bouton::~Bouton()
+{
+    cout << "Destructeur Bouton" << endl;
+}
+
 
 void Bouton::chargerTexture(SDL_Renderer * renderer)
 {
@@ -57,7 +62,7 @@ void Bouton::afficherBouton(SDL_Renderer * renderer)
 
 void Bouton::detruireTexture()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 12; i++)
     {
         SDL_DestroyTexture(_textureBoutons[i]);
     }
