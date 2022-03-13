@@ -7,7 +7,7 @@ Bouton::Bouton(int idBouton, bool etatBouton)
     _idBouton = idBouton;
     _etatBouton = etatBouton;
     _position.x = 630;
-    _position.y = 5 + idBouton * 100;
+    _position.y = 5 + idBouton * 77;
     _position.w = 320;
     _position.h = 90;
 }
