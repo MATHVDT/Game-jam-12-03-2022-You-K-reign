@@ -247,6 +247,7 @@ bool Manager::Partie(int nbTour, SDL_Renderer *renderer)
             switch (events.type)
             {
             case SDL_QUIT:
+            case SDLK_ESCAPE:
                 isOpen = false;
                 break;
 
