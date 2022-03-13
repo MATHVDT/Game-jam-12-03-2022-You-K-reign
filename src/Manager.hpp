@@ -1,6 +1,8 @@
 #ifndef __MANAGER_HPP__
 #define __MANAGER_HPP__
 
+#include <list>
+
 #include "dessin.hpp"
 #include "Pays.hpp"
 #include "Joueur.hpp"
@@ -11,29 +13,32 @@ using namespace std;
 
 class Manager
 {
-    private:
-        Pays *_tabPays[9];
-        Joueur _joueur;
-        Bouton *_tabBouton[6];
-        Menu _menu;
-        SDL_Texture *_textureFondInterface;
-        SDL_Texture *_textureRessourcesInterface;
-    
-    private:
-        void chargerTexture(SDL_Renderer *);
-        void detruireTexture();
-        void initPays();
-        void initJoueur(Pays *paysJoueur);
-        void initBouton();
+private:
+    Pays *_tabPays[9];
+    Joueur _joueur;
+    Bouton *_tabBouton[6];
+    Menu _menu;
+    SDL_Texture *_textureFondInterface;
+    SDL_Texture *_textureRessourcesInterface;
 
-        int ileChoisie(int xMouse, int yMouse);
-    public:
-        Manager();
-        ~Manager();  
+private:
+    void chargerTexture(SDL_Renderer *);
+    void detruireTexture();
+    void initPays();
+    void initJoueur(Pays *paysJoueur);
+    void initBouton();
 
-        void afficher(SDL_Renderer *);
-        void initJeu(SDL_Renderer *);
-        void Partie(int, SDL_Renderer *);
+public:
+    Manager();
+    ~Manager();
+
+    void afficher(SDL_Renderer *);
+    void initJeu(SDL_Renderer *);
+    void Partie(int, SDL_Renderer *);
+
+    void creerAlliance();
+
+    int ileChoisie(int xMouse, int yMouse);
 
 };
 

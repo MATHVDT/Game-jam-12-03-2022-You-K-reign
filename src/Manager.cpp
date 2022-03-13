@@ -4,16 +4,16 @@ Manager::Manager()
 {
     _textureFondInterface = nullptr;
     _textureRessourcesInterface = nullptr;
-    
+
     for (int i = 0; i < 9; i++)
     {
-        _tabPays[i] = nullptr;  
+        _tabPays[i] = nullptr;
     }
 
     for (int i = 0; i < 6; i++)
     {
-        _tabBouton[i] = nullptr;  
-    } 
+        _tabBouton[i] = nullptr;
+    }
 }
 
 Manager::~Manager()
@@ -22,13 +22,13 @@ Manager::~Manager()
 
     for (int i = 0; i < 9; i++)
     {
-        delete _tabPays[i];  
+        delete _tabPays[i];
     }
 
     for (int i = 0; i < 6; i++)
     {
-        delete _tabBouton[i];  
-    } 
+        delete _tabBouton[i];
+    }
 }
 
 void Manager::initJeu(SDL_Renderer *renderer)
@@ -39,7 +39,6 @@ void Manager::initJeu(SDL_Renderer *renderer)
     _joueur = Joueur();
     initJoueur(_tabPays[4]);
 }
-
 
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
@@ -63,8 +62,6 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     _textureFondInterface = SDL_CreateTextureFromSurface(renderer, imageFondInterface);
     SDL_FreeSurface(imageFondInterface);
 }
-
-
 
 void Manager::detruireTexture()
 {
@@ -95,12 +92,12 @@ void Manager::initJoueur(Pays *paysJoueur)
 
 void Manager::initBouton()
 {
-    _tabBouton[0] = new Bouton(0,false);
-    _tabBouton[1] = new Bouton(1,false);
-    _tabBouton[2] = new Bouton(2,false);
-    _tabBouton[3] = new Bouton(3,false);
-    _tabBouton[4] = new Bouton(4,false);
-    _tabBouton[5] = new Bouton(5,false);
+    _tabBouton[0] = new Bouton(0, false);
+    _tabBouton[1] = new Bouton(1, false);
+    _tabBouton[2] = new Bouton(2, false);
+    _tabBouton[3] = new Bouton(3, false);
+    _tabBouton[4] = new Bouton(4, false);
+    _tabBouton[5] = new Bouton(5, false);
 }
 
 void Manager::afficher(SDL_Renderer *renderer)
@@ -121,7 +118,7 @@ void Manager::afficher(SDL_Renderer *renderer)
 
     for (int i = 0; i < 9; i++)
     {
-        _tabPays[i]->afficherPays(renderer);  
+        _tabPays[i]->afficherPays(renderer);
     }
 
     for (int i = 0; i < 6; i++)
@@ -153,4 +150,51 @@ int Manager::ileChoisie(int xMouse, int yMouse)
 void Manager::Partie(int tour,SDL_Renderer *renderer)
 {
     initJeu(renderer);
+}
+
+// Crée les alliances entre les pays
+// 4 alliances
+// Entre 1 et 3 pays par alliance
+void Manager::creerAlliance()
+{
+    int nbPays = 9;
+    int nbPaysHorsAlliance = nbPays;
+    int nbPaysAlliance;
+    vector<Pays *> allianceCour;
+
+    // Dire que tous les pays ne sont pas encore dans une alliance
+    bool estAllie[9];
+    int indice;
+    for (int k = 0; k < nbPays; ++k)
+    {
+        estAllie[k] = false;
+    }
+
+    // Sortir le pays du joueur (par defaut 4)
+    estAllie[4] = true; // Pour ne pas etre pris en compte
+    nbPaysHorsAlliance--;
+
+    while (nbPaysHorsAlliance > 0)
+    {
+        allianceCour.clear();              // Reset membre alliance
+        nbPaysAlliance = 1 + (rand() % 3); // [|1,3|]
+        do                                 // Recuperation des pays d'une alliance
+        {
+            // Choisir un pays
+            indice = rand() % 9;
+            if (!estAllie[indice])
+            { // Pays aucune alliance => ajoute
+                allianceCour.push_back(_tabPays[indice]);
+                estAllie[indice] = true;
+                nbPaysHorsAlliance--;
+            }
+        } while (nbPaysHorsAlliance > 0 &&
+                 (int)allianceCour.size() <= nbPaysAlliance);
+
+        // Ajout de l'alliance au pays membre
+        for (auto p : allianceCour)
+        {
+            p->setAlliance(allianceCour);
+        }
+    }
 }
