@@ -29,16 +29,6 @@ void dessinerEtat(SDL_Renderer *renderer, SDL_Texture *texturesEtat[], int etat,
     SDL_RenderCopy(renderer, texturesEtat[etat-1], &src, &dst);
 }
 
-void dessinerRessource(SDL_Renderer *renderer, SDL_Texture *texturesRessourcesBases[], int ressource, int idPays)
-{
-    SDL_Rect src{0,0,0,0};
-    SDL_Rect dst{0,0,50,50};
-    dst.x = 100 + idPays%3 * 200;
-    dst.y = 100 + idPays/3 * 200;
-    SDL_QueryTexture(texturesRessourcesBases[ressource], nullptr, nullptr, &src.w, &src.h);
-    SDL_RenderCopy(renderer, texturesRessourcesBases[ressource], &src, &dst);
-}
-
 void dessinerBouton(SDL_Renderer *renderer, SDL_Texture *texturesBouton[], bool etatBouton, int idBouton)
 {
     SDL_Rect src{0,0,0,0};
@@ -48,4 +38,31 @@ void dessinerBouton(SDL_Renderer *renderer, SDL_Texture *texturesBouton[], bool 
     dst.y = 5 + idBouton * 100;
     SDL_QueryTexture(texturesBouton[idBouton + etatBouton], nullptr, nullptr, &src.w, &src.h);
     SDL_RenderCopy(renderer, texturesBouton[idBouton + etatBouton], &src, &dst);
+}
+
+void dessinerRessource(SDL_Renderer *renderer, SDL_Texture *texturesRessourcesBases[], int ressource, int id_pays, int ressourcedispo)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,50,50};
+    dst.x = 112.5 + id_pays%3 * 200;
+    dst.y = 112.5 + id_pays/3 * 200;
+    SDL_QueryTexture(texturesRessourcesBases[ressource], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, texturesRessourcesBases[ressource], &src, &dst);
+
+    SDL_Rect src2{0,0,0,0};
+    SDL_Rect dst2{0,0,30,30};
+    dst2.x = 97.5 + id_pays%3 * 200;
+    dst2.y = 122.5 + id_pays/3 * 200;
+    SDL_QueryTexture(texturesRessourcesBases[9 + ressourcedispo], nullptr, nullptr, &src2.w, &src2.h);
+    SDL_RenderCopy(renderer, texturesRessourcesBases[9 + ressourcedispo], &src2, &dst2);
+}
+
+void dessinerReligion(SDL_Renderer *renderer, SDL_Texture *textureTexte[], int religion, int id_pays)
+{
+    SDL_Rect src{0,0,0,0};
+    SDL_Rect dst{0,0,50,50};
+    dst.x = 150 + id_pays%3 * 200;
+    dst.y = 150 + id_pays/3 * 200;
+    SDL_QueryTexture(textureTexte[religion/5], nullptr, nullptr, &src.w, &src.h);
+    SDL_RenderCopy(renderer, textureTexte[religion/5], &src, &dst);
 }
