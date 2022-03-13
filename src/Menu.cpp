@@ -37,7 +37,7 @@ void Menu::dessinerMenu(SDL_Renderer *renderer)
     for (int i = 0; i < getMenuSize(); i++)
     {
         dst.x = this->m_posX;
-        dst.y = this->m_posY + i * 100 + 10;
+        dst.y = this->m_posY + i * 75 + 10;
         if (this->m_currentIndex == i)
         {
 

@@ -2,6 +2,7 @@
 
 Manager::Manager()
 {
+    _textureMenuFond = nullptr;
     _textureFondInterface = nullptr;
     _textureRessourcesInterface = nullptr;
 
@@ -44,10 +45,10 @@ void Manager::initJeu(SDL_Renderer *renderer)
 void Manager::chargerTexture(SDL_Renderer *renderer)
 {
     // Menu de jeu
-    _menu.setPosition(450, 140);
+    _menu.setPosition(450, 240);
 
-    SDL_Color hoverColor = {140, 137, 137, 250};
-    SDL_Color normalColor = {250, 250, 250, 250};
+    SDL_Color hoverColor = {141, 88, 36, 250};
+    SDL_Color normalColor = {250, 197, 129, 250};
     _menu.setColor(normalColor, hoverColor);
 
     _menu.chargerTexture(renderer, "Jouer");
@@ -60,7 +61,16 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     Bouton::chargerTexture(renderer);
     Joueur::chargerTexture(renderer);
 
-    //Charger Texture Menu Ressource
+    // Charger Texture Menu Fond
+
+    SDL_Surface *imageMenuFond;
+
+    imageMenuFond = IMG_Load("../img/menu.png");
+
+    _textureMenuFond = SDL_CreateTextureFromSurface(renderer, imageMenuFond);
+    SDL_FreeSurface(imageMenuFond);
+
+    // Charger Texture Interface Ressource
     SDL_Surface *imageRessourceInterface;
 
     imageRessourceInterface = IMG_Load("../img/menu/interface_ressource_verticale.png");
@@ -71,7 +81,7 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
     //Charger Texture Fond Interface
     SDL_Surface *imageFondInterface;
 
-    imageFondInterface = IMG_Load("../img/menu/fond_menu.png");
+    imageFondInterface = IMG_Load("../img/fond_menu.png");
 
     _textureFondInterface = SDL_CreateTextureFromSurface(renderer, imageFondInterface);
     SDL_FreeSurface(imageFondInterface);
@@ -79,6 +89,7 @@ void Manager::chargerTexture(SDL_Renderer *renderer)
 
 void Manager::detruireTexture()
 {
+    SDL_DestroyTexture(_textureMenuFond);
     SDL_DestroyTexture(_textureFondInterface);
     SDL_DestroyTexture(_textureRessourcesInterface);
     Bouton::detruireTexture();
@@ -121,17 +132,21 @@ void Manager::afficher(SDL_Renderer *renderer)
 
     SDL_Rect srcFondInterface{0, 0, 0, 0};
     SDL_Rect srcRessourcesInterface{0, 0, 0, 0};
-    SDL_Rect dstFondInterface{600, 0, 380, 600};
-    SDL_Rect dstRessourcesInterface{980, 0, 120, 600};
+    SDL_Rect srcFondInterface2{0,0,0,0};
+    SDL_Rect dstFondInterface{600, 0, 365, 600};
+    SDL_Rect dstRessourcesInterface{965, 0, 120, 600};
+    SDL_Rect dstFondInterface2{1085, 0, 15, 600};
 
     SDL_QueryTexture(_textureFondInterface, nullptr, nullptr, &srcFondInterface.w, &srcFondInterface.h);
     SDL_QueryTexture(_textureRessourcesInterface, nullptr, nullptr, &srcRessourcesInterface.w, &srcRessourcesInterface.h);
+    SDL_QueryTexture(_textureFondInterface, nullptr, nullptr, &srcFondInterface2.w, &srcFondInterface2.h);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    dessiner(renderer, _textureFondInterface, srcFondInterface, dstFondInterface);
     dessiner(renderer, _textureRessourcesInterface, srcRessourcesInterface, dstRessourcesInterface);
+    dessiner(renderer, _textureFondInterface, srcFondInterface, dstFondInterface);
+    dessiner(renderer, _textureFondInterface, srcFondInterface2, dstFondInterface2);
 
     for (int i = 0; i < 9; i++)
     {
@@ -142,15 +157,6 @@ void Manager::afficher(SDL_Renderer *renderer)
     {
         _tabBouton[i]->afficherBouton(renderer);
     }
-
-    // Affichage des ressources
-    SDL_Rect src1{0, 0, 0, 0};
-    SDL_Rect dst1{980, 0, 120, 600};
-    SDL_Rect src2{0, 0, 0, 0};
-    SDL_Rect dst2{600, 0, 380, 600};
-
-    dessiner(renderer, _textureRessourcesInterface, src1, dst1);
-    dessiner(renderer, _textureFondInterface, src2, dst2);
 
     // Affichage valeurs des ressources
     _joueur.afficherJoueur(renderer);
@@ -357,6 +363,11 @@ void Manager::jeu(SDL_Renderer *renderer)
     bool isOpen{true};
     bool isPlay{false};
 
+    SDL_Rect srcFondMenu{0, 0, 0, 0};
+    SDL_Rect dstFondMenu{0, 0, 1100, 600};
+
+    SDL_QueryTexture(_textureMenuFond, nullptr, nullptr, &srcFondMenu.w, &srcFondMenu.h);
+
     while (isOpen)
     {
         while (SDL_PollEvent(&events))
@@ -389,6 +400,7 @@ void Manager::jeu(SDL_Renderer *renderer)
                 SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
                 SDL_RenderClear(renderer);
 
+                dessiner(renderer, _textureMenuFond, srcFondMenu, dstFondMenu);
                 _menu.dessinerMenu(renderer);
 
                 SDL_RenderPresent(renderer);

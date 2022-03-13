@@ -14,5 +14,6 @@ void dessinerRessource(SDL_Renderer *renderer, SDL_Texture *texturesRessourcesBa
 void dessinerReligion(SDL_Renderer *renderer, SDL_Texture *textureTexte[], int religion, int id_pays);
 void dessinerRessourcePrimaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax);
 void dessinerRessourceSecondaire(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ressource, int ressourceDispo, int ressourceMax);
+void dessinerPARestant(SDL_Renderer *renderer, SDL_Texture *texturesRessources[], int ptAction);
 
 #endif
