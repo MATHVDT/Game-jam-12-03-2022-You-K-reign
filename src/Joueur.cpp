@@ -11,6 +11,8 @@ const int Joueur::_coupAcheterRessourceAccord = 1;
 const int Joueur::_coupConvertir = 1;
 const int Joueur::_coupTransformer = 3;
 
+SDL_Texture *Joueur::_textureRessources[7];
+
 Joueur::Joueur(Pays *paysJoueur)
     : _ptAction(0),
       _paysPossedes{paysJoueur}
@@ -427,4 +429,52 @@ string Joueur::transformerRessource()
     }
 
     return message;
+}
+
+void Joueur::chargerTexture(SDL_Renderer *renderer)
+{
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 20);
+
+    if (font == nullptr)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] %s", SDL_GetError());
+    }
+
+    SDL_Surface *imagesRessources[7];
+
+    imagesRessources[0] = TTF_RenderText_Blended(font, "0", SDL_Color{0, 0, 0, 250});
+    imagesRessources[1] = TTF_RenderText_Blended(font, "1", SDL_Color{0, 0, 0, 250});
+    imagesRessources[2] = TTF_RenderText_Blended(font, "2", SDL_Color{0, 0, 0, 250});
+    imagesRessources[3] = TTF_RenderText_Blended(font, "3", SDL_Color{0, 0, 0, 250});
+    imagesRessources[4] = TTF_RenderText_Blended(font, "4", SDL_Color{0, 0, 0, 250});
+    imagesRessources[5] = TTF_RenderText_Blended(font, "5", SDL_Color{0, 0, 0, 250});
+    imagesRessources[6] = TTF_RenderText_Blended(font, "/", SDL_Color{0, 0, 0, 250});
+
+    for (int i = 0; i < 7; i++)
+    {
+        _textureRessources[i] = SDL_CreateTextureFromSurface(renderer, imagesRessources[i]);
+        SDL_FreeSurface(imagesRessources[i]);
+    }
+
+    TTF_CloseFont(font);
+}
+
+void Joueur::detruireTexture()
+{
+    for (int i = 0; i < 7; i++)
+    {
+        SDL_DestroyTexture(_textureRessources[i]);
+    }
+}
+
+void Joueur::afficherJoueur(SDL_Renderer *renderer)
+{
+    for (int i = 0; i < 9; i++)
+    {
+        dessinerRessourcePrimaire(renderer, _textureRessources, i, _stockRB[i], _stockRBMax);
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        dessinerRessourceSecondaire(renderer, _textureRessources, i, _stockRC[i], _stockRCMax);
+    }
 }

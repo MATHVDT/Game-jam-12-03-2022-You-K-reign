@@ -33,8 +33,13 @@ private:
     static const int _coupTransformer;
 
 public:
+    static SDL_Texture *_textureRessources[7];
+
+public:
     Joueur(Pays *paysJoueur);
     ~Joueur();
+
+    void afficherJoueur(SDL_Renderer *renderer);
 
     // Getter
     Pays *getPaysOrigin();
@@ -72,6 +77,9 @@ private:
     string acheterRessourcePaysAccord(Pays &pays);
     bool checkAssezPtAction(int coup, string &message);
     bool checkAssezRessource(int pourcentage, string &message);
+    // Ressources
+    void static chargerTexture(SDL_Renderer *renderer);
+    void static detruireTexture();
 };
 
 #endif
