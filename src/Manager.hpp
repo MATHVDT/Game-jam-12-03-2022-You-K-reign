@@ -10,23 +10,25 @@ using namespace std;
 
 class Manager
 {
-    private:
-        Pays *_tabPays[9];
-        Joueur _joueur;
-        Bouton *_tabBouton[6];
-        SDL_Texture *_textureFondMenu;
-        SDL_Texture *_textureRessourcesMenu;
-    
-    private:
-        void chargerTexture(SDL_Renderer *);
-        void detruireTexture();
-        void initPays();
-        void initJoueur();
-        void initBouton();
+private:
+    Pays *_tabPays[9];
+    Joueur _joueur;
+    Bouton *_tabBouton[6];
+    SDL_Texture *_textureFondMenu;
+    SDL_Texture *_textureRessourcesMenu;
 
-    public:
-        void afficher();
-        void initJeu();
+private:
+    void chargerTexture(SDL_Renderer *);
+    void detruireTexture();
+    void initPays();
+    void initJoueur();
+    void initBouton();
+
+    int ileChoisie(int xMouse, int yMouse);
+
+public:
+    void afficher();
+    void initJeu();
 };
 
 #endif

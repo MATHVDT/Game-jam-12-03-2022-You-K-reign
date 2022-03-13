@@ -1,6 +1,6 @@
 #include "Manager.hpp"
 
-void Manager::chargerTexture(SDL_Renderer * renderer)
+void Manager::chargerTexture(SDL_Renderer *renderer)
 {
     Pays::chargerTexture(renderer);
     Bouton::chargerTexture(renderer);
@@ -40,8 +40,7 @@ void Manager::afficher()
 
 void Manager::afficher()
 {
-    
-} 
+}
 
 void Manager::initPays()
 {
@@ -63,10 +62,27 @@ void Manager::initJoueur()
 
 void Manager::initBouton()
 {
-    _tabBouton[0] = new Bouton(0,false);
-    _tabBouton[1] = new Bouton(1,false);
-    _tabBouton[2] = new Bouton(2,false);
-    _tabBouton[3] = new Bouton(3,false);
-    _tabBouton[4] = new Bouton(4,false);
-    _tabBouton[5] = new Bouton(5,false);
+    _tabBouton[0] = new Bouton(0, false);
+    _tabBouton[1] = new Bouton(1, false);
+    _tabBouton[2] = new Bouton(2, false);
+    _tabBouton[3] = new Bouton(3, false);
+    _tabBouton[4] = new Bouton(4, false);
+    _tabBouton[5] = new Bouton(5, false);
+}
+
+// Recupere la position de la souris
+// et renvoie l'id du pays selectionne
+// Renvoie id entre 0 et 8 => pays
+// Et renvoie -1 si pas dans la bonne zone
+int Manager::ileChoisie(int xMouse, int yMouse)
+{
+    int tailleCaseIle = 200;
+    int id = -1;
+
+    if (xMouse <= 600)
+    {
+        id = 3 * (yMouse / tailleCaseIle);
+        id += xMouse / tailleCaseIle;
+    }
+    return id;
 }
