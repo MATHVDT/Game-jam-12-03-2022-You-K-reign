@@ -5,11 +5,9 @@
 
 #include <vector>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
 #include "Ressource.hpp"
 #include "EtatPays.hpp"
+#include "dessin.hpp" 
 
 using namespace std;
 
@@ -35,8 +33,9 @@ public:
     static double _angle[9];
     static SDL_Texture *_textureIle;
     static SDL_Texture *_textureEtat[3];
-    static SDL_Texture *_textureRessourcesBase[9];
+    static SDL_Texture *_textureRessourcesBase[15];
     static SDL_Texture *_textureRessourcesCraft[3];
+    static SDL_Texture *_textureText[21];
 
 public:
     Pays(int idPays, string nom,
@@ -66,7 +65,6 @@ public:
     bool accordCommercial();
     void vendreRessource();
     bool convertir(int tauxConversion);
-    RessourceBase vendreRessource(int &ptActionJoueur);
 
 public:
     void static chargerTexture(SDL_Renderer *);
