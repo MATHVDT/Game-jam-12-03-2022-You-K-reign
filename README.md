@@ -6,9 +6,9 @@ Game-Jam
 **Nom du jeu :** You(k)reign
 
 ## Membre de la Team :
-DERMIGNY Flavien  
-PREVOT Pierre  
-VILLEDIEU DE TORCY Mathieu  
+DERMIGNY Flavien ([site perso](https://perso.isima.fr/~fldermigny/))
+PREVOT Pierre  ([site perso](https://perso.isima.fr/~piprevot/))
+VILLEDIEU DE TORCY Mathieu ([site perso](https://perso.isima.fr/~mavilledie4/))
 
 ---  
 
