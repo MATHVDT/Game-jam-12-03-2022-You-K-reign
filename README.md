@@ -38,7 +38,7 @@ Flavien en déplacement le samedi dans la journée.
 
 Fin du diapo de présentation du [projet de ZZ2](https://gitlab.isima.fr/fldumas5/genealogie) pour Mathieu.
 
-Panne de voiture le dimanche matin, après avoir laissé les phares allumés toute la nuit. (PS : c'est une [Twingo](https://www.renault.fr/vehicules-particuliers/twingo.html) )
+Panne de voiture le dimanche matin, après avoir laissé les phares allumés toute la nuit. (PS : c'est une [Twingo](https://www.renault.fr/vehicules-particuliers/twingo.html))
 
 ---
 ## Objectifs
