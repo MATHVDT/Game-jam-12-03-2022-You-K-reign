@@ -41,7 +41,7 @@ Fin du diapo de présentation du [projet de ZZ2](https://gitlab.isima.fr/fldumas
 Panne de voiture le dimanche matin, après avoir laissé les phares allumés toute la nuit. (PS : c'est une [Twingo](https://www.renault.fr/vehicules-particuliers/twingo.html) )
 
 ---
-## Objectif
+## Objectifs
 
 - [x] Faire un diagramme de classe qui claque 
 - [x] Faire un jeu fonctionnel 
