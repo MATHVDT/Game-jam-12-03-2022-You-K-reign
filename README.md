@@ -46,6 +46,7 @@ Panne de voiture le dimanche matin, après avoir laissé les phares allumés tou
 - [x] Faire un diagramme de classe qui claque 
 - [x] Faire un jeu fonctionnel 
 - [x] S'amuser 
+- [x] Etre fier de son jeu 
 - [ ] Mettre des petits batiments sur les iles :'( 
 
 
