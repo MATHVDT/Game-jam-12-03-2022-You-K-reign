@@ -1,6 +1,6 @@
 #SRC=main.cpp obj.cpp
 SRC=$(wildcard *.cpp)  
-EXE=prog
+EXE=yourKreign.exe
 
 
 CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto
