@@ -4,7 +4,13 @@
 **Thème :** À la carte   
 **Nom du jeu :** You(k)reign
 
-## Principe du jeu  
+## Pitch du jeu 
+
+Bienvenue dans notre Jeu **Your (k) Reign**. Voici les règles du jeu :
+
+Vous incarnez le leader d’une île qui produit un certain type de ressource. Votre île produit 3 fois par tour la ressource de votre île. Votre envie est d’aller conquérir les îles autour de vous afin d’être le leader de toutes ces îles. Pour faire cela, vous avez plusieurs possibilités comme faire la guerre avec une autre île. Pour cela, des points d’actions et des ressources vous sont demandés. Pour réaliser une tentative de guerre par exemple, il vous suffit de cliquer sur le bouton *Guerre militaire* et ensuite de cliquer sur l’île que vous souhaitez attaquer. Chaque ressource que vous possédez et qui est demandé pour attaquer permettra une augmentation d’un certain pourcentage vos chances de succès d’attaque. Lorsque vous attaquerez une île, ses alliés vous déclareront alors la guerre, cela vous empêchera d’acheter leur ressource ou alors le prix sera plus élevé. Si vous réussissez l’attaque, l’île sera annexée à la vôtre. Après cela, vous récupérerez deux fois la ressource qu’elle produit par tour. Il y a d’autres types d’attaque, comme la guerre par la religion. Celle-ci réussit en fonction du pourcentage de présence de votre religion dans l’île. Pour avoir un max de pourcentage, vous devez donc convertir les autres îles. Vous pouvez également faire des accords commerciaux avec les autres îles afin d’acheter leur ressource moins chère. Mais cet accord ne dure que quelques tours alors attention ! Pour faire certains types d’action, vous avez besoin de certaines ressources plus évoluées, pour les obtenir vous devez transformer vos ressources. Lorsque vous décidez de transformer vos ressources, vous transformez tout ce qu’il est possible de transformer. Amusez-vous bien !
+
+## Détails du jeu  
 
 Vous possédez l'ile au centre de l'écran et votre but est de conquérir toutes les autres iles. Pour cela, vous disposez de 5 points d'actions par tour. A chaque tour, vous pouvez effectuer plusieurs actions possibles :
 
@@ -71,13 +77,18 @@ Au début de chaque tour, vous produisez 3 ressources de votre ile ainsi que 2 r
 
 > Coût : 3 points d'action 
 
-
-
 ---
 ## Membre de la Team :
 DERMIGNY Flavien  
 PREVOT Pierre    
 VILLEDIEU DE TORCY Mathieu    
+
+---
+## Code
+
+**Compilation :**  `cd ./src && make && ./yourKreign.exe` 
+
+**Executable du jeu :** *youKreign.exe*
 
 ---  
 
