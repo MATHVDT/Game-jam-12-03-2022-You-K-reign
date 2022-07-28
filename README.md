@@ -2,7 +2,7 @@
  
 **Date :** 12-13 mars 2022   
 **Thème :** À la carte   
-**Nom du jeu :** You(k)reign
+**Nom du jeu :** You(k)reign  
 **Type de jeu :** Stratégie lite
 
 ---
