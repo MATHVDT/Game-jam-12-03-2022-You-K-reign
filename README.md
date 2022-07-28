@@ -3,7 +3,21 @@
 **Date :** 12-13 mars 2022   
 **Thème :** À la carte   
 **Nom du jeu :** You(k)reign
+**Type de jeu :** Stratégie lite
+---
+## Membre de la Team :
+DERMIGNY Flavien  
+PREVOT Pierre    
+VILLEDIEU DE TORCY Mathieu    
 
+---
+## Code
+
+**Compilation :**  `cd ./src && make && ./yourKreign.exe` 
+
+**Executable du jeu :** *youKreign.exe*
+
+---  
 ## Pitch du jeu 
 
 Bienvenue dans notre Jeu **Your (k) Reign**. Voici les règles du jeu :
@@ -76,21 +90,6 @@ Au début de chaque tour, vous produisez 3 ressources de votre ile ainsi que 2 r
 > Transforme toutes les ressources primaires possibles en ressources secondaires.
 
 > Coût : 3 points d'action 
-
----
-## Membre de la Team :
-DERMIGNY Flavien  
-PREVOT Pierre    
-VILLEDIEU DE TORCY Mathieu    
-
----
-## Code
-
-**Compilation :**  `cd ./src && make && ./yourKreign.exe` 
-
-**Executable du jeu :** *youKreign.exe*
-
----  
 
 ## Repas du week-end
 ### Repas du samedi midi :
