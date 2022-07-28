@@ -26,40 +26,40 @@ Vous incarnez le leader d’une île qui produit un certain type de ressource. V
 
 ## Détails du jeu  
 
-Vous possédez l'ile au centre de l'écran et votre but est de conquérir toutes les autres iles. Pour cela, vous disposez de 5 points d'actions par tour. A chaque tour, vous pouvez effectuer plusieurs actions possibles :
+Vous possédez l'île au centre de l'écran et votre but est de conquérir toutes les autres îles. Pour cela, vous disposez de 5 points d'actions par tour. A chaque tour, vous pouvez effectuer plusieurs actions possibles :
 
-- Passer un **accord commercial** avec une ile
-- **Acheter une ressource** à une ile
-- **Convertir** la population d'une ile
-- **Guerre religieuse** une ile
-- **Guerre militaire** une ile
+- Passer un **accord commercial** avec une île
+- **Acheter une ressource** à une île
+- **Convertir** la population d'une île
+- **Guerre religieuse** une île
+- **Guerre militaire** une île
 - **Transformer** les ressources  
 
-Lorsque vous lancez une guerre contre une ile, vous avez une certaine probabilité de la capturer.  
- Dans le cas où l'attaque réussit et que vous capturez l'ile, les autres iles en alliance avec elle se dévoilent et se mettent en guerre contre vous pendant au moins 5 tours.  
+Lorsque vous lancez une guerre contre une île, vous avez une certaine probabilité de la capturer.  
+ Dans le cas où l'attaque réussit et que vous capturez l'île, les autres îles en alliance avec elle se dévoîlent et se mettent en guerre contre vous pendant au moins 5 tours.  
  Vous ne pouvez donc plus passer un **Accord commercial** ou **Acheter une ressource** avec elle.   
-Au début de chaque tour, vous produisez 3 ressources de votre ile ainsi que 2 ressources des iles capturées. Les iles non capturées produisent elles 3 ressources qui seront achetables si vous n'êtes pas en guerre avec elle.
+Au début de chaque tour, vous produisez 3 ressources de votre île ainsi que 2 ressources des îles capturées. Les îles non capturées produisent elles 3 ressources qui seront achetables si vous n'êtes pas en guerre avec elle.
 
 
 ### Détails des actions possibles 
 
-- Passer un **accord commercial** avec une ile
-> Permet d'acheter des ressources à l'iles pour seulement 1 point d'action.  
-> Cet accord commercial dure 3 tours et peut être annulé si vous capturez une ile allié à celui-ci.  
-> Vous ne pouvez pas passer d'accord commercial avec une ile qui est en guerre contre vous. 
+- Passer un **accord commercial** avec une île
+> Permet d'acheter des ressources à l'îles pour seulement 1 point d'action.  
+> Cet accord commercial dure 3 tours et peut être annulé si vous capturez une île allié à celui-ci.  
+> Vous ne pouvez pas passer d'accord commercial avec une île qui est en guerre contre vous. 
 
 > Coût : 2 points d'action 
 
-- **Acheter une ressource** à une ile
-> Le nombre de ressources que vous vous pouvez acheter par tour est limité à la production de l'ile. *(3 ressources/tour)*  
-> Vous ne pouvez pas achetez de ressources à une ile qui est en guerre contre vous.  
+- **Acheter une ressource** à une île
+> Le nombre de ressources que vous vous pouvez acheter par tour est limité à la production de l'île. *(3 ressources/tour)*  
+> Vous ne pouvez pas achetez de ressources à une île qui est en guerre contre vous.  
 
-> Coût : 2 points d'action (ile sans accord commercial) 
+> Coût : 2 points d'action (île sans accord commercial) 
 
-> Coût : 1 points d'action (ile avec accord commercial) 
+> Coût : 1 points d'action (île avec accord commercial) 
 
 
-- **Convertir** la population d'une ile
+- **Convertir** la population d'une île
 > Permet de convertir une partie de la population afin de faciliter l'attaque religieuse par la suite.
 
 > Taux de conversion : *(Taux cumulable)* 
@@ -70,14 +70,14 @@ Au début de chaque tour, vous produisez 3 ressources de votre ile ainsi que 2 r
 > Coût : 1 points d'action 
 
 
-- **Guerre religieuse** une ile
-> Lance une attaque religieuse sur l'ile. La probabilité de capturer l'ile est égale au taux de conversion de l'ile *(% en bas droite de l'ile)*.
+- **Guerre religieuse** une île
+> Lance une attaque religieuse sur l'île. La probabilité de capturer l'île est égale au taux de conversion de l'île *(% en bas droite de l'île)*.
 
 > Coût : 2 points d'action   
 
 
-- **Guerre militaire** une ile
-> Lance une attaque militaire sur l'ile. La probabilité de capturer l'ile est dépend du nombre de ressources **diférentes** possédées.
+- **Guerre militaire** une île
+> Lance une attaque militaire sur l'île. La probabilité de capturer l'île est dépend du nombre de ressources **diférentes** possédées.
 
 > Taux de réussite de l'attaque : *(Taux cumulable)* 
 > - 15% de base par ressource primaire
@@ -126,5 +126,5 @@ Panne de voiture le dimanche matin, après avoir laissé les phares allumés tou
 - [x] Faire un jeu fonctionnel 
 - [x] S'amuser 
 - [x] Être fier de son jeu 
-- [ ] Mettre des petits bâtiments sur les iles :'( 
+- [ ] Mettre des petits bâtiments sur les îles 😢 
 
